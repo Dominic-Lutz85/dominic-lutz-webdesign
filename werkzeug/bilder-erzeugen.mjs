@@ -63,13 +63,161 @@ const AUFTRAEGE = {
         "in the valley, the last light on the water.",
     },
   },
+
+  /* Schreinerei Marx. Die Seite lebt vom Werkstattriss, deshalb sind die
+     Bilder hier Beiwerk und nicht Hauptdarsteller: Material und Hand,
+     keine Hochglanz-Innenarchitektur. */
+  schreinerei: {
+    ordner: "beispiele/schreinerei/bilder",
+    format: "1536x1024",
+    handschrift:
+      "Shot on 35mm film with a 50mm lens, cool north-facing daylight from a " +
+      "window, restrained desaturated colour, fine grain, honest workshop " +
+      "documentary photography, dust in the air. No people facing the camera, " +
+      "no text, no lettering, no signage, no logos, no watermarks.",
+    motive: {
+      werkstatt:
+        "A small German joinery workshop from inside: a solid workbench with " +
+        "hand planes and chisels laid out in a row, a stack of rough oak boards " +
+        "against the wall, wood shavings on the floor, large window with flat " +
+        "grey daylight.",
+      verbindung:
+        "Extreme close view of a hand-cut dovetail joint in pale oak, half " +
+        "assembled, the pins and tails still showing the saw marks, resting on " +
+        "a worn workbench.",
+      holz:
+        "Close view of the end grain and edge of freshly planed oak boards " +
+        "stacked with thin sticks between them, drying in a workshop, the " +
+        "grain and medullary rays clearly visible.",
+      moebel:
+        "A plain solid oak sideboard standing finished in an empty room with " +
+        "white walls and a bare wooden floor, side light from one window, " +
+        "nothing else in the room, no decoration.",
+    },
+  },
+
+  /* Freiwillige Feuerwehr Niederscheid. Heikel: keine Unfallbilder, keine
+     Toten, keine brennenden Haeuser mit Menschen darin. Es geht um die
+     Mannschaft und das Geraet, nicht um Katastrophenkitsch. */
+  feuerwehr: {
+    ordner: "beispiele/feuerwehr/bilder",
+    format: "1536x1024",
+    handschrift:
+      "Photojournalism, available light, slight motion, realistic colour, " +
+      "fine grain, nothing heroic or staged, no dramatic lens flare. No faces " +
+      "recognisable, no text, no lettering, no signage, no logos, no " +
+      "watermarks, no emergency victims, no injured people.",
+    motive: {
+      geraetehaus:
+        "The open roller door of a small village fire station at dusk, one red " +
+        "fire engine inside under fluorescent light, wet tarmac in front, empty " +
+        "village street, nobody in the frame.",
+      uebung:
+        "Volunteer firefighters in full protective gear rolling out a hose line " +
+        "across a field during a training exercise on a grey afternoon, seen " +
+        "from behind, no faces visible.",
+      geraet:
+        "Close view of neatly stowed equipment in the open side locker of a " +
+        "fire engine: coiled hoses, couplings, a branch pipe, everything in its " +
+        "bracket, clean and worn from use.",
+      nachwuchs:
+        "Youth fire brigade members in training uniform standing in a loose row " +
+        "on a grass pitch behind the fire station, seen from behind and from " +
+        "the side, late afternoon light, no faces visible.",
+    },
+  },
+
+  /* Cafe Sonnenschein. Warm, hell, gern etwas ueberbelichtet, das Gegenteil
+     der uebrigen Auftraege. */
+  eiscafe: {
+    ordner: "beispiele/eiscafe/bilder",
+    format: "1536x1024",
+    handschrift:
+      "Bright airy daylight photography, slightly overexposed, warm cheerful " +
+      "colour, shallow depth of field, summer. No people facing the camera, no " +
+      "text, no lettering, no signage, no logos, no watermarks.",
+    motive: {
+      theke:
+        "An ice cream counter in a small Italian style parlour seen from the " +
+        "customer side, rows of open metal pans of gelato in soft pastel " +
+        "colours, chrome scoops in water, warm light from the shop window.",
+      kugel:
+        "Close view of two scoops of pistachio and strawberry gelato in a plain " +
+        "waffle cone held up against a bright plain wall in summer sunlight.",
+      terrasse:
+        "Small pavement terrace of a village ice cream parlour on a summer " +
+        "afternoon, round metal tables, folded parasols, dappled shade from a " +
+        "plane tree, empty chairs.",
+      machen:
+        "Stainless steel batch freezer in a small gelato kitchen with fresh " +
+        "green pistachio gelato coming out of the spout into a metal pan, " +
+        "clean tiled wall behind.",
+    },
+  },
+
+  /* Studio Raster. Fotostudio, also muessen die Bilder selbst als
+     Arbeitsprobe durchgehen. Hoechster Anspruch von allen Auftraegen. */
+  fotostudio: {
+    ordner: "beispiele/fotostudio/bilder",
+    format: "1024x1536",
+    handschrift:
+      "Studio photography, single large softbox, clean seamless backdrop, " +
+      "precise focus, controlled contrast, contemporary editorial look. No " +
+      "text, no lettering, no logos, no watermarks.",
+    motive: {
+      portraet:
+        "Editorial studio portrait of a person in their forties in a plain dark " +
+        "shirt against a mid grey seamless backdrop, one big soft light from " +
+        "the left, calm direct expression, shoulders square.",
+      aufbau:
+        "A studio seen from the side while set up: softbox on a boom, C-stand, " +
+        "sandbags, a roll of grey seamless paper half unrolled, cables taped to " +
+        "the floor, nobody in the frame.",
+      produkt:
+        "A single glass perfume bottle on a matte grey surface lit with one " +
+        "hard light from behind, long clean shadow, dark background, no label.",
+      arbeit:
+        "A photographer's desk during editing: a large calibrated monitor " +
+        "showing a grid of contact sheet thumbnails, a colour checker card and " +
+        "a graphics tablet beside it, dim room.",
+    },
+  },
+
+  /* Kanzlei Weber & Kollegen. Zurueckhaltend. Keine Handschlag-Stockfotos,
+     keine Menschen im Anzug, die in die Kamera laecheln. */
+  steuerkanzlei: {
+    ordner: "beispiele/steuerkanzlei/bilder",
+    format: "1536x1024",
+    handschrift:
+      "Architectural and still life photography, soft indirect daylight, muted " +
+      "restrained colour, sharp throughout, calm and quiet, nothing corporate " +
+      "or staged. No people facing the camera, no handshakes, no text, no " +
+      "lettering, no signage, no logos, no watermarks.",
+    motive: {
+      haus:
+        "The facade of a restored nineteenth century townhouse used as an " +
+        "office, plain render, tall windows, a stone step and a brass door " +
+        "handle, quiet German small town street, overcast morning.",
+      raum:
+        "An empty meeting room with a long plain oak table, six simple chairs, " +
+        "tall window with sheer curtain, soft grey daylight, one closed folder " +
+        "on the table.",
+      unterlagen:
+        "Close view of a neat stack of paper documents, a ring binder and a " +
+        "fountain pen on a plain desk in soft window light, shallow depth of " +
+        "field, no readable writing.",
+      flur:
+        "A quiet office corridor with a row of closed wooden doors and a worn " +
+        "runner carpet, daylight falling in from one end.",
+    },
+  },
 };
 
 async function existiert(p) {
   try { await access(p); return true; } catch { return false; }
 }
 
-async function erzeuge(name, anweisung, ordner, format) {
+async function erzeuge(name, anweisung, ordner, format, handschrift) {
   const antwort = await fetch("https://api.openai.com/v1/images/generations", {
     method: "POST",
     headers: {
@@ -78,7 +226,7 @@ async function erzeuge(name, anweisung, ordner, format) {
     },
     body: JSON.stringify({
       model: "gpt-image-1",
-      prompt: `${anweisung} ${HANDSCHRIFT}`,
+      prompt: `${anweisung} ${handschrift}`,
       size: format,
       quality: "high",
       output_format: "jpeg",
@@ -125,7 +273,8 @@ for (const name of namen) {
   if (!anweisung) { console.error(`Kein Motiv namens "${name}"`); continue; }
   process.stdout.write(`${name} ... `);
   try {
-    const e = await erzeuge(name, anweisung, auftrag.ordner, auftrag.format);
+    const e = await erzeuge(name, anweisung, auftrag.ordner, auftrag.format,
+                            auftrag.handschrift || HANDSCHRIFT);
     console.log(`fertig, ${e.kb} KB` + (e.verbrauch ? `, ${e.verbrauch.total_tokens} Token` : ""));
   } catch (fehler) {
     console.log("FEHLER");
