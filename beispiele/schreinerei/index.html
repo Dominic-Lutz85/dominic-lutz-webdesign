@@ -4,451 +4,813 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Schreinerei Marx, Beispielseite von Dominic Lutz</title>
-<meta name="description" content="Beispielseite im Stil bodenständig und handwerklich, mit Richtpreis-Rechner und Vorher-Nachher-Regler. Der Betrieb ist erfunden.">
+<meta name="description" content="Beispielseite für einen Schreinerbetrieb: gezeichnete Werkstattseite mit Holzverbindungen, maßstäblichem Rechner und Schriftfeld. Der Betrieb ist erfunden.">
 <!-- NICHT INDEXIEREN: Der Betrieb ist erfunden, samt Anschrift und
      Telefonnummer. Ein Suchtreffer auf ein Unternehmen, das es nicht
      gibt, waere irrefuehrend. Gilt auch nach dem Umzug auf die eigene
      Domain, dort bleibt diese Zeile stehen. -->
 <meta name="robots" content="noindex,nofollow">
-<meta name="theme-color" content="#F6F1EA">
+<meta name="theme-color" content="#F2F0EB" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#16181A" media="(prefers-color-scheme: dark)">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@500;600;700&family=Public+Sans:wght@400;500;600&family=Chivo+Mono:wght@400;500&display=swap">
+
 <style>
-  html{-webkit-text-size-adjust:100%}
-  body{margin:0}
-  img{max-width:100%}
-  [hidden]{display:none!important}
+/* ============================================================
+   SCHREINEREI MARX, Beispielseite
+   ------------------------------------------------------------
+   LEITBILD: eine Werkstattzeichnung, kein Hochglanzprospekt.
+
+   WARUM: Die beiden ausgezeichneten Schreiner-Seiten, gegen die
+   abgeglichen wurde (Hays Woodworking, Awwwards Honorable Mention,
+   und Final Touch Carpentry, Awwwards Nominee), sind reine
+   Portfolios: 15 bis 17 Fotos, die Arbeit IST die Seite. Fuer einen
+   erfundenen Betrieb gibt es keine Fotos. Gezeichnete Maserung als
+   Foto-Ersatz sieht aus wie Ersatz.
+
+   Deshalb hier der andere Weg: die Abwesenheit wird Absicht. Die
+   Seite spricht die eigene Bildsprache des Handwerks, technische
+   Zeichnung mit Massketten, Schnitten und Holzverbindungen. Das kann
+   eine Fotoseite nicht, und es zeigt genau das Koennen, um das es
+   geht. Unten rechts steht ein Schriftfeld, wie auf jeder echten
+   Werkstattzeichnung.
+
+   UEBERNOMMEN von den Vorbildern: Telefon dauerhaft in der
+   Kopfleiste (ftcc), Held ohne Dachzeile und ohne Knopfpaar (Hays),
+   genau ein Handlungsknopf.
+   BEWUSST NICHT: Vollbild-Foto im Held (keine Fotos), Dachzeile ueber
+   der Ueberschrift (steht bei uns auf allen fuenf Beispielseiten und
+   ist reine Gewohnheit).
+   ============================================================ */
+
+:root{
+  --papier:#F2F0EB;
+  --blatt:#FFFFFF;
+  --blatt-2:#E8E5DE;
+  --graphit:#1F2124;
+  --gedaempft:#5F646A;
+  --schwach:#8D9298;
+  --riss:#C2C6CB;
+  --riss-fein:#DEE1E4;
+  --rot:#AF3A2A;
+  --rot-fein:#F2E0DC;
+  --holz:#9A6B3F;
+  --holz-fein:#E9DDCE;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --papier:#16181A;
+    --blatt:#1D2023;
+    --blatt-2:#24282C;
+    --graphit:#E9ECEE;
+    --gedaempft:#A2A8AE;
+    --schwach:#767C83;
+    --riss:#3A4046;
+    --riss-fein:#2A2F34;
+    --rot:#E0705C;
+    --rot-fein:#33201C;
+    --holz:#C79761;
+    --holz-fein:#2E2620;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --papier:#16181A;
+  --blatt:#1D2023;
+  --blatt-2:#24282C;
+  --graphit:#E9ECEE;
+  --gedaempft:#A2A8AE;
+  --schwach:#767C83;
+  --riss:#3A4046;
+  --riss-fein:#2A2F34;
+  --rot:#E0705C;
+  --rot-fein:#33201C;
+  --holz:#C79761;
+  --holz-fein:#2E2620;
+  color-scheme:dark;
+}
+
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth; -webkit-text-size-adjust:100%;}
+body{
+  margin:0;
+  background:var(--papier);
+  color:var(--graphit);
+  font-family:"Public Sans",-apple-system,"Segoe UI",sans-serif;
+  font-size:16.5px;
+  line-height:1.62;
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3{
+  font-family:"Saira Condensed","Arial Narrow",sans-serif;
+  font-weight:700; margin:0; text-transform:uppercase;
+  letter-spacing:.005em; line-height:1.02; text-wrap:balance;
+}
+p{margin:0;}
+a{color:var(--rot);}
+:focus-visible{outline:2px solid var(--rot); outline-offset:3px;}
+button,input,textarea{font-family:inherit;}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto;} *{animation:none!important; transition:none!important;}}
+
+/* Masszahlen und alles, was auf einer Zeichnung beschriftet ist */
+.mass{font-family:"Chivo Mono",ui-monospace,monospace; font-variant-numeric:tabular-nums;}
+.blatt{max-width:1240px; margin:0 auto; padding:0 30px;}
+@media (max-width:640px){.blatt{padding:0 18px;}}
+
+/* ---------- Musterhinweis, bleibt auf allen Beispielseiten ---------- */
+.muster{
+  background:var(--graphit); color:var(--papier);
+  font-family:"Chivo Mono",monospace; font-size:11.5px; letter-spacing:.06em;
+  padding:9px 16px; text-align:center;
+}
+.muster a{color:var(--papier); text-underline-offset:3px;}
+
+/* ---------- Kopfleiste: Telefon dauerhaft sichtbar ---------- */
+.kopf{
+  position:sticky; top:0; z-index:50; background:var(--papier);
+  border-bottom:1px solid var(--riss);
+}
+.kopf-innen{
+  max-width:1240px; margin:0 auto; padding:12px 30px;
+  display:flex; align-items:center; gap:22px;
+}
+@media (max-width:640px){.kopf-innen{padding:10px 18px; gap:12px;}}
+.marke{display:flex; align-items:center; gap:11px; text-decoration:none; color:var(--graphit);}
+.marke svg{width:30px; height:30px; flex-shrink:0;}
+.marke b{font-family:"Saira Condensed",sans-serif; font-weight:700; font-size:20px; text-transform:uppercase; letter-spacing:.02em;}
+.marke span{font-family:"Chivo Mono",monospace; font-size:10px; color:var(--schwach); letter-spacing:.1em; display:block; margin-top:-3px;}
+.kopf-nav{display:flex; gap:3px; margin-left:auto;}
+.kopf-nav a{
+  font-family:"Saira Condensed",sans-serif; font-weight:600; font-size:15.5px; text-transform:uppercase;
+  letter-spacing:.04em; color:var(--gedaempft); text-decoration:none; padding:7px 11px;
+}
+.kopf-nav a:hover{color:var(--graphit);}
+@media (max-width:900px){.kopf-nav{display:none;}}
+.ruf{
+  display:inline-flex; align-items:center; gap:9px; text-decoration:none;
+  border:1.5px solid var(--graphit); color:var(--graphit);
+  padding:8px 15px; font-family:"Chivo Mono",monospace; font-size:14px; white-space:nowrap;
+  transition:background .15s ease, color .15s ease;
+}
+.ruf:hover{background:var(--graphit); color:var(--papier);}
+.ruf svg{width:15px; height:15px;}
+@media (max-width:900px){.kopf-nav{display:none;} .ruf{margin-left:auto;}}
+@media (max-width:460px){.ruf span{display:none;}}
+.themenwahl{display:inline-flex; border:1px solid var(--riss);}
+.themenwahl button{
+  border:0; background:transparent; color:var(--schwach); cursor:pointer;
+  font-family:"Chivo Mono",monospace; font-size:10.5px; letter-spacing:.06em; padding:6px 8px;
+}
+.themenwahl button[aria-pressed="true"]{background:var(--graphit); color:var(--papier);}
+@media (max-width:1080px){.themenwahl{display:none;}}
+
+/* ---------- Held: Zeichnung statt Foto ---------- */
+.held{padding:58px 0 40px; border-bottom:1px solid var(--riss);}
+.held-raster{display:grid; grid-template-columns:minmax(0,0.85fr) minmax(0,1.15fr); gap:52px; align-items:center;}
+@media (max-width:900px){.held-raster{grid-template-columns:1fr; gap:34px;}}
+.held h1{font-size:clamp(42px,6.2vw,82px);}
+.held h1 em{font-style:normal; color:var(--rot);}
+.held p{margin-top:20px; max-width:40ch; color:var(--gedaempft); font-size:18px;}
+.held .einzel{
+  display:inline-flex; align-items:center; gap:10px; margin-top:28px;
+  background:var(--graphit); color:var(--papier); text-decoration:none;
+  padding:15px 26px; font-family:"Saira Condensed",sans-serif; font-weight:700;
+  font-size:17px; text-transform:uppercase; letter-spacing:.05em;
+}
+.held .einzel:hover{background:var(--rot);}
+.held-vermerk{
+  margin-top:26px; font-family:"Chivo Mono",monospace; font-size:11.5px;
+  color:var(--schwach); line-height:1.7; border-top:1px solid var(--riss-fein); padding-top:14px;
+}
+
+/* Zeichenflaeche */
+.riss{background:var(--blatt); border:1px solid var(--riss); position:relative;}
+.riss svg{display:block; width:100%; height:auto;}
+.riss-schild{
+  position:absolute; top:0; left:0; background:var(--graphit); color:var(--papier);
+  font-family:"Chivo Mono",monospace; font-size:10.5px; letter-spacing:.08em; padding:5px 10px;
+}
+/* Linienarten der Zeichnung */
+.l-voll{stroke:var(--graphit); stroke-width:1.6; fill:none;}
+.l-fein{stroke:var(--riss); stroke-width:1; fill:none;}
+.l-mass{stroke:var(--rot); stroke-width:1; fill:none;}
+.l-strich{stroke:var(--riss); stroke-width:1; fill:none; stroke-dasharray:7 4;}
+.f-holz{fill:var(--holz-fein); stroke:var(--graphit); stroke-width:1.4;}
+.f-blatt{fill:var(--blatt);}
+.t-mass{font-family:"Chivo Mono",monospace; font-size:12px; fill:var(--rot);}
+.t-teil{font-family:"Chivo Mono",monospace; font-size:11px; fill:var(--schwach);}
+@media (prefers-reduced-motion:no-preference){
+  .zeichnen{stroke-dasharray:2400; stroke-dashoffset:2400; animation:reissen 1.5s ease forwards;}
+  @keyframes reissen{to{stroke-dashoffset:0;}}
+}
+
+/* ---------- Abschnitte ---------- */
+section{padding:74px 0; border-bottom:1px solid var(--riss);}
+.kapitel{display:flex; align-items:baseline; gap:16px; margin-bottom:8px;}
+.kapitel .nr{font-family:"Chivo Mono",monospace; font-size:12px; color:var(--rot);}
+h2{font-size:clamp(30px,4vw,46px);}
+.beisatz{color:var(--gedaempft); max-width:58ch; margin-top:12px; font-size:17px;}
+
+/* ---------- Holzverbindungen ---------- */
+.verbindungen{display:grid; grid-template-columns:repeat(3,1fr); gap:0; margin-top:40px; border:1px solid var(--riss); background:var(--blatt);}
+@media (max-width:840px){.verbindungen{grid-template-columns:1fr;}}
+.verbindung{padding:24px; border-right:1px solid var(--riss);}
+.verbindung:last-child{border-right:0;}
+@media (max-width:840px){.verbindung{border-right:0; border-bottom:1px solid var(--riss);} .verbindung:last-child{border-bottom:0;}}
+.verbindung svg{width:100%; height:auto; display:block; margin-bottom:16px;}
+.verbindung h3{font-size:23px;}
+.verbindung .wo{font-family:"Chivo Mono",monospace; font-size:11px; color:var(--rot); letter-spacing:.06em; margin:6px 0 8px;}
+.verbindung p{color:var(--gedaempft); font-size:15.5px;}
+
+/* ---------- Werkverzeichnis statt Kartenraster ---------- */
+.verzeichnis{margin-top:36px; border-top:1.5px solid var(--graphit);}
+.werk{
+  display:grid; grid-template-columns:64px 1fr 1.15fr auto; gap:26px; align-items:center;
+  padding:20px 0; border-bottom:1px solid var(--riss);
+}
+@media (max-width:820px){.werk{grid-template-columns:52px 1fr; gap:16px;} .werk .beschr{grid-column:2;} .werk .spanne{grid-column:2; justify-self:start;}}
+.werk svg{width:64px; height:52px; display:block;}
+@media (max-width:820px){.werk svg{width:52px; height:44px;}}
+.werk h3{font-size:24px;}
+.werk .beschr{color:var(--gedaempft); font-size:15.5px;}
+.werk .spanne{font-family:"Chivo Mono",monospace; font-size:13.5px; color:var(--graphit); white-space:nowrap;}
+
+/* ---------- Rechner, der zeichnet ---------- */
+.rechner{display:grid; grid-template-columns:minmax(0,0.9fr) minmax(0,1.1fr); gap:44px; margin-top:38px; align-items:start;}
+@media (max-width:880px){.rechner{grid-template-columns:1fr; gap:28px;}}
+.regler{display:flex; flex-direction:column; gap:6px; margin-bottom:22px;}
+.regler-kopf{display:flex; justify-content:space-between; align-items:baseline;}
+.regler-kopf label{font-family:"Saira Condensed",sans-serif; font-weight:600; font-size:17px; text-transform:uppercase; letter-spacing:.04em;}
+.regler-kopf output{font-family:"Chivo Mono",monospace; font-size:15px; color:var(--rot);}
+input[type="range"]{width:100%; accent-color:var(--rot);}
+.wahl{display:flex; flex-direction:column; gap:8px; margin-bottom:22px;}
+.wahl > span{font-family:"Saira Condensed",sans-serif; font-weight:600; font-size:17px; text-transform:uppercase; letter-spacing:.04em;}
+.wahl-reihe{display:flex; gap:0; border:1px solid var(--graphit);}
+.wahl-reihe button{
+  flex:1; border:0; border-right:1px solid var(--graphit); background:transparent; color:var(--gedaempft);
+  padding:10px 6px; cursor:pointer; font-family:"Chivo Mono",monospace; font-size:12.5px;
+}
+.wahl-reihe button:last-child{border-right:0;}
+.wahl-reihe button[aria-pressed="true"]{background:var(--graphit); color:var(--papier);}
+.summe{border-top:1.5px solid var(--graphit); padding-top:18px; margin-top:6px;}
+.summe .zahl{font-family:"Saira Condensed",sans-serif; font-weight:700; font-size:46px; line-height:1; color:var(--graphit);}
+.summe .spanne2{font-family:"Chivo Mono",monospace; font-size:13px; color:var(--gedaempft); margin-top:8px;}
+.summe .vermerk{font-size:14px; color:var(--schwach); margin-top:12px; max-width:44ch;}
+
+/* ---------- Ablauf als Zeitschiene ---------- */
+.schiene{display:grid; grid-template-columns:repeat(4,1fr); margin-top:40px; border-top:1.5px solid var(--graphit);}
+@media (max-width:820px){.schiene{grid-template-columns:1fr 1fr;}}
+@media (max-width:480px){.schiene{grid-template-columns:1fr;}}
+.takt{padding:20px 22px 24px 0; border-right:1px solid var(--riss); position:relative;}
+.takt:last-child{border-right:0;}
+.takt::before{content:""; position:absolute; top:-5px; left:0; width:9px; height:9px; background:var(--rot);}
+.takt .woche{font-family:"Chivo Mono",monospace; font-size:11px; color:var(--rot); letter-spacing:.08em;}
+.takt h3{font-size:21px; margin-top:8px;}
+.takt p{color:var(--gedaempft); font-size:15px; margin-top:6px;}
+
+/* ---------- Werkstatt ---------- */
+.werkstatt{display:grid; grid-template-columns:1fr 1fr; gap:44px; margin-top:36px;}
+@media (max-width:760px){.werkstatt{grid-template-columns:1fr; gap:28px;}}
+.orte{display:flex; flex-wrap:wrap; gap:0; margin-top:16px; border-top:1px solid var(--riss);}
+.orte span{
+  font-family:"Chivo Mono",monospace; font-size:13px; padding:8px 14px 8px 0;
+  color:var(--gedaempft); border-right:1px solid var(--riss-fein); margin-right:14px;
+}
+.zeiten{margin-top:16px; width:100%; border-collapse:collapse;}
+.zeiten td{padding:10px 0; border-bottom:1px solid var(--riss-fein); font-size:15.5px;}
+.zeiten td:last-child{text-align:right; font-family:"Chivo Mono",monospace; font-size:14px;}
+.zeiten tr.heute td{color:var(--rot);}
+
+/* ---------- Kontakt: Telefon vor Formular ---------- */
+.anruf{
+  display:flex; flex-wrap:wrap; align-items:center; gap:18px 30px; margin-top:32px;
+  background:var(--blatt); border:1px solid var(--riss); padding:26px 28px;
+}
+.anruf .nummer{font-family:"Saira Condensed",sans-serif; font-weight:700; font-size:clamp(28px,3.6vw,42px); text-decoration:none; color:var(--graphit);}
+.anruf .nummer:hover{color:var(--rot);}
+.anruf .dazu{color:var(--gedaempft); font-size:15.5px; max-width:34ch;}
+.formular{display:grid; grid-template-columns:1fr 1fr; gap:18px; margin-top:26px; max-width:820px;}
+@media (max-width:640px){.formular{grid-template-columns:1fr;}}
+.feld{display:flex; flex-direction:column; gap:6px;}
+.feld.voll{grid-column:1/-1;}
+.feld label{font-family:"Chivo Mono",monospace; font-size:11px; letter-spacing:.08em; color:var(--schwach); text-transform:uppercase;}
+.feld input,.feld textarea{
+  background:transparent; border:0; border-bottom:1.5px solid var(--riss);
+  padding:9px 0; font-size:16.5px; color:var(--graphit); border-radius:0;
+}
+.feld input:focus,.feld textarea:focus{outline:none; border-bottom-color:var(--rot);}
+.senden{
+  justify-self:start; background:var(--graphit); color:var(--papier); border:0; cursor:pointer;
+  padding:14px 28px; font-family:"Saira Condensed",sans-serif; font-weight:700; font-size:17px;
+  text-transform:uppercase; letter-spacing:.05em;
+}
+.senden:hover{background:var(--rot);}
+.meldung{
+  position:fixed; left:50%; bottom:22px; transform:translate(-50%,18px);
+  background:var(--graphit); color:var(--papier); padding:12px 20px;
+  font-family:"Chivo Mono",monospace; font-size:12.5px; opacity:0; pointer-events:none;
+  transition:opacity .25s, transform .25s; z-index:70; max-width:92vw; text-align:center;
+}
+.meldung.zeigen{opacity:1; transform:translate(-50%,0);}
+
+/* ---------- Schriftfeld, wie auf einer Werkstattzeichnung ---------- */
+.schriftfeld{border-bottom:0; padding:44px 0 70px;}
+.feldtabelle{
+  display:grid; grid-template-columns:repeat(4,1fr); border:1.5px solid var(--graphit);
+  font-family:"Chivo Mono",monospace; font-size:12px;
+}
+@media (max-width:760px){.feldtabelle{grid-template-columns:1fr 1fr;}}
+@media (max-width:420px){.feldtabelle{grid-template-columns:1fr;}}
+.zelle{padding:13px 15px; border-right:1px solid var(--riss); border-bottom:1px solid var(--riss);}
+.zelle:nth-child(4n){border-right:0;}
+@media (max-width:760px){.zelle{border-right:1px solid var(--riss);} .zelle:nth-child(2n){border-right:0;}}
+.zelle b{display:block; color:var(--schwach); font-weight:400; font-size:10px; letter-spacing:.1em; margin-bottom:4px;}
+.zelle span{color:var(--graphit);}
+.zelle.breit{grid-column:1/-1; border-right:0; border-bottom:0; color:var(--gedaempft); line-height:1.75;}
+.zelle.breit a{color:var(--rot);}
 </style>
 </head>
 <body>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --bg:#F6F1EA; --surface:#FFFFFF; --surface-2:#EFE7DC; --ink:#2B211A; --ink-soft:#5E4F43; --ink-faint:#8E7F72;
-    --border:#E2D7C8; --oak:#B8865A; --oak-deep:#8C5F37; --cta:#D9581F; --cta-deep:#B0430F; --ok:#3B7A4A;
-    --shadow:0 12px 30px -16px rgba(43,33,26,.35);
-  }
-  @media (prefers-color-scheme: dark){
-    :root:not([data-theme="light"]){
-      --bg:#1B1612; --surface:#241E19; --surface-2:#2C241E; --ink:#F3EBE1; --ink-soft:#C9BBAC; --ink-faint:#8F8073;
-      --border:#3A3129; --oak:#C9976A; --oak-deep:#E0B285; --cta:#E8692F; --cta-deep:#F58A55; --ok:#7CC48C;
-      --shadow:0 14px 32px -16px rgba(0,0,0,.6);
-    }
-  }
-  :root[data-theme="dark"]{
-    --bg:#1B1612; --surface:#241E19; --surface-2:#2C241E; --ink:#F3EBE1; --ink-soft:#C9BBAC; --ink-faint:#8F8073;
-    --border:#3A3129; --oak:#C9976A; --oak-deep:#E0B285; --cta:#E8692F; --cta-deep:#F58A55; --ok:#7CC48C;
-    --shadow:0 14px 32px -16px rgba(0,0,0,.6);
-  }
-  *{box-sizing:border-box;}
-  html{scroll-behavior:smooth;}
-  body{margin:0; background:var(--bg); color:var(--ink); font-family:"Barlow", ui-sans-serif, system-ui, sans-serif; font-size:17px; line-height:1.55; overflow-x:hidden;}
-  h1,h2,h3{font-family:"Barlow Condensed", "Barlow", sans-serif; margin:0; text-wrap:balance; color:var(--ink); letter-spacing:.005em;}
-  a{color:var(--oak-deep);}
-  :focus-visible{outline:3px solid var(--cta); outline-offset:3px; border-radius:4px;}
-  button, input, select{font-family:inherit;}
-  .wrap{max-width:1100px; margin:0 auto; padding:0 24px;}
-  .num{font-variant-numeric:tabular-nums;}
 
-  .sample-bar{position:sticky; top:0; z-index:60; background:var(--ink); color:var(--bg); font-size:13px; font-weight:600; padding:8px 16px; text-align:center;}
-  .sample-bar a{color:var(--oak);}
+<div class="muster">BEISPIELSEITE &middot; DER BETRIEB IST ERFUNDEN &middot; <a href="/">Zurück zur Übersicht</a></div>
 
-  nav{display:flex; align-items:center; justify-content:space-between; gap:16px; padding:14px 24px; max-width:1100px; margin:0 auto;}
-  .logo{display:flex; align-items:center; gap:10px; font-family:"Barlow Condensed",sans-serif; font-weight:800; font-size:24px; text-transform:uppercase; letter-spacing:.03em; text-decoration:none; color:var(--ink);}
-  .logo i{width:30px; height:30px; background:var(--oak); display:block; clip-path:polygon(0 100%, 50% 0, 100% 100%);}
-  .nav-links{display:flex; gap:2px;}
-  .nav-links a{text-decoration:none; color:var(--ink-soft); font-weight:600; padding:8px 12px; border-radius:6px; font-size:15px;}
-  .nav-links a:hover{background:var(--surface-2); color:var(--ink);}
-  @media (max-width:820px){.nav-links{display:none;}}
-  .nav-right{display:flex; align-items:center; gap:10px;}
-  .theme-toggle{display:flex; gap:2px; background:var(--surface); border:1px solid var(--border); border-radius:999px; padding:3px;}
-  .theme-toggle button{border:none; background:transparent; color:var(--ink-soft); font-size:12.5px; font-weight:600; padding:5px 10px; border-radius:999px; cursor:pointer;}
-  .theme-toggle button[aria-pressed="true"]{background:var(--oak); color:#fff;}
-  .btn{display:inline-flex; align-items:center; gap:8px; font-weight:700; font-size:16px; padding:13px 20px; border-radius:8px; text-decoration:none; border:2px solid transparent; cursor:pointer; transition:transform .12s ease, background .15s ease;}
-  .btn:active{transform:scale(.98);}
-  .btn-cta{background:var(--cta); color:#fff;}
-  .btn-cta:hover{background:var(--cta-deep);}
-  .btn-line{background:transparent; border-color:var(--border); color:var(--ink);}
-  .btn-line:hover{border-color:var(--oak);}
-  .phone{font-family:"Barlow Condensed",sans-serif; font-weight:700; font-size:20px; text-decoration:none; color:var(--ink); display:inline-flex; align-items:center; gap:8px;}
-  .phone b{width:34px; height:34px; border-radius:50%; background:var(--cta); color:#fff; display:inline-flex; align-items:center; justify-content:center; font-size:15px;}
-
-  /* mobile sticky call bar */
-  .callbar{display:none; position:fixed; left:0; right:0; bottom:0; z-index:55; background:var(--cta); color:#fff; padding:12px 16px; font-weight:700; text-align:center; text-decoration:none; font-size:17px;}
-  @media (max-width:640px){ .callbar{display:block;} body{padding-bottom:56px;} }
-
-  header.hero{padding:56px 0 48px; border-bottom:1px solid var(--border); position:relative; overflow:hidden;}
-  .hero-grid{display:grid; grid-template-columns:1.1fr .9fr; gap:40px; align-items:center;}
-  @media (max-width:820px){.hero-grid{grid-template-columns:1fr;}}
-  .hero h1{font-size:clamp(44px,7vw,84px); line-height:.95; font-weight:800; text-transform:uppercase;}
-  .hero h1 span{color:var(--oak-deep);}
-  .hero p{font-size:19px; color:var(--ink-soft); max-width:46ch; margin:18px 0 26px;}
-  .hero-cta{display:flex; gap:12px; flex-wrap:wrap;}
-  .hero-art{position:relative; aspect-ratio:4/3; border-radius:14px; overflow:hidden; box-shadow:var(--shadow); background:var(--surface-2);}
-  .hero-art canvas{display:block; width:100%; height:100%;}
-  .hero-art .cap{position:absolute; left:12px; bottom:12px; background:rgba(43,33,26,.8); color:#fff; font-size:12.5px; padding:5px 9px; border-radius:6px;}
-  .trust{display:flex; gap:28px; flex-wrap:wrap; margin-top:36px; padding-top:22px; border-top:1px solid var(--border);}
-  .trust div{display:flex; flex-direction:column; gap:2px;}
-  .trust b{font-family:"Barlow Condensed",sans-serif; font-size:26px; font-weight:700; color:var(--oak-deep); line-height:1;}
-  .trust span{font-size:13.5px; color:var(--ink-soft);}
-
-  section{padding:72px 0; border-bottom:1px solid var(--border);}
-  .kicker{font-weight:700; color:var(--cta); text-transform:uppercase; letter-spacing:.1em; font-size:13px; display:block; margin-bottom:8px;}
-  h2{font-size:clamp(32px,4.5vw,50px); font-weight:800; text-transform:uppercase;}
-  .sub{color:var(--ink-soft); max-width:58ch; margin-top:10px;}
-
-  .services{display:grid; grid-template-columns:repeat(4,1fr); gap:16px; margin-top:36px;}
-  @media (max-width:900px){.services{grid-template-columns:1fr 1fr;}}
-  @media (max-width:520px){.services{grid-template-columns:1fr;}}
-  .service{background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:22px; border-top:4px solid var(--oak);}
-  .service h3{font-size:24px; font-weight:700;}
-  .service p{color:var(--ink-soft); font-size:15px; margin:8px 0 0;}
-
-  /* calculator */
-  .calc{display:grid; grid-template-columns:1fr 1fr; gap:28px; margin-top:36px; background:var(--surface); border:1px solid var(--border); border-radius:14px; padding:28px; box-shadow:var(--shadow);}
-  @media (max-width:760px){.calc{grid-template-columns:1fr;}}
-  .field{display:flex; flex-direction:column; gap:6px; margin-bottom:14px;}
-  label{font-weight:600; font-size:14px;}
-  input[type="text"], input[type="tel"], input[type="email"], select, textarea{font-size:16px; padding:11px 12px; border-radius:8px; border:1.5px solid var(--border); background:var(--bg); color:var(--ink); width:100%; font-family:inherit;}
-  input[type="range"]{width:100%; accent-color:var(--oak-deep);}
-  .range-row{display:flex; justify-content:space-between; font-size:13.5px; color:var(--ink-soft);}
-  .range-row output{font-weight:700; color:var(--ink);}
-  .segment{display:flex; gap:6px; flex-wrap:wrap;}
-  .segment button{border:1.5px solid var(--border); background:var(--bg); color:var(--ink-soft); padding:8px 12px; border-radius:8px; font-weight:600; cursor:pointer; font-size:14px;}
-  .segment button[aria-pressed="true"]{background:var(--oak); border-color:var(--oak); color:#fff;}
-  .result{background:var(--surface-2); border-radius:12px; padding:22px; display:flex; flex-direction:column; justify-content:center; gap:8px;}
-  .result .big{font-family:"Barlow Condensed",sans-serif; font-size:48px; font-weight:800; color:var(--oak-deep); line-height:1;}
-  .result small{color:var(--ink-soft); font-size:13.5px;}
-  .result ul{margin:8px 0 0; padding-left:18px; color:var(--ink-soft); font-size:14px;}
-
-  /* references */
-  .refs{display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:36px;}
-  @media (max-width:900px){.refs{grid-template-columns:1fr 1fr;}}
-  @media (max-width:520px){.refs{grid-template-columns:1fr;}}
-  .ref{background:var(--surface); border:1px solid var(--border); border-radius:12px; overflow:hidden;}
-  .ref canvas{display:block; width:100%; height:auto;}
-  .ref .body{padding:14px 16px;}
-  .ref h3{font-size:20px; font-weight:700;}
-  .ref p{margin:4px 0 0; color:var(--ink-soft); font-size:14px;}
-  .ref .meta{display:flex; justify-content:space-between; margin-top:10px; font-size:12.5px; color:var(--ink-faint);}
-
-  /* before/after */
-  .ba{position:relative; margin-top:36px; border-radius:14px; overflow:hidden; box-shadow:var(--shadow); aspect-ratio:16/8; background:var(--surface-2); user-select:none; touch-action:none;}
-  .ba canvas{position:absolute; inset:0; width:100%; height:100%; display:block;}
-  .ba .after{clip-path:inset(0 0 0 var(--cut, 50%));}
-  .ba .handle{position:absolute; top:0; bottom:0; left:var(--cut, 50%); width:3px; background:#fff; transform:translateX(-50%); box-shadow:0 0 0 1px rgba(0,0,0,.2);}
-  .ba .knob{position:absolute; top:50%; left:var(--cut, 50%); transform:translate(-50%,-50%); width:44px; height:44px; border-radius:50%; background:#fff; color:var(--ink); display:flex; align-items:center; justify-content:center; font-weight:800; box-shadow:0 4px 14px rgba(0,0,0,.3); cursor:ew-resize;}
-  .ba .lbl{position:absolute; top:12px; background:rgba(43,33,26,.8); color:#fff; font-size:12.5px; font-weight:700; padding:5px 9px; border-radius:6px;}
-  .ba .lbl.l{left:12px;} .ba .lbl.r{right:12px;}
-  .ba input[type="range"]{position:absolute; inset:0; width:100%; height:100%; opacity:0; margin:0; cursor:ew-resize;}
-
-  .area{display:grid; grid-template-columns:1fr 1fr; gap:36px; margin-top:36px; align-items:start;}
-  @media (max-width:760px){.area{grid-template-columns:1fr;}}
-  .towns{display:flex; flex-wrap:wrap; gap:8px; margin-top:14px;}
-  .towns span{background:var(--surface); border:1px solid var(--border); border-radius:999px; padding:6px 12px; font-size:14px; font-weight:600;}
-  table{width:100%; border-collapse:collapse; font-size:16px; margin-top:14px;}
-  td{padding:10px 0; border-bottom:1px solid var(--border);}
-  td:last-child{text-align:right; font-weight:700;}
-  .today td{color:var(--cta);}
-
-  .contact{margin-top:36px; display:grid; grid-template-columns:1fr 1fr; gap:16px; max-width:780px;}
-  @media (max-width:640px){.contact{grid-template-columns:1fr;}}
-  .contact .full{grid-column:1/-1;}
-  .toast{position:fixed; left:50%; bottom:72px; transform:translate(-50%, 20px); background:var(--ink); color:var(--bg); padding:12px 18px; border-radius:10px; font-weight:700; opacity:0; pointer-events:none; transition:opacity .25s, transform .25s; z-index:70; max-width:90vw; text-align:center;}
-  .toast.show{opacity:1; transform:translate(-50%,0);}
-  footer{padding:40px 24px 64px; text-align:center; color:var(--ink-faint); font-size:13.5px;}
-  footer a{color:var(--ink-soft);}
-  @media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto;} .btn{transition:none;} }
-</style>
-
-<div class="sample-bar">Beispielseite · Stil: Bodenständig / Handwerk · Der Betrieb ist erfunden · <a href="/">Zurück zur Übersicht</a></div>
-
-<nav>
-  <a href="#top" class="logo"><i aria-hidden="true"></i>Schreinerei Marx</a>
-  <div class="nav-links"><a href="#leistungen">Leistungen</a><a href="#rechner">Richtpreis</a><a href="#referenzen">Referenzen</a><a href="#gebiet">Einzugsgebiet</a><a href="#kontakt">Kontakt</a></div>
-  <div class="nav-right">
-    <div class="theme-toggle" role="group" aria-label="Darstellung">
-      <button type="button" data-theme-choice="light" aria-pressed="false">Hell</button>
-      <button type="button" data-theme-choice="dark" aria-pressed="false">Dunkel</button>
-      <button type="button" data-theme-choice="system" aria-pressed="true">Auto</button>
-    </div>
-    <a href="tel:+4965010000000" class="phone"><b>☎</b>06501 000 00 00</a>
-  </div>
-</nav>
-<a href="tel:+4965010000000" class="callbar">☎ Jetzt anrufen, 06501 000 00 00</a>
-
-<header class="hero" id="top">
-  <div class="wrap">
-    <div class="hero-grid">
-      <div>
-        <h1>Möbel nach Maß <span>aus Konz.</span></h1>
-        <p>Einbauschränke, Küchen, Türen und Treppen, geplant in unserer Werkstatt, gebaut von Meisterhand, eingebaut, bis es sitzt. Seit 1994 im Kreis Trier-Saarburg.</p>
-        <div class="hero-cta">
-          <a href="#kontakt" class="btn btn-cta">Angebot anfragen</a>
-          <a href="#rechner" class="btn btn-line">Richtpreis berechnen</a>
-        </div>
-        <div class="trust">
-          <div><b>1994</b><span>Meisterbetrieb seit</span></div>
-          <div><b>4</b><span>Gesellen + 1 Azubi</span></div>
-          <div><b>Innung</b><span>Tischler-Innung Trier</span></div>
-          <div><b>10 J.</b><span>Garantie auf Einbaumöbel</span></div>
-        </div>
-      </div>
-      <div class="hero-art"><canvas id="heroWood" width="800" height="600" aria-label="Holzmaserung Eiche"></canvas><span class="cap">Eiche, geölt, Maserung im Browser gezeichnet, kein Foto</span></div>
+<header class="kopf">
+  <div class="kopf-innen">
+    <a href="#oben" class="marke">
+      <svg viewBox="0 0 40 40" aria-hidden="true">
+        <path class="l-voll" d="M4 30 L14 10 L26 10 L36 30 Z"/>
+        <path class="l-fein" d="M14 10 L20 30 M26 10 L20 30"/>
+      </svg>
+      <span style="display:block"><b>Schreinerei Marx</b><span>MEISTERBETRIEB SEIT 1994</span></span>
+    </a>
+    <nav class="kopf-nav">
+      <a href="#verbindungen">Verbindungen</a>
+      <a href="#werke">Was wir bauen</a>
+      <a href="#rechner">Richtpreis</a>
+      <a href="#werkstatt">Werkstatt</a>
+      <a href="#kontakt">Kontakt</a>
+    </nav>
+    <a class="ruf" href="tel:+4965010000000">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .3 1.9.6 2.8a2 2 0 0 1-.4 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.5 2.8.6a2 2 0 0 1 1.7 2Z"/></svg>
+      <span>06501 000 00 00</span>
+    </a>
+    <div class="themenwahl" role="group" aria-label="Darstellung">
+      <button type="button" data-thema="light" aria-pressed="false">HELL</button>
+      <button type="button" data-thema="dark" aria-pressed="false">DUNKEL</button>
+      <button type="button" data-thema="system" aria-pressed="true">AUTO</button>
     </div>
   </div>
 </header>
 
-<section id="leistungen">
-  <div class="wrap">
-    <span class="kicker">Leistungen</span>
-    <h2>Was wir bauen</h2>
-    <p class="sub">Alles aus einer Hand: Aufmaß bei Ihnen zu Hause, Zeichnung zum Freigeben, Bau in der Werkstatt, Montage. Ohne Subunternehmer.</p>
-    <div class="services">
-      <div class="service"><h3>Einbauschränke</h3><p>Dachschräge, Nische, Flur, wir nutzen jeden Zentimeter. Fronten lackiert, furniert oder massiv.</p></div>
-      <div class="service"><h3>Küchen</h3><p>Massivholzküchen und Fronten nach Maß, auch Aufarbeitung bestehender Küchen.</p></div>
-      <div class="service"><h3>Türen &amp; Fenster</h3><p>Innentüren, Haustüren, Reparatur alter Holzfenster statt Austausch.</p></div>
-      <div class="service"><h3>Treppen &amp; Böden</h3><p>Massivholztreppen, Treppenrenovierung, Dielen- und Parkettverlegung.</p></div>
+<main id="oben">
+
+<div class="held">
+  <div class="blatt held-raster">
+    <div>
+      <h1>Möbel nach Maß.<br><em>Gezeichnet, gebaut, eingebaut.</em></h1>
+      <p>Einbauschränke, Küchen, Türen und Treppen aus der eigenen Werkstatt in Konz. Vier Gesellen, ein Meister, kein Subunternehmer.</p>
+      <a class="einzel" href="#kontakt">Angebot anfragen</a>
+      <div class="held-vermerk">
+        JEDES MÖBEL BEGINNT ALS RISS.<br>
+        Was hier steht, ist gezeichnet und nicht fotografiert. Auf der
+        Seite eines echten Betriebs stünden hier Fotos von der Baustelle.
+      </div>
+    </div>
+    <div class="riss">
+      <span class="riss-schild">RISS 01 &middot; EINBAUSCHRANK UNTER DACHSCHRÄGE &middot; M 1:20</span>
+      <svg viewBox="0 0 500 440" role="img" aria-label="Technische Zeichnung eines Einbauschranks unter einer Dachschräge von 38 Grad, in drei Stufen der Schräge folgend, mit Maßketten">
+        <g class="l-fein" opacity=".5">
+          <path d="M60 90 H470 M60 140 H470 M60 190 H470 M60 240 H470 M60 290 H470"/>
+          <path d="M110 60 V360 M160 60 V360 M210 60 V360 M260 60 V360 M310 60 V360 M360 60 V360 M410 60 V360"/>
+        </g>
+        <!-- Boden, Wand, Dachschraege -->
+        <path class="l-voll" d="M60 360 H470"/>
+        <path class="l-voll" d="M60 360 V60"/>
+        <path class="l-voll zeichnen" d="M60 60 L444 360"/>
+        <text class="t-teil" x="240" y="224">DACHSCHRÄGE 38°</text>
+        <!-- Korpus, folgt der Schraege in drei Stufen -->
+        <path class="f-holz" d="M110 360 V173 H205 V248 H300 V326 H400 V360 Z"/>
+        <!-- Fachboeden -->
+        <path class="l-voll" d="M110 235 H205 M110 298 H205 M205 304 H300"/>
+        <!-- Schubkaesten in der niedrigsten Stufe -->
+        <path class="l-voll" d="M300 337 H400 M300 348 H400"/>
+        <path class="l-fein" d="M341 331 H359 M341 342 H359 M341 354 H359"/>
+        <!-- Fuge in der hohen Stufe -->
+        <path class="l-strich" d="M157 173 V360"/>
+        <!-- Masskette Breite -->
+        <path class="l-mass" d="M110 396 H400 M110 388 V404 M400 388 V404"/>
+        <path class="l-mass" fill="var(--rot)" d="M110 396 l12 -5 v10 Z M400 396 l-12 -5 v10 Z"/>
+        <rect x="220" y="384" width="70" height="24" class="f-blatt" stroke="none"/>
+        <text class="t-mass" x="255" y="401" text-anchor="middle">2 900</text>
+        <!-- Masskette Hoehe der hohen Stufe -->
+        <path class="l-mass" d="M76 173 V360 M68 173 H84 M68 360 H84"/>
+        <path class="l-mass" fill="var(--rot)" d="M76 173 l-5 12 h10 Z M76 360 l-5 -12 h10 Z"/>
+        <rect x="62" y="238" width="28" height="58" class="f-blatt" stroke="none"/>
+        <text class="t-mass" x="76" y="267" text-anchor="middle" dy="4" transform="rotate(-90 76 267)">1 870</text>
+        <!-- Beschriftungen -->
+        <text class="t-teil" x="157" y="200" text-anchor="middle">FRONT</text>
+        <text class="t-teil" x="252" y="278" text-anchor="middle">FACHBÖDEN</text>
+        <text class="t-teil" x="350" y="318" text-anchor="middle">SCHUBKÄSTEN</text>
+      </svg>
+    </div>
+  </div>
+</div>
+
+<section id="verbindungen">
+  <div class="blatt">
+    <div class="kapitel"><span class="nr">01</span><h2>Woran man einen Schreiner erkennt</h2></div>
+    <p class="beisatz">Nicht an der Front, die sieht überall gleich aus. An der Verbindung dahinter. Drei, die wir von Hand oder auf der Fräse machen, je nachdem wo sie sitzt.</p>
+    <div class="verbindungen">
+
+      <div class="verbindung">
+        <svg viewBox="0 0 260 150" role="img" aria-label="Zeichnung einer Zinkenverbindung">
+          <path class="f-holz" d="M30 30 H120 V50 H140 V70 H120 V90 H140 V110 H120 V130 H30 Z"/>
+          <path class="f-holz" d="M230 30 H140 V50 H120 V70 H140 V90 H120 V110 H140 V130 H230 Z" opacity=".55"/>
+          <path class="l-fein" d="M130 20 V140"/>
+          <text class="t-teil" x="130" y="14" text-anchor="middle">FUGE</text>
+        </svg>
+        <h3>Zinken</h3>
+        <div class="wo">SCHUBKASTEN, KORPUSECKE</div>
+        <p>Verkeilt sich gegen den Zug. Deshalb sitzt sie da, wo täglich gezogen wird. Hält ohne Schraube und ohne Leim, wenn es sein muss.</p>
+      </div>
+
+      <div class="verbindung">
+        <svg viewBox="0 0 260 150" role="img" aria-label="Zeichnung einer Zapfenverbindung">
+          <path class="f-holz" d="M30 46 H150 V66 H196 V96 H150 V116 H30 Z"/>
+          <path class="f-holz" d="M196 20 H236 V140 H196 Z" opacity=".55"/>
+          <path class="l-strich" d="M196 66 H236 M196 96 H236"/>
+          <text class="t-teil" x="216" y="14" text-anchor="middle">ZAPFENLOCH</text>
+        </svg>
+        <h3>Zapfen</h3>
+        <div class="wo">TÜRRAHMEN, TISCHGESTELL</div>
+        <p>Nimmt die Last aus dem Rahmen auf und gibt sie ins Bein. Wo ein Rahmen sich verziehen könnte, sitzt ein Zapfen.</p>
+      </div>
+
+      <div class="verbindung">
+        <svg viewBox="0 0 260 150" role="img" aria-label="Zeichnung einer Gratverbindung">
+          <path class="f-holz" d="M30 40 H230 V70 H30 Z"/>
+          <path class="l-voll" d="M96 70 L106 100 H154 L164 70"/>
+          <path class="f-holz" d="M96 100 L106 130 H154 L164 100 Z" opacity=".55"/>
+          <path class="l-strich" d="M96 70 V100 M164 70 V100"/>
+          <text class="t-teil" x="130" y="146" text-anchor="middle">EINGESCHOBEN</text>
+        </svg>
+        <h3>Grat</h3>
+        <div class="wo">FACHBODEN, TREPPENWANGE</div>
+        <p>Wird eingeschoben und hält von selbst. Zieht das Holz beim Arbeiten zusammen statt es aufzureißen. Deshalb tragen so die Böden.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="werke">
+  <div class="blatt">
+    <div class="kapitel"><span class="nr">02</span><h2>Was wir bauen</h2></div>
+    <p class="beisatz">Aufmaß bei Ihnen, Zeichnung zum Freigeben, Bau in der Werkstatt, Montage. Ohne Subunternehmer.</p>
+    <div class="verzeichnis">
+
+      <div class="werk">
+        <svg viewBox="0 0 80 66" aria-hidden="true">
+          <path class="l-voll" d="M8 58 V20 L48 20 V58 Z"/><path class="l-fein" d="M8 34 H48 M28 20 V58"/>
+          <path class="l-voll" d="M48 58 V32 L72 32 V58 Z"/><path class="l-fein" d="M48 45 H72"/>
+        </svg>
+        <h3>Einbauschränke</h3>
+        <div class="beschr">Dachschräge, Nische, Flur. Jeder Zentimeter genutzt, Fronten lackiert, furniert oder massiv.</div>
+        <div class="spanne">ab 1.900 €</div>
+      </div>
+
+      <div class="werk">
+        <svg viewBox="0 0 80 66" aria-hidden="true">
+          <path class="l-voll" d="M6 30 H74 V40 H6 Z"/><path class="l-voll" d="M10 40 V60 H70 V40"/>
+          <path class="l-fein" d="M30 40 V60 M50 40 V60 M10 50 H70"/>
+          <path class="l-fein" d="M18 22 H30 M46 22 H62"/>
+        </svg>
+        <h3>Küchen</h3>
+        <div class="beschr">Massivholz oder lackiert, Arbeitsplatte nach Maß. Auch Aufarbeitung einer vorhandenen Küche.</div>
+        <div class="spanne">ab 6.500 €</div>
+      </div>
+
+      <div class="werk">
+        <svg viewBox="0 0 80 66" aria-hidden="true">
+          <path class="l-voll" d="M18 8 H62 V60 H18 Z"/><path class="l-fein" d="M26 16 H54 V36 H26 Z M26 42 H54 V54 H26 Z"/>
+          <circle cx="24" cy="34" r="2.4" class="l-voll"/>
+        </svg>
+        <h3>Türen und Fenster</h3>
+        <div class="beschr">Innentüren, Haustüren, und die Reparatur alter Holzfenster statt Austausch.</div>
+        <div class="spanne">ab 780 €</div>
+      </div>
+
+      <div class="werk">
+        <svg viewBox="0 0 80 66" aria-hidden="true">
+          <path class="l-voll" d="M8 60 H24 V48 H40 V36 H56 V24 H72 V12"/>
+          <path class="l-fein" d="M24 60 V48 M40 48 V36 M56 36 V24 M72 24 V12"/>
+          <path class="l-strich" d="M8 60 L72 12"/>
+        </svg>
+        <h3>Treppen und Böden</h3>
+        <div class="beschr">Massivholztreppen, Treppenrenovierung, Dielen und Parkett verlegt und geschliffen.</div>
+        <div class="spanne">ab 3.400 €</div>
+      </div>
+
     </div>
   </div>
 </section>
 
 <section id="rechner">
-  <div class="wrap">
-    <span class="kicker">Richtpreis in 20 Sekunden</span>
-    <h2>Was kostet ein Einbauschrank?</h2>
-    <p class="sub">Schieben, klicken, fertig. Das Ergebnis ist ein Richtwert für die Beispielseite, das echte Angebot kommt nach dem Aufmaß.</p>
-    <div class="calc">
+  <div class="blatt">
+    <div class="kapitel"><span class="nr">03</span><h2>Der Riss rechnet mit</h2></div>
+    <p class="beisatz">Schieben Sie die Maße, die Zeichnung ändert sich mit. Das Ergebnis ist ein Richtwert für diese Musterseite, das echte Angebot kommt nach dem Aufmaß.</p>
+    <div class="rechner">
       <div>
-        <div class="field">
-          <div class="range-row"><label for="w">Breite</label><output id="wOut">240 cm</output></div>
-          <input type="range" id="w" min="60" max="500" step="10" value="240">
+        <div class="regler">
+          <div class="regler-kopf"><label for="breite">Breite</label><output id="breiteAus" class="mass">240 cm</output></div>
+          <input type="range" id="breite" min="60" max="500" step="10" value="240">
         </div>
-        <div class="field">
-          <div class="range-row"><label for="h">Höhe</label><output id="hOut">250 cm</output></div>
-          <input type="range" id="h" min="100" max="300" step="10" value="250">
+        <div class="regler">
+          <div class="regler-kopf"><label for="hoehe">Höhe</label><output id="hoeheAus" class="mass">250 cm</output></div>
+          <input type="range" id="hoehe" min="100" max="300" step="10" value="250">
         </div>
-        <div class="field">
-          <label>Front</label>
-          <div class="segment" id="front" role="group" aria-label="Front">
-            <button type="button" data-v="lack" data-f="1" aria-pressed="true">Lackiert</button>
-            <button type="button" data-v="furnier" data-f="1.25" aria-pressed="false">Furniert</button>
-            <button type="button" data-v="massiv" data-f="1.6" aria-pressed="false">Massivholz</button>
+        <div class="wahl">
+          <span>Front</span>
+          <div class="wahl-reihe" id="front" role="group" aria-label="Front">
+            <button type="button" data-f="1" aria-pressed="true">LACKIERT</button>
+            <button type="button" data-f="1.25" aria-pressed="false">FURNIERT</button>
+            <button type="button" data-f="1.6" aria-pressed="false">MASSIV</button>
           </div>
         </div>
-        <div class="field">
-          <label>Innenausstattung</label>
-          <div class="segment" id="inner" role="group" aria-label="Innenausstattung">
-            <button type="button" data-v="einfach" data-add="0" aria-pressed="true">Böden &amp; Stange</button>
-            <button type="button" data-v="mittel" data-add="180" aria-pressed="false">+ Schubladen</button>
-            <button type="button" data-v="voll" data-add="420" aria-pressed="false">+ Schubladen &amp; Licht</button>
+        <div class="wahl">
+          <span>Innenausbau</span>
+          <div class="wahl-reihe" id="innen" role="group" aria-label="Innenausbau">
+            <button type="button" data-a="0" aria-pressed="true">BÖDEN</button>
+            <button type="button" data-a="180" aria-pressed="false">+ SCHUB</button>
+            <button type="button" data-a="420" aria-pressed="false">+ LICHT</button>
           </div>
+        </div>
+        <div class="summe">
+          <div class="zahl mass" id="preis">ca. 4.150 €</div>
+          <div class="spanne2" id="spanne"></div>
+          <p class="vermerk">Inklusive Aufmaß, Zeichnung und Montage. Lieferzeit sechs bis acht Wochen. Beispielwerte dieser Musterseite, zzgl. USt.</p>
         </div>
       </div>
-      <div class="result">
-        <small>Richtpreis inkl. Montage</small>
-        <div class="big num" id="price">noch offen</div>
-        <small id="priceRange"></small>
-        <ul>
-          <li>Aufmaß und Zeichnung inklusive</li>
-          <li>Lieferzeit ca. 6 bis 8 Wochen</li>
-          <li>Preise sind Beispielwerte dieser Musterseite</li>
-        </ul>
-        <a href="#kontakt" class="btn btn-cta" style="margin-top:12px; align-self:flex-start;">Genau anfragen</a>
+      <div class="riss">
+        <span class="riss-schild">RISS 02 &middot; IHR SCHRANK &middot; ANSICHT</span>
+        <svg id="rechnerRiss" viewBox="0 0 560 420" role="img" aria-label="Maßstäbliche Ansicht des eingestellten Schranks"></svg>
       </div>
     </div>
   </div>
 </section>
 
-<section id="referenzen">
-  <div class="wrap">
-    <span class="kicker">Referenzen</span>
-    <h2>Zuletzt gebaut</h2>
-    <p class="sub">Sechs Projekte aus dem letzten Jahr. Auf der echten Seite stehen hier Fotos von der Baustelle, für die Beispielseite zeichnen wir die Holzarten im Browser.</p>
-    <div class="refs" id="refs"></div>
-  </div>
-</section>
-
-<section id="vorher">
-  <div class="wrap">
-    <span class="kicker">Vorher / Nachher</span>
-    <h2>Treppe aufgearbeitet statt neu</h2>
-    <p class="sub">Alte Buchentreppe, 1978: abgeschliffen, Kanten neu, geölt. Ziehen Sie den Regler.</p>
-    <div class="ba" id="ba">
-      <canvas class="before" id="baBefore" width="1200" height="600"></canvas>
-      <canvas class="after" id="baAfter" width="1200" height="600"></canvas>
-      <span class="lbl l">Vorher</span><span class="lbl r">Nachher</span>
-      <div class="handle" aria-hidden="true"></div><div class="knob" aria-hidden="true">⇔</div>
-      <input type="range" id="baRange" min="0" max="100" value="50" aria-label="Vorher-Nachher-Regler">
+<section id="ablauf">
+  <div class="blatt">
+    <div class="kapitel"><span class="nr">04</span><h2>Vom Aufmaß bis zur Montage</h2></div>
+    <div class="schiene">
+      <div class="takt"><div class="woche">WOCHE 0</div><h3>Aufmaß</h3><p>Wir kommen vorbei und messen. Dauert eine Stunde und kostet nichts.</p></div>
+      <div class="takt"><div class="woche">WOCHE 1</div><h3>Zeichnung</h3><p>Sie bekommen einen Riss wie oben, mit Maßen und Festpreis. Erst wenn der passt, geht es weiter.</p></div>
+      <div class="takt"><div class="woche">WOCHE 2 BIS 7</div><h3>Werkstatt</h3><p>Zuschnitt, Verbindungen, Oberfläche. Bei uns in Konz, nicht bei einem Zulieferer.</p></div>
+      <div class="takt"><div class="woche">WOCHE 8</div><h3>Montage</h3><p>Ein bis zwei Tage bei Ihnen. Wir nehmen den Verschnitt wieder mit.</p></div>
     </div>
   </div>
 </section>
 
-<section id="gebiet">
-  <div class="wrap">
-    <span class="kicker">Wo wir arbeiten</span>
-    <h2>Einzugsgebiet &amp; Zeiten</h2>
-    <div class="area">
+<section id="werkstatt">
+  <div class="blatt">
+    <div class="kapitel"><span class="nr">05</span><h2>Werkstatt und Einzugsgebiet</h2></div>
+    <div class="werkstatt">
       <div>
-        <p style="margin:0; color:var(--ink-soft);">Werkstatt in Konz. Anfahrt ohne Aufpreis in:</p>
-        <div class="towns"><span>Konz</span><span>Trier</span><span>Saarburg</span><span>Schweich</span><span>Wittlich</span><span>Bitburg</span><span>Hermeskeil</span><span>Luxemburg-Stadt</span><span>Remich</span></div>
-        <p style="margin:16px 0 0; color:var(--ink-soft);">Darüber hinaus nach Absprache.</p>
+        <p class="beisatz" style="margin-top:0">Werkstatt und Ausstellung, Saarstraße 41, 54329 Konz. Anfahrt ohne Aufpreis in:</p>
+        <div class="orte">
+          <span>Konz</span><span>Trier</span><span>Saarburg</span><span>Schweich</span>
+          <span>Wittlich</span><span>Bitburg</span><span>Hermeskeil</span><span>Luxemburg-Stadt</span><span>Remich</span>
+        </div>
+        <p style="margin-top:18px; color:var(--gedaempft); font-size:15.5px;">Darüber hinaus nach Absprache.</p>
       </div>
       <div>
-        <p style="margin:0; color:var(--ink-soft);">Werkstatt &amp; Ausstellung, Saarstraße 41, 54329 Konz</p>
-        <table id="hours">
-          <tr data-day="1"><td>Montag bis Donnerstag</td><td>7 bis 17 Uhr</td></tr>
-          <tr data-day="5"><td>Freitag</td><td>7 bis 14 Uhr</td></tr>
-          <tr data-day="6"><td>Samstag</td><td>nach Termin</td></tr>
-          <tr data-day="0"><td>Sonntag</td><td>geschlossen</td></tr>
+        <table class="zeiten" id="zeiten">
+          <tr data-tag="1"><td>Montag bis Donnerstag</td><td>7 bis 17 Uhr</td></tr>
+          <tr data-tag="5"><td>Freitag</td><td>7 bis 14 Uhr</td></tr>
+          <tr data-tag="6"><td>Samstag</td><td>nach Termin</td></tr>
+          <tr data-tag="0"><td>Sonntag</td><td>geschlossen</td></tr>
         </table>
       </div>
     </div>
   </div>
 </section>
 
-<section id="kontakt" style="border-bottom:none;">
-  <div class="wrap">
-    <span class="kicker">Kontakt</span>
-    <h2>Angebot anfragen</h2>
-    <p class="sub">Kurz beschreiben, was Sie vorhaben, wir melden uns innerhalb eines Werktags und machen einen Termin fürs Aufmaß.</p>
-    <form class="contact" id="contactForm" novalidate>
-      <div class="field"><label for="c-name">Name</label><input id="c-name" type="text" autocomplete="name"></div>
-      <div class="field"><label for="c-phone">Telefon</label><input id="c-phone" type="tel" autocomplete="tel"></div>
-      <div class="field full"><label for="c-what">Was soll gebaut werden?</label><textarea id="c-what" rows="4" placeholder="z. B. Einbauschrank unter der Dachschräge, ca. 3 m breit"></textarea></div>
-      <div class="field full"><button type="submit" class="btn btn-cta">Anfrage senden</button></div>
+<section id="kontakt">
+  <div class="blatt">
+    <div class="kapitel"><span class="nr">06</span><h2>Rufen Sie an</h2></div>
+    <div class="anruf">
+      <a class="nummer" href="tel:+4965010000000">06501 000 00 00</a>
+      <p class="dazu">Montag bis Freitag geht jemand ran, der auch sägt. Schneller als jedes Formular.</p>
+    </div>
+    <form class="formular" id="anfrage" novalidate>
+      <div class="feld"><label for="k-name">Name</label><input id="k-name" type="text" autocomplete="name"></div>
+      <div class="feld"><label for="k-tel">Telefon</label><input id="k-tel" type="tel" autocomplete="tel"></div>
+      <div class="feld voll"><label for="k-was">Was soll gebaut werden?</label><textarea id="k-was" rows="3" placeholder="z. B. Einbauschrank unter der Dachschräge, etwa 3 m breit"></textarea></div>
+      <div class="feld voll"><button type="submit" class="senden">Anfrage senden</button></div>
     </form>
   </div>
 </section>
 
-<footer>Schreinerei Marx ist ein erfundener Betrieb. Diese Seite ist eine Beispielseite von Dominic Lutz, <a href="/">zur Übersicht</a>.</footer>
-<div class="toast" id="toast" role="status"></div>
+<section class="schriftfeld">
+  <div class="blatt">
+    <div class="feldtabelle">
+      <div class="zelle"><b>BETRIEB</b><span>Schreinerei Marx, Konz</span></div>
+      <div class="zelle"><b>GEGRÜNDET</b><span>1994</span></div>
+      <div class="zelle"><b>BESETZUNG</b><span>1 Meister, 4 Gesellen, 1 Azubi</span></div>
+      <div class="zelle"><b>INNUNG</b><span>Tischler-Innung Trier</span></div>
+      <div class="zelle"><b>GARANTIE</b><span>10 Jahre auf Einbaumöbel</span></div>
+      <div class="zelle"><b>MASSSTAB</b><span>M 1:20</span></div>
+      <div class="zelle"><b>BLATT</b><span>1 von 1</span></div>
+      <div class="zelle"><b>STAND</b><span>05.09.2026</span></div>
+      <div class="zelle breit">
+        Schreinerei Marx ist ein erfundener Betrieb. Anschrift und Telefonnummer gibt es nicht.
+        Diese Seite ist eine Beispielseite von Dominic Lutz, <a href="/">zurück zur Übersicht</a>.
+        Aufbau nach Abgleich mit Hays Woodworking (Awwwards Honorable Mention) und
+        Final Touch Carpentry (Awwwards Nominee): Telefon dauerhaft in der Kopfleiste,
+        ein einziger Handlungsknopf, kein Knopfpaar im Kopfbereich.
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+<div class="meldung" id="meldung" role="status"></div>
 
 <script>
 (function(){
-  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  // theme
-  var root = document.documentElement, saved = null;
-  try { saved = localStorage.getItem('marx-theme'); } catch(e){}
-  if (saved === 'light' || saved === 'dark') root.setAttribute('data-theme', saved);
-  function setPressed(c){ document.querySelectorAll('[data-theme-choice]').forEach(function(b){ b.setAttribute('aria-pressed', b.getAttribute('data-theme-choice')===c?'true':'false'); }); }
-  setPressed(saved || 'system');
-  document.querySelectorAll('[data-theme-choice]').forEach(function(btn){
-    btn.addEventListener('click', function(){
-      var c = btn.getAttribute('data-theme-choice');
-      if (c === 'system') root.removeAttribute('data-theme'); else root.setAttribute('data-theme', c);
-      try { localStorage.setItem('marx-theme', c); } catch(e){}
-      setPressed(c);
+  var sparsam = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---------- Darstellung ---------- */
+  var wurzel = document.documentElement, gemerkt = null;
+  try { gemerkt = localStorage.getItem('marx-thema'); } catch(e){}
+  if (gemerkt === 'light' || gemerkt === 'dark') wurzel.setAttribute('data-theme', gemerkt);
+  function gedrueckt(w){
+    document.querySelectorAll('[data-thema]').forEach(function(b){
+      b.setAttribute('aria-pressed', b.getAttribute('data-thema') === w ? 'true' : 'false');
+    });
+  }
+  gedrueckt(gemerkt || 'system');
+  document.querySelectorAll('[data-thema]').forEach(function(b){
+    b.addEventListener('click', function(){
+      var w = b.getAttribute('data-thema');
+      if (w === 'system') wurzel.removeAttribute('data-theme'); else wurzel.setAttribute('data-theme', w);
+      try { localStorage.setItem('marx-thema', w); } catch(e){}
+      gedrueckt(w);
+      zeichneRiss();
     });
   });
-  var toast = document.getElementById('toast');
-  function showToast(t){ toast.textContent = t; toast.classList.add('show'); setTimeout(function(){ toast.classList.remove('show'); }, 3200); }
-  document.getElementById('contactForm').addEventListener('submit', function(e){ e.preventDefault(); showToast('Beispielseite: Hier würde die Anfrage jetzt per E-Mail ankommen.'); });
 
-  // today's hours
-  var d = new Date().getDay();
-  var key = (d >= 1 && d <= 4) ? '1' : String(d);
-  var row = document.querySelector('#hours tr[data-day="'+key+'"]'); if (row) row.classList.add('today');
+  /* ---------- Meldung ---------- */
+  var meldung = document.getElementById('meldung');
+  function melden(t){
+    meldung.textContent = t; meldung.classList.add('zeigen');
+    setTimeout(function(){ meldung.classList.remove('zeigen'); }, 3400);
+  }
+  document.getElementById('anfrage').addEventListener('submit', function(e){
+    e.preventDefault();
+    melden('Beispielseite: hier ginge die Anfrage jetzt per E-Mail raus.');
+  });
 
-  // ---------- procedural wood grain ----------
-  function hashf(x){ var s = Math.sin(x * 12.9898) * 43758.5453; return s - Math.floor(s); }
-  function wood(canvas, opts){
-    var ctx = canvas.getContext('2d'), w = canvas.width, h = canvas.height;
-    var base = opts.base, dark = opts.dark, light = opts.light, rings = opts.rings || 14, seed = opts.seed || 1, angle = opts.angle || 0;
-    var g = ctx.createLinearGradient(0,0,w,h); g.addColorStop(0, base); g.addColorStop(1, light);
-    ctx.fillStyle = g; ctx.fillRect(0,0,w,h);
-    ctx.save(); ctx.translate(w/2, h/2); ctx.rotate(angle); ctx.translate(-w/2, -h/2);
-    ctx.globalAlpha = .9;
-    for (var i=0;i<rings;i++){
-      var y = (i / rings) * h * 1.3 - h*.15 + hashf(seed + i) * 18;
-      var thick = 1.5 + hashf(seed*3 + i) * 7;
-      ctx.strokeStyle = (i % 3 === 0) ? dark : (i % 3 === 1 ? 'rgba(0,0,0,.18)' : 'rgba(255,255,255,.14)');
-      ctx.lineWidth = thick;
-      ctx.beginPath();
-      for (var x=-20; x<=w+20; x+=12){
-        var yy = y + Math.sin(x*.012 + seed + i*.7) * 12 + Math.sin(x*.045 + i) * 4 + Math.sin(x*.002 + seed) * 30;
-        x === -20 ? ctx.moveTo(x, yy) : ctx.lineTo(x, yy);
+  /* ---------- Heutiger Tag in den Zeiten ---------- */
+  var t = new Date().getDay(), schluessel = (t >= 1 && t <= 4) ? '1' : String(t);
+  var zeile = document.querySelector('#zeiten tr[data-tag="' + schluessel + '"]');
+  if (zeile) zeile.classList.add('heute');
+
+  /* ============================================================
+     DER RECHNER ZEICHNET
+     Kein Zahlenfeld, das sich aendert, sondern eine massstaebliche
+     Ansicht: der Schrank wird breiter, hoeher, bekommt Schubkaesten,
+     und die Massketten wandern mit. Das ist der Teil, den eine
+     Fotoseite nicht haben kann.
+     ============================================================ */
+  var svgRaum = 'http://www.w3.org/2000/svg';
+  var riss = document.getElementById('rechnerRiss');
+  var eBreite = document.getElementById('breite'), eHoehe = document.getElementById('hoehe');
+  var front = 1, aufpreis = 0;
+
+  function el(name, werte){
+    var k = document.createElementNS(svgRaum, name);
+    for (var s in werte) k.setAttribute(s, werte[s]);
+    return k;
+  }
+  function text(x, y, inhalt, klasse, anker){
+    var k = el('text', {x:x, y:y, class:klasse});
+    if (anker) k.setAttribute('text-anchor', anker);
+    k.textContent = inhalt;
+    return k;
+  }
+
+  function zeichneRiss(){
+    var b = parseInt(eBreite.value, 10), h = parseInt(eHoehe.value, 10);
+    var schub = aufpreis > 0, licht = aufpreis >= 420;
+
+    // Zeichenfeld, in dem der Schrank Platz haben muss
+    var X0 = 78, Y1 = 344, MAXB = 396, MAXH = 268;
+    var faktor = Math.min(MAXB / 500, MAXH / 300);
+    var pb = b * faktor * (500 / 500), ph = h * faktor;
+    pb = b / 500 * MAXB; ph = h / 300 * MAXH;
+    var Y0 = Y1 - ph, X1 = X0 + pb;
+
+    while (riss.firstChild) riss.removeChild(riss.firstChild);
+
+    // Boden und Wand
+    riss.appendChild(el('path', {class:'l-voll', d:'M40 ' + Y1 + ' H520'}));
+    riss.appendChild(el('path', {class:'l-fein', d:'M40 ' + Y1 + ' V60'}));
+
+    // Korpus
+    riss.appendChild(el('path', {class:'f-holz',
+      d:'M' + X0 + ' ' + Y1 + ' V' + Y0 + ' H' + X1 + ' V' + Y1 + ' Z'}));
+
+    // Fachboeden, Anzahl haengt an der Hoehe
+    var boeden = Math.max(2, Math.round(h / 55));
+    for (var i = 1; i < boeden; i++){
+      var y = Y0 + (ph / boeden) * i;
+      riss.appendChild(el('path', {class:'l-voll', d:'M' + X0 + ' ' + y + ' H' + X1}));
+    }
+    // Senkrechte Fugen, alle 60 cm ein Feld
+    var felder = Math.max(1, Math.round(b / 60));
+    for (var j = 1; j < felder; j++){
+      var x = X0 + (pb / felder) * j;
+      riss.appendChild(el('path', {class:'l-strich', d:'M' + x + ' ' + Y0 + ' V' + Y1}));
+    }
+    // Schubkaesten im untersten Fach
+    if (schub){
+      var yS = Y1 - (ph / boeden);
+      for (var s = 1; s <= 3; s++){
+        var ys = yS + ((Y1 - yS) / 3) * s;
+        if (s < 3) riss.appendChild(el('path', {class:'l-voll', d:'M' + X0 + ' ' + ys + ' H' + X1}));
       }
-      ctx.stroke();
+      for (var g = 0; g < 3; g++){
+        var mitteY = yS + ((Y1 - yS) / 3) * (g + 0.5);
+        riss.appendChild(el('path', {class:'l-fein',
+          d:'M' + (X0 + pb/2 - 14) + ' ' + mitteY + ' H' + (X0 + pb/2 + 14)}));
+      }
     }
-    // knot
-    if (opts.knot !== false){
-      var kx = w*(.25 + hashf(seed*7)*.5), ky = h*(.3 + hashf(seed*11)*.4);
-      for (var r=0;r<9;r++){ ctx.strokeStyle = r%2 ? dark : 'rgba(0,0,0,.25)'; ctx.lineWidth = 2 + hashf(r+seed)*3; ctx.beginPath(); ctx.ellipse(kx, ky, 8 + r*7, 5 + r*4.5, .3, 0, Math.PI*2); ctx.stroke(); }
+    // Beleuchtung als Strahlen unter dem obersten Boden
+    if (licht){
+      var yL = Y0 + (ph / boeden);
+      for (var l = 0; l < 5; l++){
+        var xl = X0 + (pb / 6) * (l + 1);
+        riss.appendChild(el('path', {class:'l-mass', d:'M' + xl + ' ' + (yL + 3) + ' v14'}));
+      }
+      riss.appendChild(text(X1 + 10, yL + 14, 'LED', 't-teil'));
     }
-    ctx.restore();
-    // pores
-    ctx.globalAlpha = .12; ctx.fillStyle = '#000';
-    for (var p=0;p<w*h/900;p++){ var px = hashf(seed*13 + p)*w, py = hashf(seed*17 + p)*h; ctx.fillRect(px, py, 1 + hashf(p)*2, 6 + hashf(p*2)*14); }
-    ctx.globalAlpha = 1;
-    if (opts.sheen){ var sh = ctx.createLinearGradient(0,0,w,0); sh.addColorStop(0,'rgba(255,255,255,0)'); sh.addColorStop(.5,'rgba(255,255,255,.18)'); sh.addColorStop(1,'rgba(255,255,255,0)'); ctx.fillStyle = sh; ctx.fillRect(0,0,w,h); }
+
+    // Masskette Breite
+    var yM = Y1 + 38;
+    riss.appendChild(el('path', {class:'l-mass', d:'M' + X0 + ' ' + yM + ' H' + X1 + ' M' + X0 + ' ' + (yM-8) + ' v16 M' + X1 + ' ' + (yM-8) + ' v16'}));
+    riss.appendChild(el('path', {class:'l-mass', fill:'var(--rot)', d:'M' + X0 + ' ' + yM + ' l12 -5 v10 Z M' + X1 + ' ' + yM + ' l-12 -5 v10 Z'}));
+    riss.appendChild(el('rect', {x:(X0+X1)/2 - 38, y:yM - 13, width:76, height:26, class:'f-blatt', stroke:'none'}));
+    riss.appendChild(text((X0+X1)/2, yM + 5, (b * 10).toLocaleString('de-DE'), 't-mass', 'middle'));
+
+    // Masskette Hoehe
+    var xM = X0 - 34;
+    riss.appendChild(el('path', {class:'l-mass', d:'M' + xM + ' ' + Y0 + ' V' + Y1 + ' M' + (xM-8) + ' ' + Y0 + ' h16 M' + (xM-8) + ' ' + Y1 + ' h16'}));
+    riss.appendChild(el('path', {class:'l-mass', fill:'var(--rot)', d:'M' + xM + ' ' + Y0 + ' l-5 12 h10 Z M' + xM + ' ' + Y1 + ' l-5 -12 h10 Z'}));
+    riss.appendChild(el('rect', {x:xM - 14, y:(Y0+Y1)/2 - 30, width:28, height:60, class:'f-blatt', stroke:'none'}));
+    var th = text(xM, (Y0+Y1)/2, (h * 10).toLocaleString('de-DE'), 't-mass', 'middle');
+    th.setAttribute('transform', 'rotate(-90 ' + xM + ' ' + ((Y0+Y1)/2) + ')');
+    th.setAttribute('dy', '4');
+    riss.appendChild(th);
+
+    // Beschriftung Front
+    var frontName = front === 1 ? 'FRONT LACKIERT' : (front === 1.25 ? 'FRONT FURNIERT' : 'FRONT MASSIV');
+    riss.appendChild(text(X0 + 8, Y0 - 12, frontName + ' · ' + felder + ' FELDER · ' + boeden + ' FÄCHER', 't-teil'));
   }
-  var SPECIES = {
-    eiche:   {base:'#C79A62', dark:'#7A4E26', light:'#E0BB86'},
-    nuss:    {base:'#6E4A33', dark:'#3B2417', light:'#8E6749'},
-    esche:   {base:'#E6D3B0', dark:'#A78C63', light:'#F3E6CB'},
-    buche:   {base:'#D9A882', dark:'#9E6A45', light:'#EBC5A6'},
-    kirsche: {base:'#B5613F', dark:'#6F3520', light:'#D48A66'},
-    laerche: {base:'#D8A25F', dark:'#8F5A2A', light:'#EFC38A'}
-  };
-  wood(document.getElementById('heroWood'), Object.assign({rings:16, seed:3, angle:-.08, sheen:true}, SPECIES.eiche));
 
-  // references
-  var REFS = [
-    ['Einbauschrank Dachschräge', 'Trier-Kürenz · Esche furniert, 3,4 m', 'esche', 5],
-    ['Massivholzküche', 'Saarburg · Eiche geölt, Arbeitsplatte 6 cm', 'eiche', 8],
-    ['Haustür mit Seitenteil', 'Konz-Könen · Lärche, dreifach verglast', 'laerche', 11],
-    ['Treppe & Geländer', 'Schweich · Buche, offene Stufen', 'buche', 14],
-    ['Ankleide', 'Luxemburg-Stadt · Nussbaum, LED', 'nuss', 17],
-    ['Esstisch 2,8 m', 'Wittlich · Kirsche massiv, Schweizer Kante', 'kirsche', 20]
-  ];
-  var refsEl = document.getElementById('refs');
-  REFS.forEach(function(r){
-    var el = document.createElement('div'); el.className = 'ref';
-    el.innerHTML = '<canvas width="480" height="300" aria-label="Holzart '+r[2]+'"></canvas><div class="body"><h3>'+r[0]+'</h3><p>'+r[1]+'</p><div class="meta"><span>2026</span><span>Beispiel</span></div></div>';
-    refsEl.appendChild(el);
-    wood(el.querySelector('canvas'), Object.assign({rings:11, seed:r[3], angle:(r[3]%2?.06:-.05), sheen:true}, SPECIES[r[2]]));
-  });
+  function rechnen(){
+    var b = parseInt(eBreite.value, 10), h = parseInt(eHoehe.value, 10);
+    document.getElementById('breiteAus').textContent = b + ' cm';
+    document.getElementById('hoeheAus').textContent = h + ' cm';
+    var flaeche = (b / 100) * (h / 100);
+    var grund = 380 + flaeche * 720 * front;
+    var innen = aufpreis * Math.max(1, Math.round(b / 100));
+    var montage = 240 + flaeche * 60;
+    var gesamt = grund + innen + montage;
+    function r(n){ return Math.round(n / 10) * 10; }
+    document.getElementById('preis').textContent = 'ca. ' + r(gesamt).toLocaleString('de-DE') + ' €';
+    document.getElementById('spanne').textContent =
+      'Spanne je nach Details: ' + r(gesamt * 0.9).toLocaleString('de-DE') +
+      ' bis ' + r(gesamt * 1.15).toLocaleString('de-DE') + ' €';
+    zeichneRiss();
+  }
 
-  // before / after
-  var before = document.getElementById('baBefore'), after = document.getElementById('baAfter');
-  wood(after, Object.assign({rings:13, seed:31, angle:.04, sheen:true}, SPECIES.buche));
-  (function(){ // "before": worn, grey, scratched
-    wood(before, {base:'#9A8B79', dark:'#5C4F43', light:'#B3A490', rings:13, seed:31, angle:.04, knot:true});
-    var ctx = before.getContext('2d');
-    ctx.globalAlpha = .35; ctx.fillStyle = '#6B6259'; ctx.fillRect(0,0,before.width,before.height);
-    ctx.globalAlpha = .5; ctx.strokeStyle = '#3E3630'; ctx.lineWidth = 1.2;
-    for (var i=0;i<60;i++){ var x = hashf(i*3)*before.width, y = hashf(i*5)*before.height; ctx.beginPath(); ctx.moveTo(x,y); ctx.lineTo(x + (hashf(i)*160-80), y + (hashf(i*7)*40-20)); ctx.stroke(); }
-    ctx.globalAlpha = 1;
-  })();
-  var ba = document.getElementById('ba'), baRange = document.getElementById('baRange');
-  function setCut(v){ ba.style.setProperty('--cut', v + '%'); }
-  baRange.addEventListener('input', function(){ setCut(this.value); });
-  setCut(50);
-
-  // calculator
-  var W = document.getElementById('w'), H = document.getElementById('h'), front = 1, add = 0;
-  function seg(id, onPick){
-    var el = document.getElementById(id);
-    el.querySelectorAll('button').forEach(function(b){
-      b.addEventListener('click', function(){ el.querySelectorAll('button').forEach(function(x){ x.setAttribute('aria-pressed', x===b?'true':'false'); }); onPick(b); calc(); });
+  function reihe(id, beim){
+    var g = document.getElementById(id);
+    g.querySelectorAll('button').forEach(function(b){
+      b.addEventListener('click', function(){
+        g.querySelectorAll('button').forEach(function(x){ x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
+        beim(b); rechnen();
+      });
     });
   }
-  seg('front', function(b){ front = parseFloat(b.getAttribute('data-f')); });
-  seg('inner', function(b){ add = parseFloat(b.getAttribute('data-add')); });
-  function fmt(n){ return Math.round(n / 10) * 10; }
-  function calc(){
-    var w = parseInt(W.value, 10), h = parseInt(H.value, 10);
-    document.getElementById('wOut').textContent = w + ' cm'; document.getElementById('hOut').textContent = h + ' cm';
-    var area = (w/100) * (h/100);                 // m² Front
-    var base = 380 + area * 720 * front;           // Grundpreis + Fläche × Frontpreis
-    var inner = add * Math.max(1, Math.round(w/100)); // Ausstattung je laufendem Meter
-    var montage = 240 + area * 60;
-    var total = base + inner + montage;
-    document.getElementById('price').textContent = 'ca. ' + fmt(total).toLocaleString('de-DE') + ' €';
-    document.getElementById('priceRange').textContent = 'Spanne je nach Details: ' + fmt(total*.9).toLocaleString('de-DE') + ' bis ' + fmt(total*1.15).toLocaleString('de-DE') + ' €, zzgl. USt.';
-  }
-  W.addEventListener('input', calc); H.addEventListener('input', calc); calc();
+  reihe('front', function(b){ front = parseFloat(b.getAttribute('data-f')); });
+  reihe('innen', function(b){ aufpreis = parseFloat(b.getAttribute('data-a')); });
+  eBreite.addEventListener('input', rechnen);
+  eHoehe.addEventListener('input', rechnen);
+  rechnen();
 })();
 </script>
 
