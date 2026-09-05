@@ -1,0 +1,8 @@
+# Vorlaeufige Adresse auf vercel.app.
+# Sie wird bewusst NICHT indexiert: sonst konkurriert sie spaeter mit der
+# richtigen Domain um dieselben Suchbegriffe, und eine einmal indexierte
+# Adresse wieder herauszubekommen dauert Wochen.
+# Beim Umzug auf die eigene Domain: diese Datei auf "Allow: /" aendern und
+# das noindex im <head> der index.html entfernen.
+User-agent: *
+Disallow: /
