@@ -164,11 +164,22 @@
     position:sticky; top:0; z-index:50; background:var(--surface); border-bottom:1px solid var(--border);
   }
   .topnav-inner{display:flex; align-items:center; gap:16px; padding:12px 24px; position:relative;}
-  .brand{
-    font-family:"IBM Plex Mono",monospace; font-weight:600; font-size:14px; width:34px; height:34px;
-    border-radius:9px; background:var(--ink); color:var(--bg); display:flex; align-items:center; justify-content:center;
-    text-decoration:none; flex-shrink:0;
+  .brand{display:flex; align-items:center; gap:11px; text-decoration:none; flex-shrink:0;}
+  .brand i{
+    width:34px; height:34px; display:block; flex-shrink:0;
+    background-color:var(--ink);
+    -webkit-mask:url("marke.png") center/contain no-repeat;
+    mask:url("marke.png") center/contain no-repeat;
+    transition:background-color .15s ease;
   }
+  .brand b{
+    font-family:"Archivo",sans-serif; font-weight:800; font-size:15px; letter-spacing:.02em;
+    text-transform:uppercase; color:var(--ink); line-height:1.05; white-space:nowrap;
+  }
+  .brand b small{display:block; font-family:"IBM Plex Mono",monospace; font-weight:500; font-size:9.5px;
+    letter-spacing:.16em; color:var(--ink-faint); text-transform:uppercase;}
+  .brand:hover i{background-color:var(--accent);}
+  @media (max-width:520px){ .brand b{display:none;} }
   .nav-links{display:flex; gap:2px; flex:1; align-items:center;}
   .nav-links a, .nav-links .menu-btn{
     font-size:14px; font-weight:600; color:var(--ink-soft); text-decoration:none; padding:8px 14px; border-radius:999px;
@@ -212,6 +223,17 @@
 
   /* ---------- HERO ---------- */
   header.hero{position:relative; padding:80px 0 64px; overflow:hidden; isolation:isolate;}
+  /* Das Zeichen als Grundfigur, nicht als Bild: gemaskt und in der
+     Akzentfarbe, dadurch in beiden Themes stimmig und 7 statt 1012 KB. */
+  .hero-zeichen{
+    position:absolute; right:max(-90px, -6vw); top:46%; transform:translateY(-50%);
+    width:min(560px, 44vw); aspect-ratio:457/485;
+    background-color:var(--accent);
+    -webkit-mask:url("marke.png") center/contain no-repeat;
+    mask:url("marke.png") center/contain no-repeat;
+    opacity:.12; pointer-events:none; z-index:0;
+  }
+  @media (max-width:820px){ .hero-zeichen{opacity:.07; width:70vw; right:-14vw;} }
   .hero > .wrap{position:relative; z-index:1;}
   .eyebrow{
     font-family:"IBM Plex Mono", monospace; font-size:12.5px; letter-spacing:.08em; text-transform:uppercase;
@@ -528,7 +550,7 @@
 
 <nav class="topnav">
   <div class="wrap topnav-inner">
-    <a href="#top" class="brand" aria-label="Nach oben">DL</a>
+    <a href="#top" class="brand" aria-label="Dominic Lutz Webdesign, nach oben"><i aria-hidden="true"></i><b>Dominic Lutz<small>Webdesign</small></b></a>
     <div class="nav-links">
       <button type="button" class="menu-btn" id="megaBtn" aria-expanded="false" aria-controls="mega">Leistungen <span class="chev">▾</span></button>
       <a href="#koennen">Was drin steckt</a>
@@ -549,6 +571,7 @@
 </nav>
 
 <header class="hero" id="top">
+  <div class="hero-zeichen" aria-hidden="true"></div>
   <div class="wrap">
     <span class="eyebrow">Webdesign im Raum Trier und Luxemburg</span>
     <h1 class="title">Eine Website, die <span class="accent-text">tut, was sie soll</span></h1>
@@ -608,7 +631,7 @@
           <li>Heller und dunkler Modus, folgt der Systemeinstellung</li>
           <li>Große, klare Schrift, lesbar auch auf dem Handy</li>
         </ul>
-        <p style="margin-top:14px;">Sechs komplette Beispielseiten in sechs Stilen: <a href="/beispiele/steuerkanzlei/" target="_blank" rel="noopener">Steuerkanzlei ↗</a>, <a href="/beispiele/schreinerei/" target="_blank" rel="noopener">Schreinerei ↗</a>, <a href="/beispiele/weingut/" target="_blank" rel="noopener">Weingut ↗</a>, <a href="/beispiele/fotostudio/" target="_blank" rel="noopener">Fotostudio mit Raster-Effekt ↗</a> <a href="/beispiele/eiscafe/" target="_blank" rel="noopener">Eiscafé mit 3D ↗</a> und <a href="/beispiele/musikverein/" target="_blank" rel="noopener">Musikverein ↗</a>.</p>
+        <p style="margin-top:14px;">Fünf komplette Beispielseiten in fünf Stilen: <a href="/beispiele/steuerkanzlei/" target="_blank" rel="noopener">Steuerkanzlei ↗</a>, <a href="/beispiele/schreinerei/" target="_blank" rel="noopener">Schreinerei ↗</a>, <a href="/beispiele/weingut/" target="_blank" rel="noopener">Weingut ↗</a>, <a href="/beispiele/fotostudio/" target="_blank" rel="noopener">Fotostudio mit Raster-Effekt ↗</a> <a href="/beispiele/eiscafe/" target="_blank" rel="noopener">Eiscafé mit 3D ↗</a>.</p>
       </div>
       <div class="demo">
         <span class="demo-label">Beispiel</span>
@@ -832,7 +855,7 @@
         <legend><span class="legend-num">7</span>Gestaltung</legend>
         <p class="fs-help">Wie soll die Seite wirken? Mehrfachauswahl möglich.</p>
         <div class="choice-grid" id="styleGrid"></div>
-        <p class="fs-help" style="margin-top:14px;">Sechs fertige Beispielseiten zum Anschauen: <a href="/beispiele/steuerkanzlei/" target="_blank" rel="noopener">Seriös / klassisch (Steuerkanzlei) ↗</a> · <a href="/beispiele/schreinerei/" target="_blank" rel="noopener">Bodenständig (Schreinerei) ↗</a> · <a href="/beispiele/weingut/" target="_blank" rel="noopener">Hochwertig (Weingut) ↗</a> · <a href="/beispiele/fotostudio/" target="_blank" rel="noopener">Modern / kreativ (Fotostudio) ↗</a> · <a href="/beispiele/eiscafe/" target="_blank" rel="noopener">Freundlich / verspielt mit 3D (Eiscafé) ↗</a> · <a href="/beispiele/musikverein/" target="_blank" rel="noopener">Verein (Musikverein) ↗</a></p>
+        <p class="fs-help" style="margin-top:14px;">Fünf fertige Beispielseiten zum Anschauen: <a href="/beispiele/steuerkanzlei/" target="_blank" rel="noopener">Seriös / klassisch (Steuerkanzlei) ↗</a> · <a href="/beispiele/schreinerei/" target="_blank" rel="noopener">Bodenständig (Schreinerei) ↗</a> · <a href="/beispiele/weingut/" target="_blank" rel="noopener">Hochwertig (Weingut) ↗</a> · <a href="/beispiele/fotostudio/" target="_blank" rel="noopener">Modern / kreativ (Fotostudio) ↗</a> · <a href="/beispiele/eiscafe/" target="_blank" rel="noopener">Freundlich / verspielt mit 3D (Eiscafé) ↗</a></p>
         <div class="field" style="margin-top:16px;">
           <label for="f-refs">Seiten, die Ihnen gefallen <span class="opt">(optional, gerne Links)</span></label>
           <textarea id="f-refs" name="refs" placeholder="z. B. Websites von Wettbewerbern oder Vorbildern, die Ihnen gefallen"></textarea>
