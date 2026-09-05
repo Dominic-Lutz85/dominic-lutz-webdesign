@@ -1,0 +1,443 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Weingut Steinhaus, Beispielseite von Dominic Lutz</title>
+<meta name="description" content="Beispielseite im Stil hochwertig, mit gezeichneter Lagenkarte und Weinproben-Rechner. Das Weingut ist erfunden.">
+<!-- NICHT INDEXIEREN: Der Betrieb ist erfunden, samt Anschrift und
+     Telefonnummer. Ein Suchtreffer auf ein Unternehmen, das es nicht
+     gibt, waere irrefuehrend. Gilt auch nach dem Umzug auf die eigene
+     Domain, dort bleibt diese Zeile stehen. -->
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#F4F1EA">
+<style>
+  html{-webkit-text-size-adjust:100%}
+  body{margin:0}
+  img{max-width:100%}
+  [hidden]{display:none!important}
+</style>
+</head>
+<body>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F4F1EA; --surface:#FBF9F5; --surface-2:#ECE7DD; --ink:#1E1B17; --ink-soft:#5B564F; --ink-faint:#8F8980;
+    --border:#DDD7CB; --slate:#4C5A63; --slate-deep:#2F3A41; --gold:#B08D3C; --gold-tint:#F0E6CF; --river:#8FA9B5;
+    --line:rgba(30,27,23,.14); --shadow:0 18px 40px -24px rgba(30,27,23,.35);
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#15171A; --surface:#1C1F23; --surface-2:#23272C; --ink:#EDE8DE; --ink-soft:#B9B2A6; --ink-faint:#7E786F;
+      --border:#2E3338; --slate:#9DB0BB; --slate-deep:#C8D6DE; --gold:#D2B15E; --gold-tint:#2E2A1C; --river:#5F7885;
+      --line:rgba(237,232,222,.14); --shadow:0 18px 40px -24px rgba(0,0,0,.7);
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#15171A; --surface:#1C1F23; --surface-2:#23272C; --ink:#EDE8DE; --ink-soft:#B9B2A6; --ink-faint:#7E786F;
+    --border:#2E3338; --slate:#9DB0BB; --slate-deep:#C8D6DE; --gold:#D2B15E; --gold-tint:#2E2A1C; --river:#5F7885;
+    --line:rgba(237,232,222,.14); --shadow:0 18px 40px -24px rgba(0,0,0,.7);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0; background:var(--bg); color:var(--ink); font-family:"Manrope", ui-sans-serif, system-ui, sans-serif; font-size:16.5px; line-height:1.65; overflow-x:hidden;}
+  h1,h2,h3{font-family:"Cormorant Garamond", Georgia, serif; margin:0; text-wrap:balance; color:var(--ink); font-weight:500;}
+  a{color:var(--slate-deep);}
+  :focus-visible{outline:2px solid var(--gold); outline-offset:3px;}
+  button, input, select, textarea{font-family:inherit;}
+  .wrap{max-width:1120px; margin:0 auto; padding:0 28px;}
+  .caps{font-size:11.5px; letter-spacing:.22em; text-transform:uppercase; font-weight:600; color:var(--ink-soft);}
+
+  .sample-bar{position:sticky; top:0; z-index:60; background:var(--slate-deep); color:var(--bg); font-size:12.5px; font-weight:600; padding:8px 16px; text-align:center; letter-spacing:.02em;}
+  .sample-bar a{color:var(--gold);}
+  nav{display:grid; grid-template-columns:1fr auto 1fr; align-items:center; padding:18px 28px; max-width:1120px; margin:0 auto; gap:16px;}
+  .nav-links{display:flex; gap:22px;}
+  .nav-links.r{justify-content:flex-end;}
+  .nav-links a{text-decoration:none; color:var(--ink-soft); font-size:12px; letter-spacing:.18em; text-transform:uppercase; font-weight:600;}
+  .nav-links a:hover{color:var(--ink);}
+  @media (max-width:820px){ nav{grid-template-columns:1fr auto;} .nav-links.l{display:none;} .nav-links.r{gap:14px;} }
+  .mark{font-family:"Cormorant Garamond",serif; font-size:20px; letter-spacing:.32em; text-transform:uppercase; text-decoration:none; color:var(--ink); font-weight:600; text-align:center;}
+  .theme-toggle{display:inline-flex; gap:2px; border:1px solid var(--border); border-radius:999px; padding:2px;}
+  .theme-toggle button{border:none; background:transparent; color:var(--ink-soft); font-size:10.5px; letter-spacing:.1em; text-transform:uppercase; padding:5px 9px; border-radius:999px; cursor:pointer;}
+  .theme-toggle button[aria-pressed="true"]{background:var(--ink); color:var(--bg);}
+
+  /* ---------- HERO: giant wordmark over drawn vineyard map ---------- */
+  header.hero{position:relative; overflow:hidden; isolation:isolate; padding:56px 0 40px; min-height:640px; display:flex; flex-direction:column; justify-content:center;}
+  .map{position:absolute; inset:0; z-index:0; width:100%; height:100%;}
+  .map svg{width:100%; height:100%; display:block;}
+  .hero-inner{position:relative; z-index:1; text-align:center;}
+  .hero .pre{margin-bottom:22px;}
+  .wordmark{
+    font-family:"Cormorant Garamond",serif; font-weight:500; text-transform:uppercase;
+    font-size:clamp(44px, 11vw, 200px); line-height:.9; letter-spacing:.08em; margin-left:.08em; color:var(--ink);
+    display:flex; justify-content:center; overflow:hidden; white-space:nowrap;
+  }
+  .wordmark span{display:inline-block;}
+  @media (prefers-reduced-motion: no-preference){
+    .wordmark span{animation:rise .9s cubic-bezier(.2,.7,.2,1) both;}
+    @keyframes rise{from{transform:translateY(30%);} to{transform:translateY(0);}}
+    .hero .pre, .hero .post{animation:fadeUp .8s ease both; animation-delay:.35s;}
+    @keyframes fadeUp{from{transform:translateY(10px);} to{transform:translateY(0);}}
+  }
+  .hero .post{margin-top:26px; font-family:"Cormorant Garamond",serif; font-size:clamp(20px,2.4vw,28px); font-style:italic; color:var(--ink-soft); max-width:30ch; margin-left:auto; margin-right:auto;}
+  .hero-cta{display:flex; gap:14px; justify-content:center; margin-top:34px; flex-wrap:wrap;}
+  .btn{display:inline-flex; align-items:center; gap:8px; font-weight:600; font-size:12.5px; letter-spacing:.16em; text-transform:uppercase; padding:14px 24px; text-decoration:none; border:1px solid var(--ink); color:var(--ink); background:transparent; cursor:pointer; transition:background .2s, color .2s;}
+  .btn:hover{background:var(--ink); color:var(--bg);}
+  .btn-solid{background:var(--ink); color:var(--bg);}
+  .btn-solid:hover{background:var(--slate-deep); border-color:var(--slate-deep); color:#fff;}
+  .hero-note{position:absolute; right:20px; bottom:14px; z-index:1; font-size:11.5px; color:var(--ink-faint); letter-spacing:.04em;}
+
+  section{padding:96px 0; border-top:1px solid var(--border);}
+  h2{font-size:clamp(34px,4.4vw,56px); line-height:1.05;}
+  .lead{font-family:"Cormorant Garamond",serif; font-size:22px; color:var(--ink-soft); max-width:58ch; margin-top:16px; line-height:1.5;}
+  .split{display:grid; grid-template-columns:1fr 1fr; gap:56px; align-items:start;}
+  @media (max-width:820px){.split{grid-template-columns:1fr;}}
+
+  /* wines */
+  .filters{display:flex; gap:8px; margin-top:32px; flex-wrap:wrap;}
+  .filters button{border:1px solid var(--border); background:transparent; color:var(--ink-soft); padding:9px 16px; font-size:11.5px; letter-spacing:.16em; text-transform:uppercase; font-weight:600; cursor:pointer;}
+  .filters button[aria-pressed="true"]{background:var(--ink); border-color:var(--ink); color:var(--bg);}
+  .wines{margin-top:24px; border-top:1px solid var(--ink);}
+  .wine{display:grid; grid-template-columns:70px 1fr auto auto; gap:20px; align-items:baseline; padding:20px 0; border-bottom:1px solid var(--border);}
+  @media (max-width:640px){ .wine{grid-template-columns:56px 1fr auto;} .wine .style{display:none;} }
+  .wine .yr{font-family:"Cormorant Garamond",serif; font-size:26px; color:var(--gold);}
+  .wine h3{font-size:24px; font-weight:500;}
+  .wine .lage{font-size:13px; color:var(--ink-soft); letter-spacing:.04em;}
+  .wine .style{font-size:11.5px; letter-spacing:.16em; text-transform:uppercase; color:var(--ink-faint); font-weight:600;}
+  .wine .price{font-family:"Cormorant Garamond",serif; font-size:24px; white-space:nowrap;}
+  .wine .price small{font-family:"Manrope",sans-serif; font-size:11px; color:var(--ink-faint); display:block; text-align:right; letter-spacing:.04em;}
+  .wines-note{font-size:13px; color:var(--ink-faint); margin-top:14px;}
+
+  /* lagen map interactive */
+  .lagen{display:grid; grid-template-columns:1.2fr .8fr; gap:40px; margin-top:36px; align-items:stretch;}
+  @media (max-width:820px){.lagen{grid-template-columns:1fr;}}
+  .lagen-map{background:var(--surface); border:1px solid var(--border); padding:16px; box-shadow:var(--shadow);}
+  .lagen-map svg{width:100%; height:auto; display:block;}
+  .parcel{fill:var(--surface-2); stroke:var(--ink); stroke-width:.8; cursor:pointer; transition:fill .2s;}
+  .parcel:hover, .parcel.on{fill:var(--gold-tint);}
+  .parcel.on{stroke:var(--gold); stroke-width:1.6;}
+  .plabel{font-family:"Cormorant Garamond",serif; font-size:13px; fill:var(--ink); pointer-events:none; letter-spacing:.06em;}
+  .contour{fill:none; stroke:var(--line); stroke-width:.7;}
+  .riverpath{fill:var(--river); opacity:.55;}
+  .lagen-info{background:var(--surface); border:1px solid var(--border); padding:28px; display:flex; flex-direction:column; gap:10px;}
+  .lagen-info h3{font-size:30px;}
+  .lagen-info .stats{display:grid; grid-template-columns:1fr 1fr; gap:10px 20px; margin-top:8px;}
+  .lagen-info .stats b{display:block; font-family:"Cormorant Garamond",serif; font-size:24px; font-weight:500;}
+  .lagen-info .stats span{font-size:11.5px; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-faint); font-weight:600;}
+  .lagen-info p{color:var(--ink-soft); margin:0; font-size:15px;}
+
+  /* story */
+  .story-num{font-family:"Cormorant Garamond",serif; font-size:clamp(64px,9vw,120px); line-height:.9; color:var(--gold);}
+  .story-list{margin:20px 0 0; padding:0; list-style:none; display:grid; gap:14px;}
+  .story-list li{display:grid; grid-template-columns:90px 1fr; gap:16px; border-top:1px solid var(--border); padding-top:12px;}
+  .story-list b{font-family:"Cormorant Garamond",serif; font-size:22px; font-weight:500; color:var(--slate-deep);}
+  .story-list span{color:var(--ink-soft); font-size:15px;}
+
+  /* visit / booking */
+  .booking{display:grid; grid-template-columns:1fr 1fr; gap:36px; margin-top:36px;}
+  @media (max-width:820px){.booking{grid-template-columns:1fr;}}
+  .field{display:flex; flex-direction:column; gap:6px; margin-bottom:16px;}
+  label{font-size:11.5px; letter-spacing:.16em; text-transform:uppercase; font-weight:600; color:var(--ink-soft);}
+  input, select, textarea{font-size:16px; padding:12px 14px; border:1px solid var(--border); background:var(--surface); color:var(--ink); width:100%; border-radius:0;}
+  input:focus, select:focus, textarea:focus{border-color:var(--ink); outline:none;}
+  .pkgs{display:grid; gap:10px;}
+  .pkg{display:flex; justify-content:space-between; gap:12px; align-items:center; border:1px solid var(--border); padding:14px 16px; cursor:pointer; background:var(--surface);}
+  .pkg:has(input:checked){border-color:var(--ink); background:var(--gold-tint);}
+  .pkg input{accent-color:var(--ink);}
+  .pkg .n{font-family:"Cormorant Garamond",serif; font-size:21px;}
+  .pkg .d{font-size:13px; color:var(--ink-soft);}
+  .pkg .p{font-family:"Cormorant Garamond",serif; font-size:21px; white-space:nowrap;}
+  .summary{border:1px solid var(--ink); padding:22px; margin-top:6px;}
+  .summary .total{font-family:"Cormorant Garamond",serif; font-size:40px; line-height:1;}
+  .summary small{display:block; color:var(--ink-faint); font-size:12.5px; margin-top:6px;}
+  .hours{margin-top:8px; border-top:1px solid var(--ink);}
+  .hours div{display:flex; justify-content:space-between; padding:10px 0; border-bottom:1px solid var(--border); font-size:15px;}
+  .hours div.today{color:var(--gold); font-weight:600;}
+
+  .toast{position:fixed; left:50%; bottom:24px; transform:translate(-50%, 20px); background:var(--ink); color:var(--bg); padding:12px 18px; font-size:13px; letter-spacing:.06em; opacity:0; pointer-events:none; transition:opacity .25s, transform .25s; z-index:70; max-width:90vw; text-align:center;}
+  .toast.show{opacity:1; transform:translate(-50%,0);}
+  footer{padding:56px 28px 72px; text-align:center; color:var(--ink-faint); font-size:13px; border-top:1px solid var(--border);}
+  footer .mark{display:block; margin-bottom:14px; font-size:16px;}
+  footer a{color:var(--ink-soft);}
+  @media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto;} }
+</style>
+
+<div class="sample-bar">Beispielseite · Stil: Hochwertig / Wortmarke als Hero · Das Weingut ist erfunden · <a href="/">Zurück zur Übersicht</a></div>
+
+<nav>
+  <div class="nav-links l"><a href="#weine">Weine</a><a href="#lagen">Lagen</a><a href="#weingut">Weingut</a></div>
+  <a href="#top" class="mark">Steinhaus</a>
+  <div class="nav-links r"><a href="#besuch">Besuch</a><a href="#kontakt">Kontakt</a>
+    <span class="theme-toggle" role="group" aria-label="Darstellung"><button type="button" data-theme-choice="light" aria-pressed="false">Hell</button><button type="button" data-theme-choice="dark" aria-pressed="false">Dunkel</button><button type="button" data-theme-choice="system" aria-pressed="true">Auto</button></span>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="map" id="heroMap" aria-hidden="true"></div>
+  <div class="hero-inner wrap">
+    <div class="caps pre">Weingut · Mosel · Steillagen seit 1794</div>
+    <h1 class="wordmark" aria-label="Steinhaus"><span>S</span><span>t</span><span>e</span><span>i</span><span>n</span><span>h</span><span>a</span><span>u</span><span>s</span></h1>
+    <p class="post">Riesling aus blauem Schiefer, von Hand gelesen an Hängen, die steiler sind als jede Treppe.</p>
+    <div class="hero-cta">
+      <a href="#weine" class="btn btn-solid">Die Weine</a>
+      <a href="#besuch" class="btn">Weinprobe buchen</a>
+    </div>
+  </div>
+  <div class="hero-note">Lagenkarte im Browser gezeichnet, auf der echten Seite: Foto oder historische Karte</div>
+</header>
+
+<section id="weine">
+  <div class="wrap">
+    <div class="caps">Jahrgang 2024 · ab Hof</div>
+    <h2>Zwölf Weine, ein Berg</h2>
+    <p class="lead">Alles Riesling, alles aus unseren drei Lagen. Spontan vergoren, lange auf der Hefe, ohne Eile abgefüllt.</p>
+    <div class="filters" id="filters" role="group" aria-label="Geschmack">
+      <button type="button" data-f="alle" aria-pressed="true">Alle</button>
+      <button type="button" data-f="trocken" aria-pressed="false">Trocken</button>
+      <button type="button" data-f="feinherb" aria-pressed="false">Feinherb</button>
+      <button type="button" data-f="suess" aria-pressed="false">Edelsüß</button>
+      <button type="button" data-f="sekt" aria-pressed="false">Sekt</button>
+    </div>
+    <div class="wines" id="wines"></div>
+    <p class="wines-note">Preise ab Hof, 0,75 l, inkl. USt. Versand ab sechs Flaschen. Für die Beispielseite erfunden.</p>
+  </div>
+</section>
+
+<section id="lagen">
+  <div class="wrap">
+    <div class="caps">Herkunft</div>
+    <h2>Drei Lagen, ein Schiefer</h2>
+    <p class="lead">Fahren Sie mit der Maus über die Karte. Jede Parzelle erzählt etwas anderes.</p>
+    <div class="lagen">
+      <div class="lagen-map" id="lagenMap"></div>
+      <div class="lagen-info" id="lagenInfo"></div>
+    </div>
+  </div>
+</section>
+
+<section id="weingut">
+  <div class="wrap split">
+    <div>
+      <div class="caps">Das Weingut</div>
+      <h2>Acht Generationen, achteinhalb Hektar</h2>
+      <p class="lead">1794 kaufte Johann Steinhaus die erste Parzelle am Kapellenberg. Seitdem hat die Familie nichts verkauft und wenig dazugekauft, dafür jeden Weinberg von Hand bearbeitet.</p>
+      <ul class="story-list">
+        <li><b>1794</b><span>Erste Parzelle am Kapellenberg, 0,4 Hektar.</span></li>
+        <li><b>1921</b><span>Der Keller unter dem Haus wird in den Schiefer gesprengt. Er ist bis heute in Betrieb.</span></li>
+        <li><b>2009</b><span>Umstellung auf biologischen Anbau, seit 2014 zertifiziert.</span></li>
+        <li><b>2022</b><span>Marie Steinhaus übernimmt die Kellerarbeit von ihrem Vater.</span></li>
+      </ul>
+    </div>
+    <div>
+      <div class="story-num">8,5<span style="font-size:.4em;"> ha</span></div>
+      <p class="lead" style="margin-top:8px;">Davon 6,2 Hektar in Steillage über 45 Grad. Handlese, kleine Kisten, drei Durchgänge.</p>
+      <div class="hours" style="margin-top:28px;">
+        <div><span>Rebfläche</span><span>8,5 ha, 100 % Riesling</span></div>
+        <div><span>Boden</span><span>Blauer Devonschiefer</span></div>
+        <div><span>Ausbau</span><span>Fuder aus Mosel-Eiche, Edelstahl</span></div>
+        <div><span>Produktion</span><span>ca. 55.000 Flaschen</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="besuch">
+  <div class="wrap">
+    <div class="caps">Besuch</div>
+    <h2>Weinprobe im Schieferkeller</h2>
+    <p class="lead">Wählen Sie eine Probe, sagen Sie uns, wann und wie viele, wir bestätigen innerhalb eines Tages.</p>
+    <div class="booking">
+      <form id="bookForm" novalidate>
+        <div class="field"><label>Probe</label>
+          <div class="pkgs" id="pkgs">
+            <label class="pkg"><span><input type="radio" name="pkg" value="35" checked> <span class="n">Klassisch</span><span class="d"> · 6 Weine, 90 Minuten</span></span><span class="p">35 €</span></label>
+            <label class="pkg"><span><input type="radio" name="pkg" value="58"> <span class="n">Lagenprobe</span><span class="d"> · 9 Weine, Kellerführung, 2,5 Stunden</span></span><span class="p">58 €</span></label>
+            <label class="pkg"><span><input type="radio" name="pkg" value="95"> <span class="n">Raritäten</span><span class="d"> · 8 gereifte Jahrgänge bis 1994, mit Menü</span></span><span class="p">95 €</span></label>
+          </div>
+        </div>
+        <div class="field"><label for="b-n">Personen</label><select id="b-n"><option>2</option><option>3</option><option selected>4</option><option>5</option><option>6</option><option>8</option><option>10</option><option>12</option></select></div>
+        <div class="field"><label for="b-date">Wunschtermin</label><input id="b-date" type="text" placeholder="z. B. Samstag, 12. Oktober, 15 Uhr"></div>
+        <div class="field"><label for="b-name">Name</label><input id="b-name" type="text" autocomplete="name"></div>
+        <div class="field"><label for="b-mail">E-Mail</label><input id="b-mail" type="email" autocomplete="email"></div>
+        <button type="submit" class="btn btn-solid">Anfrage senden</button>
+      </form>
+      <div>
+        <div class="summary">
+          <div class="caps">Ihre Probe</div>
+          <div class="total" id="total">140 €</div>
+          <small id="totalNote">Klassisch · 4 Personen · 35 € je Person</small>
+          <small>Ab 8 Personen 10 % Nachlass. Beim Kauf ab 6 Flaschen wird die Probe verrechnet.</small>
+        </div>
+        <div class="caps" style="margin-top:28px;">Vinothek</div>
+        <div class="hours" id="hours">
+          <div data-d="1"><span>Montag bis Freitag</span><span>10 bis 18 Uhr</span></div>
+          <div data-d="6"><span>Samstag</span><span>10 bis 17 Uhr</span></div>
+          <div data-d="0"><span>Sonntag &amp; Feiertag</span><span>nach Vereinbarung</span></div>
+        </div>
+        <p style="color:var(--ink-soft); font-size:14.5px; margin-top:14px;">Moselufer 7, 54492 Zeltingen-Rachtig · Parkplätze am Haus, Schiffsanleger 200 m.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="kontakt">
+  <div class="wrap split">
+    <div>
+      <div class="caps">Kontakt</div>
+      <h2>Schreiben Sie uns</h2>
+      <p class="lead">Für Bestellungen, Presse und Fragen zu den Weinen. Wir antworten persönlich, meist noch am selben Tag.</p>
+    </div>
+    <div>
+      <p style="margin:0; font-family:'Cormorant Garamond',serif; font-size:24px;">Weingut Steinhaus<br>Moselufer 7 · 54492 Zeltingen-Rachtig</p>
+      <p style="color:var(--ink-soft); margin-top:12px;">06532 000 00 · <a href="#kontakt">post@beispiel-weingut.de</a></p>
+      <p style="color:var(--ink-soft); font-size:14px;">Instagram · Newsletter viermal im Jahr, zur Lese und zu jedem neuen Jahrgang.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span class="mark">Steinhaus</span>
+  Weingut Steinhaus ist ein erfundener Betrieb. Diese Seite ist eine Beispielseite von Dominic Lutz, <a href="/">zur Übersicht</a>.
+</footer>
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+(function(){
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var root = document.documentElement, saved = null;
+  try { saved = localStorage.getItem('steinhaus-theme'); } catch(e){}
+  if (saved === 'light' || saved === 'dark') root.setAttribute('data-theme', saved);
+  function setPressed(c){ document.querySelectorAll('[data-theme-choice]').forEach(function(b){ b.setAttribute('aria-pressed', b.getAttribute('data-theme-choice')===c?'true':'false'); }); }
+  setPressed(saved || 'system');
+  document.querySelectorAll('[data-theme-choice]').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var c = btn.getAttribute('data-theme-choice');
+      if (c === 'system') root.removeAttribute('data-theme'); else root.setAttribute('data-theme', c);
+      try { localStorage.setItem('steinhaus-theme', c); } catch(e){}
+      setPressed(c);
+    });
+  });
+  var toast = document.getElementById('toast');
+  function showToast(t){ toast.textContent = t; toast.classList.add('show'); setTimeout(function(){ toast.classList.remove('show'); }, 3200); }
+
+  // stagger wordmark letters
+  document.querySelectorAll('.wordmark span').forEach(function(s, i){ s.style.animationDelay = (i * .05) + 's'; });
+
+  // ---------- procedural vineyard map (hero) ----------
+  function hashf(x){ var s = Math.sin(x * 12.9898) * 43758.5453; return s - Math.floor(s); }
+  function heroMap(){
+    var w = 1400, h = 800, out = [];
+    // contour lines: hillside on the right bank of a river bend
+    for (var i=0;i<26;i++){
+      var d = 'M 0 ' + (120 + i*26);
+      for (var x=0;x<=w;x+=40){
+        var y = 120 + i*26 + Math.sin(x*.0045 + i*.35)*38 + Math.sin(x*.0012)*90 + hashf(i*7+x)*6;
+        d += ' L ' + x + ' ' + y.toFixed(1);
+      }
+      out.push('<path class="contour" d="'+d+'"/>');
+    }
+    // river band across the bottom, curving
+    var r = 'M 0 ' + (h-140);
+    for (var x2=0;x2<=w;x2+=40){ r += ' L ' + x2 + ' ' + (h-140 + Math.sin(x2*.0025)*40).toFixed(1); }
+    r += ' L ' + w + ' ' + h + ' L 0 ' + h + ' Z';
+    out.push('<path class="riverpath" d="'+r+'"/>');
+    // vine rows: short strokes following the slope
+    for (var row=0; row<18; row++){
+      for (var c=0;c<34;c++){
+        var vx = 80 + c*38 + (row%2)*19, vy = 180 + row*28 + Math.sin(vx*.0045 + row*.3)*30 + Math.sin(vx*.0012)*80;
+        out.push('<line x1="'+vx+'" y1="'+vy.toFixed(1)+'" x2="'+(vx+14)+'" y2="'+(vy-6).toFixed(1)+'" stroke="var(--line)" stroke-width="1.2"/>');
+      }
+    }
+    document.getElementById('heroMap').innerHTML = '<svg viewBox="0 0 '+w+' '+h+'" preserveAspectRatio="xMidYMid slice">' + out.join('') + '</svg>';
+  }
+  heroMap();
+  // gentle parallax on mouse
+  if (!reduceMotion){
+    var hero = document.querySelector('.hero'), mapEl = document.getElementById('heroMap');
+    hero.addEventListener('pointermove', function(e){
+      var r = hero.getBoundingClientRect(), x = (e.clientX - r.left)/r.width - .5, y = (e.clientY - r.top)/r.height - .5;
+      mapEl.style.transform = 'translate(' + (x*-12) + 'px,' + (y*-8) + 'px) scale(1.04)';
+    });
+    hero.addEventListener('pointerleave', function(){ mapEl.style.transform = ''; });
+  }
+
+  // ---------- wines ----------
+  var WINES = [
+    {y:2024, n:'Gutsriesling', l:'Aus allen drei Lagen', s:'trocken', p:'12,50'},
+    {y:2024, n:'Kapellenberg', l:'Ortswein · Zeltingen', s:'trocken', p:'19,00'},
+    {y:2023, n:'Kapellenberg Alte Reben', l:'Lagenwein · 70 Jahre alte Stöcke', s:'trocken', p:'34,00'},
+    {y:2023, n:'Rabenkopf', l:'Lagenwein · Terrassen', s:'trocken', p:'38,00'},
+    {y:2024, n:'Schieferterrassen feinherb', l:'Ortswein', s:'feinherb', p:'16,50'},
+    {y:2023, n:'Kapellenberg Kabinett', l:'Lagenwein', s:'feinherb', p:'21,00'},
+    {y:2023, n:'Rabenkopf Spätlese', l:'Lagenwein · Handlese Ende Oktober', s:'suess', p:'29,00'},
+    {y:2022, n:'Kapellenberg Auslese', l:'Lagenwein · Goldkapsel', s:'suess', p:'56,00'},
+    {y:2019, n:'Rabenkopf Beerenauslese', l:'0,375 l', s:'suess', p:'89,00'},
+    {y:2020, n:'Steinhaus Brut Nature', l:'48 Monate auf der Hefe', s:'sekt', p:'27,00'},
+    {y:2018, n:'Steinhaus Réserve', l:'72 Monate auf der Hefe', s:'sekt', p:'42,00'},
+    {y:2024, n:'Rosé vom Schiefer', l:'Ortswein · Spätburgunder-Anteil', s:'trocken', p:'14,00'}
+  ];
+  var LABEL = {trocken:'Trocken', feinherb:'Feinherb', suess:'Edelsüß', sekt:'Sekt'};
+  var winesEl = document.getElementById('wines'), filter = 'alle';
+  function esc(s){ return String(s).replace(/[&<>"]/g, function(ch){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[ch]; }); }
+  function renderWines(){
+    var list = WINES.filter(function(w){ return filter === 'alle' || w.s === filter; });
+    winesEl.innerHTML = list.map(function(w){
+      return '<div class="wine"><span class="yr">'+w.y+'</span><div><h3>'+esc(w.n)+'</h3><div class="lage">'+esc(w.l)+'</div></div><span class="style">'+LABEL[w.s]+'</span><span class="price">'+w.p+' €<small>0,75 l</small></span></div>';
+    }).join('');
+  }
+  document.querySelectorAll('#filters button').forEach(function(b){
+    b.addEventListener('click', function(){ filter = b.getAttribute('data-f'); document.querySelectorAll('#filters button').forEach(function(x){ x.setAttribute('aria-pressed', x===b?'true':'false'); }); renderWines(); });
+  });
+  renderWines();
+
+  // ---------- lagen map (interactive) ----------
+  var LAGEN = [
+    {id:'kapellenberg', name:'Kapellenberg', ha:'4,1 ha', slope:'52°', alt:'120 bis 240 m', exp:'Süd', text:'Der Hausberg. Blauer Schiefer, alte Terrassenmauern, im Kern 70 Jahre alte, wurzelechte Reben. Hier entstehen die trockenen Lagenweine und die Auslesen.',
+      path:'M 60 300 L 200 120 L 380 90 L 470 200 L 420 330 L 240 360 Z', lx:245, ly:240},
+    {id:'rabenkopf', name:'Rabenkopf', ha:'1,7 ha', slope:'60°', alt:'150 bis 260 m', exp:'Südwest', text:'Die steilste Parzelle, nur über Treppen erreichbar. Kleine Terrassen, spätere Lese, das kühlste Mikroklima, dafür die längste Spannung im Wein.',
+      path:'M 480 210 L 560 80 L 700 60 L 760 170 L 700 300 L 540 320 Z', lx:620, ly:190},
+    {id:'terrassen', name:'Schieferterrassen', ha:'2,7 ha', slope:'38°', alt:'110 bis 190 m', exp:'Südost', text:'Die jüngste Lage, 1998 neu angelegt. Gemischter Schiefer mit Quarzit, früher reif, saftig und zugänglich, Herkunft der Orts- und Gutsweine.',
+      path:'M 770 190 L 860 100 L 1020 120 L 1060 240 L 980 340 L 800 330 Z', lx:915, ly:225}
+  ];
+  var mapEl2 = document.getElementById('lagenMap'), info = document.getElementById('lagenInfo');
+  var svg = '<svg viewBox="0 0 1100 420" role="img" aria-label="Lagenkarte">';
+  for (var i=0;i<9;i++){ var d = 'M 0 ' + (60 + i*40); for (var x=0;x<=1100;x+=50){ d += ' L ' + x + ' ' + (60 + i*40 + Math.sin(x*.006 + i)*18).toFixed(1); } svg += '<path class="contour" d="'+d+'"/>'; }
+  svg += '<path class="riverpath" d="M 0 370 C 300 330, 700 410, 1100 360 L 1100 420 L 0 420 Z"/>';
+  svg += '<text x="20" y="405" class="plabel" style="font-style:italic; fill:var(--slate-deep);">Mosel</text>';
+  LAGEN.forEach(function(l){ svg += '<path class="parcel" data-id="'+l.id+'" d="'+l.path+'"><title>'+l.name+'</title></path><text class="plabel" x="'+l.lx+'" y="'+l.ly+'" text-anchor="middle">'+l.name+'</text>'; });
+  svg += '</svg>';
+  mapEl2.innerHTML = svg;
+  function showLage(id){
+    var l = LAGEN.filter(function(x){ return x.id === id; })[0];
+    mapEl2.querySelectorAll('.parcel').forEach(function(p){ p.classList.toggle('on', p.getAttribute('data-id') === id); });
+    info.innerHTML = '<div class="caps">Lage</div><h3>'+l.name+'</h3><div class="stats"><div><b>'+l.ha+'</b><span>Fläche</span></div><div><b>'+l.slope+'</b><span>Hangneigung</span></div><div><b>'+l.alt+'</b><span>Höhe</span></div><div><b>'+l.exp+'</b><span>Ausrichtung</span></div></div><p>'+l.text+'</p>';
+  }
+  mapEl2.querySelectorAll('.parcel').forEach(function(p){
+    p.addEventListener('pointerenter', function(){ showLage(p.getAttribute('data-id')); });
+    p.addEventListener('click', function(){ showLage(p.getAttribute('data-id')); });
+    p.setAttribute('tabindex','0'); p.addEventListener('focus', function(){ showLage(p.getAttribute('data-id')); });
+  });
+  showLage('kapellenberg');
+
+  // ---------- booking calc ----------
+  var nSel = document.getElementById('b-n');
+  function calc(){
+    var pk = document.querySelector('input[name="pkg"]:checked'), price = parseInt(pk.value, 10), n = parseInt(nSel.value, 10);
+    var name = pk.parentNode.querySelector('.n').textContent;
+    var total = price * n, disc = n >= 8 ? .1 : 0;
+    document.getElementById('total').textContent = Math.round(total * (1 - disc)) + ' €';
+    document.getElementById('totalNote').textContent = name + ' · ' + n + ' Personen · ' + price + ' € je Person' + (disc ? ' · 10 % Gruppennachlass' : '');
+  }
+  document.getElementById('pkgs').addEventListener('change', calc); nSel.addEventListener('change', calc); calc();
+  document.getElementById('bookForm').addEventListener('submit', function(e){ e.preventDefault(); showToast('Beispielseite: Hier würde die Anfrage jetzt per E-Mail ankommen.'); });
+
+  // today
+  var d = new Date().getDay(), key = (d >= 1 && d <= 5) ? '1' : String(d);
+  var row = document.querySelector('#hours div[data-d="'+key+'"]'); if (row) row.classList.add('today');
+})();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,325 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Café Sonnenschein, Beispielseite von Dominic Lutz</title>
+<meta name="description" content="Beispielseite im Stil freundlich und verspielt, mit 3D-Szene im Kopfbereich. Der Betrieb ist erfunden.">
+<!-- NICHT INDEXIEREN: Der Betrieb ist erfunden, samt Anschrift und
+     Telefonnummer. Ein Suchtreffer auf ein Unternehmen, das es nicht
+     gibt, waere irrefuehrend. Gilt auch nach dem Umzug auf die eigene
+     Domain, dort bleibt diese Zeile stehen. -->
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#F5B8C8">
+<style>
+  html{-webkit-text-size-adjust:100%}
+  body{margin:0}
+  img{max-width:100%}
+  [hidden]{display:none!important}
+</style>
+</head>
+<body>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Nunito:wght@500;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --pink:#F5B8C8; --pink-deep:#C8325A; --cream:#FFF4E6; --green:#0F5C4A; --green-deep:#0A3F33; --lemon:#FFD24D; --sky:#8FD0E8;
+    --ink:#1E1414; --ink-soft:#5F4B4B; --paper:#FFFBF5; --border:rgba(30,20,20,.14);
+    --bg:var(--cream); --surface:var(--paper);
+  }
+  :root[data-theme="dark"]{
+    --pink:#5A2233; --pink-deep:#F07A9A; --cream:#1D1517; --green:#1B7A63; --green-deep:#12574A; --lemon:#FFD24D; --sky:#5FB2D4;
+    --ink:#FFF1E8; --ink-soft:#D5BFC0; --paper:#26191D; --border:rgba(255,241,232,.16);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0; background:var(--bg); color:var(--ink); font-family:"Nunito", ui-sans-serif, system-ui, sans-serif; font-size:17px; line-height:1.55; overflow-x:hidden;}
+  h1,h2,h3{font-family:"Bricolage Grotesque", "Nunito", sans-serif; margin:0; font-weight:800; letter-spacing:-.02em; text-wrap:balance; color:var(--ink);}
+  a{color:var(--pink-deep);}
+  :focus-visible{outline:3px solid var(--lemon); outline-offset:3px; border-radius:6px;}
+  button, input, textarea, select{font-family:inherit;}
+  .caps{font-family:"Bricolage Grotesque",sans-serif; font-weight:700; text-transform:uppercase; letter-spacing:.06em; font-size:13px;}
+  .wrap{max-width:1180px; margin:0 auto; padding:0 28px;}
+
+  .sample-bar{position:sticky; top:0; z-index:60; background:var(--green-deep); color:#fff; font-size:12.5px; font-weight:700; padding:8px 16px; text-align:center;}
+  .sample-bar a{color:var(--lemon);}
+
+  /* pink nav bar, full bleed (Van Leeuwen) */
+  nav{background:var(--pink); border-bottom:2px solid var(--ink);}
+  .nav-in{max-width:1180px; margin:0 auto; padding:14px 28px; display:flex; align-items:center; gap:22px;}
+  .logo{font-family:"Bricolage Grotesque",sans-serif; font-weight:800; font-size:24px; letter-spacing:-.02em; text-decoration:none; color:var(--ink); display:flex; align-items:center; gap:10px;}
+  .logo i{width:26px; height:26px; border-radius:50%; background:conic-gradient(var(--pink-deep), var(--lemon), var(--green), var(--sky), var(--pink-deep)); border:2px solid var(--ink);}
+  .nav-links{display:flex; gap:4px; flex:1;}
+  .nav-links a{text-decoration:none; color:var(--ink); padding:8px 12px; border-radius:999px;}
+  .nav-links a:hover{background:var(--cream);}
+  @media (max-width:760px){.nav-links{display:none;}}
+  .pill{display:inline-flex; align-items:center; gap:8px; border-radius:999px; padding:12px 22px; font-weight:800; text-decoration:none; border:2px solid var(--ink); background:var(--lemon); color:var(--ink); cursor:pointer; box-shadow:3px 3px 0 var(--ink); transition:transform .12s, box-shadow .12s;}
+  .pill:hover{transform:translate(-1px,-1px); box-shadow:4px 4px 0 var(--ink);}
+  .pill:active{transform:translate(2px,2px); box-shadow:1px 1px 0 var(--ink);}
+  .pill.ghost{background:var(--paper);}
+  .pill.sm{padding:8px 14px; font-size:14px;}
+  .theme{display:inline-flex; gap:2px; border:2px solid var(--ink); border-radius:999px; padding:2px; background:var(--paper);}
+  .theme button{border:none; background:transparent; color:var(--ink-soft); font-weight:800; font-size:12px; padding:4px 10px; border-radius:999px; cursor:pointer;}
+  .theme button[aria-pressed="true"]{background:var(--ink); color:var(--cream);}
+
+  /* hero: flat color block + framed 3D scene */
+  .hero{display:grid; grid-template-columns:1fr 1fr; min-height:600px; border-bottom:2px solid var(--ink);}
+  @media (max-width:860px){.hero{grid-template-columns:1fr;}}
+  .hero-copy{background:var(--pink-deep); color:#fff; padding:64px 48px; display:flex; flex-direction:column; justify-content:center; gap:22px;}
+  @media (max-width:860px){.hero-copy{padding:48px 28px;}}
+  .hero-copy .caps{color:var(--lemon);}
+  .hero-copy h1{font-size:clamp(46px,6.4vw,92px); line-height:.92; text-transform:uppercase; color:#fff; max-width:11ch;}
+  .hero-copy p{font-size:19px; max-width:42ch; margin:0; color:#FFE4EC;}
+  .hero-cta{display:flex; gap:12px; flex-wrap:wrap;}
+  .hero-scene{position:relative; background:var(--sky); border-left:2px solid var(--ink); min-height:420px; overflow:hidden;}
+  @media (max-width:860px){.hero-scene{border-left:none; border-top:2px solid var(--ink);}}
+  #gl{position:absolute; inset:0; width:100%; height:100%; display:block;}
+  .scene-note{position:absolute; left:16px; bottom:14px; background:var(--paper); color:var(--ink); border:2px solid var(--ink); padding:6px 10px; font-size:12.5px; font-weight:800; border-radius:999px;}
+
+  /* marquee, scroll-driven where supported */
+  .marquee{background:var(--lemon); border-bottom:2px solid var(--ink); overflow:hidden; white-space:nowrap; padding:12px 0;}
+  .marquee .track{display:inline-block; font-family:"Bricolage Grotesque",sans-serif; font-weight:800; text-transform:uppercase; font-size:20px; letter-spacing:.02em;}
+  .marquee .track span{margin:0 28px;}
+  @media (prefers-reduced-motion: no-preference){
+    .marquee .track{animation:mq 26s linear infinite;}
+    @keyframes mq{from{transform:translateX(0);} to{transform:translateX(-50%);}}
+  }
+
+  section{padding:80px 0;}
+  .lead{font-size:clamp(28px,4vw,52px); line-height:1.02; text-transform:uppercase; max-width:16ch;}
+  .lead em{font-style:normal; color:var(--pink-deep);}
+  .cheeky{font-size:18px; color:var(--ink-soft); max-width:48ch; margin-top:14px;}
+
+  /* flavour bands: sticky stack (NOPE's per-flavour sections) */
+  .stack{margin-top:40px;}
+  .band{position:sticky; top:52px; min-height:min(70vh, 520px); border:2px solid var(--ink); border-radius:26px; padding:36px; display:grid; grid-template-columns:1.1fr .9fr; gap:28px; align-items:center; margin-bottom:22px; box-shadow:0 -10px 30px -20px rgba(0,0,0,.35);}
+  @media (max-width:760px){.band{grid-template-columns:1fr; padding:26px; top:60px;}}
+  .band .n{font-family:"Bricolage Grotesque",sans-serif; font-weight:700; font-size:13px; letter-spacing:.08em; text-transform:uppercase; opacity:.8;}
+  .band h3{font-size:clamp(36px,5vw,72px); line-height:.95; text-transform:uppercase; margin-top:8px;}
+  .band p{font-size:17px; max-width:44ch; margin:14px 0 0;}
+  .band .price{font-family:"Bricolage Grotesque",sans-serif; font-weight:800; font-size:26px; margin-top:16px;}
+  .band .scoop{justify-self:center; width:min(260px, 60vw); aspect-ratio:1; border-radius:50%; border:2px solid var(--ink); box-shadow:inset -30px -26px 0 rgba(0,0,0,.08), 8px 8px 0 var(--ink); position:relative;}
+  .band .scoop::after{content:""; position:absolute; left:22%; top:18%; width:22%; height:14%; border-radius:50%; background:rgba(255,255,255,.5); transform:rotate(-20deg);}
+  .band.b1{background:#F7A8B8; color:var(--ink);} .band.b2{background:#9ED39B; color:var(--ink);} .band.b3{background:#FBE28A; color:var(--ink);} .band.b4{background:#5A3A2A; color:#FFF1E8;} .band.b4 h3{color:#FFF1E8;}
+  .band .tag{display:inline-block; background:var(--ink); color:var(--cream); border-radius:999px; padding:4px 10px; font-size:12px; font-weight:800; margin-left:8px; vertical-align:middle;}
+
+  /* polaroids: draggable */
+  .board{position:relative; height:520px; margin-top:36px; background:var(--green); border:2px solid var(--ink); border-radius:26px; overflow:hidden; touch-action:none;}
+  .board .hint{position:absolute; left:18px; top:14px; color:#fff; font-weight:800; font-size:13px; opacity:.85;}
+  .polaroid{position:absolute; width:200px; background:#fff; padding:10px 10px 30px; box-shadow:0 14px 30px -12px rgba(0,0,0,.5); cursor:grab; user-select:none; border:1px solid rgba(0,0,0,.08);}
+  .polaroid.drag{cursor:grabbing; box-shadow:0 26px 50px -16px rgba(0,0,0,.6); z-index:5;}
+  .polaroid canvas{display:block; width:100%; height:auto; background:#ddd;}
+  .polaroid span{display:block; text-align:center; font-family:"Bricolage Grotesque",sans-serif; font-weight:700; font-size:14px; color:#1E1414; margin-top:8px;}
+  @media (max-width:640px){.board{height:440px;} .polaroid{width:150px; padding-bottom:24px;}}
+
+  /* events: index rows */
+  .events{margin-top:36px; border-top:2px solid var(--ink);}
+  .ev{display:grid; grid-template-columns:120px 1fr auto; gap:20px; align-items:center; padding:18px 0; border-bottom:2px solid var(--border); text-decoration:none; color:inherit;}
+  @media (max-width:640px){.ev{grid-template-columns:90px 1fr;} .ev .pill{grid-column:1/-1; justify-self:start;}}
+  .ev .d{font-family:"Bricolage Grotesque",sans-serif; font-weight:800; font-size:22px; line-height:1;}
+  .ev .d small{display:block; font-size:12px; letter-spacing:.08em; text-transform:uppercase; opacity:.7; margin-top:4px;}
+  .ev h3{font-size:22px;}
+  .ev p{margin:2px 0 0; color:var(--ink-soft); font-size:15px;}
+
+  /* find us + reservation */
+  .find{display:grid; grid-template-columns:1fr 1fr; gap:0; border:2px solid var(--ink); border-radius:26px; overflow:hidden; margin-top:36px;}
+  @media (max-width:760px){.find{grid-template-columns:1fr;}}
+  .find > div{padding:36px;}
+  .find .l{background:var(--sky); color:var(--ink); border-right:2px solid var(--ink);}
+  @media (max-width:760px){.find .l{border-right:none; border-bottom:2px solid var(--ink);}}
+  .find .r{background:var(--paper);}
+  .hours{margin-top:16px; border-top:2px solid var(--ink);}
+  .hours div{display:flex; justify-content:space-between; padding:9px 0; border-bottom:1px solid rgba(30,20,20,.2); font-weight:700;}
+  .hours div.today{color:var(--pink-deep);}
+  .field{display:flex; flex-direction:column; gap:6px; margin-bottom:12px;}
+  label{font-weight:800; font-size:13px; text-transform:uppercase; letter-spacing:.06em;}
+  input, textarea, select{font-size:16px; padding:11px 13px; border-radius:12px; border:2px solid var(--ink); background:var(--cream); color:var(--ink); width:100%;}
+  input:focus, textarea:focus{outline:none; border-color:var(--pink-deep);}
+  .two{display:grid; grid-template-columns:1fr 1fr; gap:12px;}
+  .toast{position:fixed; left:50%; bottom:24px; transform:translate(-50%, 20px); background:var(--ink); color:var(--cream); padding:12px 18px; border-radius:999px; font-weight:800; opacity:0; pointer-events:none; transition:opacity .25s, transform .25s; z-index:70; max-width:90vw; text-align:center;}
+  .toast.show{opacity:1; transform:translate(-50%,0);}
+  footer{background:var(--pink); border-top:2px solid var(--ink); padding:36px 28px 56px; text-align:center; font-weight:700; font-size:14px; color:var(--ink);}
+  footer a{color:var(--ink);}
+  @media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto;} .pill{transition:none;} }
+</style>
+
+<div class="sample-bar">Beispielseite · Stil: Freundlich / verspielt · 3D-Effekt · Der Betrieb ist erfunden · <a href="/">Zurück zur Übersicht</a></div>
+
+<nav>
+  <div class="nav-in">
+    <a href="#top" class="logo"><i aria-hidden="true"></i>Café Sonnenschein</a>
+    <div class="nav-links caps"><a href="#sorten">Sorten</a><a href="#hof">Der Hof</a><a href="#events">Events</a><a href="#finden">Finden</a></div>
+    <span class="theme" role="group" aria-label="Darstellung"><button type="button" data-theme-choice="light" aria-pressed="true">Hell</button><button type="button" data-theme-choice="dark" aria-pressed="false">Dunkel</button></span>
+    <a href="#finden" class="pill sm">Tisch im Hof</a>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="hero-copy">
+    <span class="caps">Jetzt im Becher: Erdbeer-Basilikum</span>
+    <h1>Eis, das nach Sommer schmeckt.</h1>
+    <p>Milch vom Hof nebenan, Obst vom Wochenmarkt, Kringel aus dem eigenen Ofen. Und der schönste Innenhof der Trierer Altstadt, mit Sonne, sobald es welche gibt.</p>
+    <div class="hero-cta"><a href="#sorten" class="pill">Sorten der Woche</a><a href="#finden" class="pill ghost">So findet ihr uns</a></div>
+  </div>
+  <div class="hero-scene" id="scene">
+    <canvas id="gl" aria-hidden="true"></canvas>
+    <span class="scene-note">Maus bewegen, die Kringel folgen</span>
+  </div>
+</header>
+
+<div class="marquee" aria-hidden="true"><div class="track" id="track"></div></div>
+
+<section id="sorten">
+  <div class="wrap">
+    <h2 class="lead">Vier Sorten, <em>die gerade alle bestellen.</em></h2>
+    <p class="cheeky">Alles hausgemacht, keine Fertigmischung. Scrollt weiter, die Sorten stapeln sich.</p>
+    <div class="stack">
+      <div class="band b1"><div><span class="n">01 · Neu</span><h3>Erdbeer-Basilikum</h3><p>Erdbeeren vom Wochenmarkt, ein Hauch Basilikum aus dem Hof. Schmeckt wie Juni, auch im Oktober.</p><div class="price">1,80 € / Kugel <span class="tag">Neu</span></div></div><div class="scoop" style="background:#F7A8B8;"></div></div>
+      <div class="band b2"><div><span class="n">02 · Klassiker</span><h3>Pistazie</h3><p>Sizilianische Pistazien, langsam geröstet. Kein Farbstoff, deshalb eher beige als giftgrün. Ehrlich.</p><div class="price">2,10 € / Kugel</div></div><div class="scoop" style="background:#D9D39B;"></div></div>
+      <div class="band b3"><div><span class="n">03 · Leicht</span><h3>Zitrone-Joghurt</h3><p>Frisch und leicht, mit Joghurt vom Hof Weber. Das Eis für die, die "nur einen kleinen Becher" sagen.</p><div class="price">1,80 € / Kugel</div></div><div class="scoop" style="background:#FBE28A;"></div></div>
+      <div class="band b4"><div><span class="n">04 · Vegan</span><h3>Dunkle Schokolade</h3><p>70 % Kakao, auf Haferbasis, dunkel und cremig. Wer es probiert, fragt nicht mehr nach Sahne.</p><div class="price">1,90 € / Kugel <span class="tag">Vegan</span></div></div><div class="scoop" style="background:#7A4E3A;"></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="hof" style="padding-top:20px;">
+  <div class="wrap">
+    <h2 class="lead">Der Hof. <em>Zieht die Bilder ruhig durcheinander.</em></h2>
+    <p class="cheeky">Auf der echten Seite hängen hier Fotos aus dem Hof. Für die Beispielseite zeichnen wir sie im Browser, verschieben geht trotzdem.</p>
+    <div class="board" id="board"><span class="hint">Polaroids anfassen und ziehen</span></div>
+  </div>
+</section>
+
+<section id="events" style="padding-top:20px;">
+  <div class="wrap">
+    <h2 class="lead">Im Hof <em>passiert was.</em></h2>
+    <div class="events">
+      <a class="ev" href="#finden"><span class="d">14<small>Sept · Sa</small></span><div><h3>Eiswerkstatt für Kinder</h3><p>Zwei Stunden, eine Sorte, alle Hände klebrig. Ab 6 Jahren, 12 € inklusive Becher.</p></div><span class="pill sm">Platz sichern</span></a>
+      <a class="ev" href="#finden"><span class="d">20<small>Sept · Fr</small></span><div><h3>Sommerkino im Hof</h3><p>Leinwand an der Hofmauer, Decken gibt es bei uns, Eis sowieso. Film ab bei Dunkelheit.</p></div><span class="pill sm">Platz sichern</span></a>
+      <a class="ev" href="#finden"><span class="d">05<small>Okt · So</small></span><div><h3>Jazz-Frühstück</h3><p>Kringel, Kaffee, ein Trio aus Trier. 10 bis 13 Uhr, ohne Reservierung, aber früh kommen.</p></div><span class="pill sm">Merken</span></a>
+    </div>
+  </div>
+</section>
+
+<section id="finden" style="padding-top:20px;">
+  <div class="wrap">
+    <h2 class="lead">Ihr werdet <em>wärmer.</em> Und mit wärmer meinen wir kälter.</h2>
+    <div class="find">
+      <div class="l">
+        <span class="caps">So findet ihr uns</span>
+        <p style="margin:10px 0 0; font-weight:700;">Jakobstraße 12, 54290 Trier, im Innenhof hinter dem blauen Tor. Fünf Minuten vom Hauptmarkt, Fahrradständer direkt am Tor.</p>
+        <div class="hours" id="hours">
+          <div data-day="1"><span>Montag</span><span>Ruhetag</span></div>
+          <div data-day="2"><span>Dienstag bis Donnerstag</span><span>11 bis 19 Uhr</span></div>
+          <div data-day="5"><span>Freitag</span><span>11 bis 21 Uhr</span></div>
+          <div data-day="6"><span>Samstag</span><span>10 bis 21 Uhr</span></div>
+          <div data-day="0"><span>Sonntag</span><span>10 bis 19 Uhr</span></div>
+        </div>
+        <p style="margin:14px 0 0; font-weight:800;">Heute: <span id="todayText"></span></p>
+      </div>
+      <div class="r">
+        <span class="caps">Tisch im Hof</span>
+        <p style="margin:10px 0 18px; color:var(--ink-soft);">Ab sechs Personen nehmen wir gern eine Reservierung. Sonst: einfach kommen.</p>
+        <form id="contactForm" novalidate>
+          <div class="two"><div class="field"><label for="c-name">Name</label><input id="c-name" type="text" autocomplete="name"></div><div class="field"><label for="c-phone">Telefon</label><input id="c-phone" type="tel" autocomplete="tel"></div></div>
+          <div class="two"><div class="field"><label for="c-date">Wann?</label><input id="c-date" type="text" placeholder="Samstag, 15 Uhr"></div><div class="field"><label for="c-n">Wie viele?</label><input id="c-n" type="text" placeholder="8 Personen"></div></div>
+          <div class="field"><label for="c-msg">Noch etwas?</label><textarea id="c-msg" rows="2" placeholder="Kindergeburtstag, Allergien, Hund dabei …"></textarea></div>
+          <button type="submit" class="pill">Anfrage senden</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>Café Sonnenschein ist ein erfundener Betrieb. Beispielseite von Dominic Lutz, <a href="/">zur Übersicht</a>. Aufbau nach Vorbild von NOPE Ice Cream (Awwwards 2025) und Van Leeuwen.</footer>
+<div class="toast" id="toast" role="status"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+(function(){
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var root = document.documentElement, saved = null;
+  try { saved = localStorage.getItem('cafe-theme'); } catch(e){}
+  if (saved === 'dark') root.setAttribute('data-theme','dark');
+  function setPressed(c){ document.querySelectorAll('[data-theme-choice]').forEach(function(b){ b.setAttribute('aria-pressed', b.getAttribute('data-theme-choice')===c?'true':'false'); }); }
+  setPressed(saved === 'dark' ? 'dark' : 'light');
+  document.querySelectorAll('[data-theme-choice]').forEach(function(btn){
+    btn.addEventListener('click', function(){ var c = btn.getAttribute('data-theme-choice'); if (c === 'dark') root.setAttribute('data-theme','dark'); else root.removeAttribute('data-theme'); try { localStorage.setItem('cafe-theme', c); } catch(e){} setPressed(c); });
+  });
+  var toast = document.getElementById('toast');
+  function showToast(t){ toast.textContent = t; toast.classList.add('show'); setTimeout(function(){ toast.classList.remove('show'); }, 3200); }
+  document.getElementById('contactForm').addEventListener('submit', function(e){ e.preventDefault(); showToast('Beispielseite: Hier würde die Reservierung jetzt per E-Mail ankommen.'); });
+
+  // marquee content (duplicated for seamless loop)
+  var items = ['Jetzt im Becher: Erdbeer-Basilikum', 'Kringel ab 7 Uhr', 'Hof geöffnet bis 21 Uhr', 'Vegan: Dunkle Schokolade', 'Milch vom Hof Weber', 'Sommerkino am 20. Sept'];
+  var track = document.getElementById('track'); var html = items.map(function(t){ return '<span>' + t + ' ✦</span>'; }).join(''); track.innerHTML = html + html;
+
+  // today
+  var day = new Date().getDay(); var key = (day >= 2 && day <= 4) ? '2' : String(day);
+  var row = document.querySelector('#hours div[data-day="'+key+'"]'); if (row){ row.classList.add('today'); document.getElementById('todayText').textContent = row.children[1].textContent; }
+
+  // ---------- polaroids: procedural "photos" + drag ----------
+  var board = document.getElementById('board');
+  function drawPhoto(canvas, kind){
+    var ctx = canvas.getContext('2d'), w = canvas.width, h = canvas.height;
+    var sky = ctx.createLinearGradient(0,0,0,h); sky.addColorStop(0,'#8FD0E8'); sky.addColorStop(1,'#FFF0C8'); ctx.fillStyle = sky; ctx.fillRect(0,0,w,h);
+    ctx.fillStyle = '#FFD24D'; ctx.beginPath(); ctx.arc(w*.78, h*.25, h*.14, 0, Math.PI*2); ctx.fill();
+    if (kind === 'hof'){ ctx.fillStyle = '#C8325A'; ctx.fillRect(0, h*.55, w, h*.45); ctx.fillStyle = '#FFF4E6'; for (var i=0;i<4;i++){ ctx.beginPath(); ctx.arc(w*(.18 + i*.22), h*.72, h*.09, 0, Math.PI*2); ctx.fill(); } }
+    if (kind === 'eis'){ ctx.fillStyle = '#D9A066'; ctx.beginPath(); ctx.moveTo(w*.5, h*.95); ctx.lineTo(w*.35, h*.55); ctx.lineTo(w*.65, h*.55); ctx.closePath(); ctx.fill(); ['#F7A8B8','#9ED39B','#FBE28A'].forEach(function(c, i){ ctx.fillStyle = c; ctx.beginPath(); ctx.arc(w*.5, h*(.5 - i*.14), h*.13, 0, Math.PI*2); ctx.fill(); }); }
+    if (kind === 'kringel'){ ctx.fillStyle = '#0F5C4A'; ctx.fillRect(0, h*.6, w, h*.4); for (var k=0;k<3;k++){ ctx.strokeStyle = ['#F7A8B8','#8FD0E8','#FBE28A'][k]; ctx.lineWidth = h*.1; ctx.beginPath(); ctx.arc(w*(.25 + k*.25), h*.62, h*.14, 0, Math.PI*2); ctx.stroke(); } }
+    if (kind === 'tor'){ ctx.fillStyle = '#5FA8D0'; ctx.fillRect(w*.3, h*.3, w*.4, h*.7); ctx.fillStyle = '#1E1414'; ctx.fillRect(w*.48, h*.32, w*.04, h*.68); ctx.fillStyle = '#FFD24D'; ctx.beginPath(); ctx.arc(w*.42, h*.62, h*.03, 0, Math.PI*2); ctx.fill(); }
+  }
+  var PHOTOS = [['hof','Der Hof, Juli'],['eis','Drei Kugeln, klar'],['kringel','Kringel, 7 Uhr'],['tor','Das blaue Tor']];
+  PHOTOS.forEach(function(p, i){
+    var el = document.createElement('div'); el.className = 'polaroid';
+    el.innerHTML = '<canvas width="360" height="300"></canvas><span>' + p[1] + '</span>';
+    el.style.left = (8 + i*22) + '%'; el.style.top = (12 + (i%2)*34) + '%'; el.style.transform = 'rotate(' + ((i%2? -1:1) * (4 + i*2)) + 'deg)';
+    board.appendChild(el); drawPhoto(el.querySelector('canvas'), p[0]);
+    var drag = null;
+    el.addEventListener('pointerdown', function(e){ drag = {x:e.clientX - el.offsetLeft, y:e.clientY - el.offsetTop}; el.classList.add('drag'); el.setPointerCapture(e.pointerId); });
+    el.addEventListener('pointermove', function(e){ if (!drag) return; var br = board.getBoundingClientRect(); var x = Math.max(-40, Math.min(br.width - el.offsetWidth + 40, e.clientX - drag.x)), y = Math.max(-30, Math.min(br.height - el.offsetHeight + 30, e.clientY - drag.y)); el.style.left = x + 'px'; el.style.top = y + 'px'; });
+    ['pointerup','pointercancel'].forEach(function(ev){ el.addEventListener(ev, function(){ drag = null; el.classList.remove('drag'); }); });
+  });
+
+  // ---------- Three.js scene (framed, right half) ----------
+  var canvas = document.getElementById('gl'), scene0 = document.getElementById('scene');
+  if (!window.THREE || !window.WebGLRenderingContext){ canvas.style.display = 'none'; return; }
+  var renderer; try { renderer = new THREE.WebGLRenderer({canvas: canvas, alpha: true, antialias: true}); } catch(e){ canvas.style.display = 'none'; return; }
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2)); renderer.outputEncoding = THREE.sRGBEncoding; renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+  var scene = new THREE.Scene(); var camera = new THREE.PerspectiveCamera(38, 1, 0.1, 100); camera.position.set(0, 0.3, 10);
+  scene.add(new THREE.HemisphereLight(0xfff4e0, 0xffd9c2, 0.95));
+  var sun = new THREE.DirectionalLight(0xffffff, 0.9); sun.position.set(4, 7, 6); sun.castShadow = true; sun.shadow.mapSize.set(1024,1024); sun.shadow.camera.left=-10; sun.shadow.camera.right=10; sun.shadow.camera.top=10; sun.shadow.camera.bottom=-10; scene.add(sun);
+  var group = new THREE.Group(); scene.add(group);
+  var pastel = [0xF7A8B8, 0x9ED39B, 0xFBE28A, 0xFFFFFF, 0xC9A0E8, 0xFFC9A3];
+  function mat(c){ return new THREE.MeshStandardMaterial({color: c, roughness: .55, metalness: .05}); }
+  var itemsG = [];
+  function add(mesh, x, y, z, s){ mesh.position.set(x, y, z); mesh.scale.setScalar(s); mesh.castShadow = true; mesh.receiveShadow = true; mesh.userData = {baseY: y, phase: Math.random()*Math.PI*2, spin: (Math.random()-.5)*.01, bob: .12 + Math.random()*.18}; group.add(mesh); itemsG.push(mesh); }
+  for (var i=0;i<5;i++){
+    var donut = new THREE.Mesh(new THREE.TorusGeometry(1, .42, 32, 64), mat(pastel[i % pastel.length])); donut.rotation.set(Math.random()*1.2, Math.random()*1.2, 0);
+    var spr = new THREE.Group(); for (var k=0;k<26;k++){ var sp = new THREE.Mesh(new THREE.CylinderGeometry(.05, .05, .22, 6), mat(pastel[(k+2) % pastel.length])); var a = Math.random()*Math.PI*2, r = 1 + (Math.random()-.5)*.5; sp.position.set(Math.cos(a)*r, Math.sin(a)*r, .42 + Math.random()*.04); sp.rotation.set(Math.random()*3, Math.random()*3, Math.random()*3); spr.add(sp); }
+    donut.add(spr); add(donut, (Math.random()-.5)*6, (Math.random()-.5)*4.5, (Math.random()-.5)*3, .55 + Math.random()*.4);
+  }
+  for (var j=0;j<4;j++){
+    var cone = new THREE.Group(); var wafer = new THREE.Mesh(new THREE.ConeGeometry(.55, 1.6, 24), mat(0xD9A066)); wafer.rotation.x = Math.PI; wafer.position.y = -.9;
+    var s1 = new THREE.Mesh(new THREE.SphereGeometry(.62, 32, 32), mat(pastel[(j*2) % pastel.length])); var s2 = new THREE.Mesh(new THREE.SphereGeometry(.5, 32, 32), mat(pastel[(j*2+1) % pastel.length])); s2.position.y = .85;
+    [wafer, s1, s2].forEach(function(m){ m.castShadow = true; m.receiveShadow = true; cone.add(m); });
+    add(cone, (Math.random()-.5)*6, (Math.random()-.5)*4.5, (Math.random()-.5)*3, .7 + Math.random()*.35);
+  }
+  var ground = new THREE.Mesh(new THREE.PlaneGeometry(40, 40), new THREE.ShadowMaterial({opacity: .14})); ground.rotation.x = -Math.PI/2; ground.position.y = -4; ground.receiveShadow = true; scene.add(ground);
+  var target = {x:0, y:0}, cur = {x:0, y:0}, scrollRot = 0;
+  scene0.addEventListener('pointermove', function(e){ var r = scene0.getBoundingClientRect(); target.x = (e.clientX - r.left)/r.width - .5; target.y = (e.clientY - r.top)/r.height - .5; });
+  window.addEventListener('scroll', function(){ scrollRot = window.scrollY * .0012; }, {passive:true});
+  function resize(){ var w = scene0.clientWidth, h = scene0.clientHeight; if (w < 10 || h < 10){ requestAnimationFrame(resize); return; } renderer.setSize(w, h, false); camera.aspect = w/h; camera.updateProjectionMatrix(); group.scale.setScalar(w > 600 ? 1 : .75); }
+  window.addEventListener('resize', resize); resize();
+  var t0 = performance.now(), running = true;
+  function frame(now){ if (!running) return; var t = (now - t0)/1000; cur.x += (target.x - cur.x)*.05; cur.y += (target.y - cur.y)*.05; group.rotation.y = cur.x*.5 + scrollRot; group.rotation.x = cur.y*.3;
+    itemsG.forEach(function(m){ var u = m.userData; m.position.y = u.baseY + Math.sin(t*.9 + u.phase)*u.bob; m.rotation.y += u.spin; m.rotation.x += u.spin*.6; });
+    renderer.render(scene, camera); if (!reduceMotion) requestAnimationFrame(frame); }
+  document.addEventListener('visibilitychange', function(){ if (reduceMotion) return; if (document.hidden) running = false; else { running = true; requestAnimationFrame(frame); } });
+  requestAnimationFrame(frame);
+})();
+</script>
+
+</body>
+</html>

@@ -4,13 +4,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Websites für kleine Unternehmen und Vereine, Dominic Lutz</title>
-<meta name="description" content="Websites für kleine Unternehmen und Vereine aus Trier und Umgebung. Festpreis vorab, Beispielseiten zum Ausprobieren, Briefing-Formular für ein Angebot.">
+<meta name="description" content="Websites für kleine Unternehmen und Vereine aus Trier und Umgebung. Festpreis vorab, Beispielseiten zum Ausprobieren, Anfrage-Formular für ein Angebot.">
 <meta name="author" content="Dominic Lutz">
 <!-- Vorschaubild-Angaben fuer geteilte Links -->
 <meta property="og:type" content="website">
 <meta property="og:locale" content="de_DE">
 <meta property="og:title" content="Websites für kleine Unternehmen und Vereine">
-<meta property="og:description" content="Festpreis vorab, Beispielseiten zum Ausprobieren, Briefing-Formular für ein Angebot.">
+<meta property="og:description" content="Festpreis vorab, Beispielseiten zum Ausprobieren, Anfrage-Formular für ein Angebot.">
 <!-- Vorlaeufige Adresse: noch nicht in Suchmaschinen, siehe robots.txt -->
 <meta name="robots" content="noindex,nofollow">
 <meta name="theme-color" content="#0E6B5C" media="(prefers-color-scheme: light)">
@@ -243,7 +243,7 @@
 
   .refs{display:grid; grid-template-columns:repeat(auto-fit, minmax(250px, 1fr)); gap:32px; margin-top:48px;}
   @media (max-width:640px){.refs{grid-template-columns:1fr;}}
-  .ref-card{border-top:2px solid var(--border-strong); padding:18px 0 0; position:relative;}
+  .ref-card{border-top:2px solid var(--border-strong); padding:18px 0 0; position:relative; display:flex; flex-direction:column;}
   .ref-card::before{
     content:""; position:absolute; top:-2px; left:0; height:2px; width:0; background:var(--accent);
     transition:width .35s cubic-bezier(.2,.7,.2,1);
@@ -253,7 +253,7 @@
   .ref-card .ref-name a{color:var(--ink); text-decoration:none;}
   .ref-card .ref-name a:hover{color:var(--accent);}
   .ref-card p{color:var(--ink-soft); font-size:14.5px; margin:8px 0 0;}
-  .ref-tags{display:flex; gap:6px; flex-wrap:wrap; margin-top:12px;}
+  .ref-tags{display:flex; gap:6px; flex-wrap:wrap; margin-top:auto; padding-top:14px;}
   .tag{
     font-family:"IBM Plex Mono",monospace; font-size:11.5px; background:var(--accent-tint); color:var(--accent-strong);
     padding:3px 8px; border-radius:5px;
@@ -534,7 +534,7 @@
       <a href="#koennen">Was drin steckt</a>
       <a href="#ablauf">Ablauf</a>
       <a href="#preise">Preise</a>
-      <a href="#briefing">Briefing</a>
+      <a href="#briefing">Anfrage</a>
     </div>
     <div class="nav-right">
       <div class="theme-toggle" role="group" aria-label="Darstellung">
@@ -542,7 +542,7 @@
         <button type="button" data-theme-choice="dark" aria-pressed="false">Dunkel</button>
         <button type="button" data-theme-choice="system" aria-pressed="true">System</button>
       </div>
-      <a href="#briefing" class="btn btn-primary btn-sm">Briefing starten</a>
+      <a href="#briefing" class="btn btn-primary btn-sm">Anfrage starten</a>
     </div>
     <div class="mega" id="mega" role="menu" aria-label="Leistungen"></div>
   </div>
@@ -550,11 +550,11 @@
 
 <header class="hero" id="top">
   <div class="wrap">
-    <span class="eyebrow">Website-Briefing &amp; Preisrahmen</span>
+    <span class="eyebrow">Webdesign im Raum Trier und Luxemburg</span>
     <h1 class="title">Eine Website, die <span class="accent-text">tut, was sie soll</span></h1>
     <p class="lede">Ich baue Websites für kleine Unternehmen und Vereine, von der ersten Idee bis zur fertigen Seite. Erzählen Sie mir unten kurz von Ihrem Projekt: Je genauer, desto schneller bekommen Sie ein passendes Angebot mit fester Preisspanne zurück.</p>
     <div class="hero-cta">
-      <a href="#briefing" class="btn btn-primary">Briefing ausfüllen</a>
+      <a href="#briefing" class="btn btn-primary">Projekt beschreiben</a>
       <a href="#koennen" class="btn btn-ghost">Was drin steckt</a>
     </div>
 
@@ -608,7 +608,7 @@
           <li>Heller und dunkler Modus, folgt der Systemeinstellung</li>
           <li>Große, klare Schrift, lesbar auch auf dem Handy</li>
         </ul>
-        <p style="margin-top:14px;">Fünf komplette Beispielseiten in fünf Stilen: <a href="https://claude.ai/code/artifact/6bfcb8f8-1825-477b-a1cc-0a7afe13a37d" target="_blank" rel="noopener">Steuerkanzlei ↗</a>, <a href="https://claude.ai/code/artifact/ba419faa-e31e-4fb6-89be-1d122a6333ef" target="_blank" rel="noopener">Schreinerei ↗</a>, <a href="https://claude.ai/code/artifact/5157635b-feb1-44ea-8aff-8bd07f372ce1" target="_blank" rel="noopener">Weingut ↗</a>, <a href="https://claude.ai/code/artifact/0c920d04-f96c-4406-b453-15c5c06f89e0" target="_blank" rel="noopener">Fotostudio mit Raster-Effekt ↗</a> und <a href="https://claude.ai/code/artifact/776eefee-ffae-4b74-b1ac-52b5865c511a" target="_blank" rel="noopener">Eiscafé mit 3D ↗</a>.</p>
+        <p style="margin-top:14px;">Fünf komplette Beispielseiten in fünf Stilen: <a href="/beispiele/steuerkanzlei/" target="_blank" rel="noopener">Steuerkanzlei ↗</a>, <a href="/beispiele/schreinerei/" target="_blank" rel="noopener">Schreinerei ↗</a>, <a href="/beispiele/weingut/" target="_blank" rel="noopener">Weingut ↗</a>, <a href="/beispiele/fotostudio/" target="_blank" rel="noopener">Fotostudio mit Raster-Effekt ↗</a> und <a href="/beispiele/eiscafe/" target="_blank" rel="noopener">Eiscafé mit 3D ↗</a>.</p>
       </div>
       <div class="demo">
         <span class="demo-label">Beispiel</span>
@@ -711,7 +711,7 @@
     <span class="kicker">Ablauf</span>
     <h2 class="h2">Vier Schritte bis zur fertigen Seite</h2>
     <div class="process">
-      <div class="step"><span class="step-num">01</span><h3>Briefing</h3><p>Sie erzählen mir unten von Ihrem Projekt: Ziel, Umfang, gewünschte Funktionen.</p></div>
+      <div class="step"><span class="step-num">01</span><h3>Anfrage</h3><p>Sie erzählen mir unten von Ihrem Projekt: Ziel, Umfang, gewünschte Funktionen.</p></div>
       <div class="step"><span class="step-num">02</span><h3>Festpreis-Angebot</h3><p>Innerhalb von 2 bis 3 Werktagen bekommen Sie ein konkretes Angebot, ohne Überraschungen bei der Rechnung später.</p></div>
       <div class="step"><span class="step-num">03</span><h3>Umsetzung</h3><p>Sie sehen unterwegs Zwischenstände und können jederzeit mitreden.</p></div>
       <div class="step"><span class="step-num">04</span><h3>Übergabe</h3><p>Kurze Einweisung, eine Testphase, und dann gehört die Seite ganz Ihnen.</p></div>
@@ -741,9 +741,9 @@
 
 <section id="briefing">
   <div class="wrap-narrow">
-    <span class="kicker">Briefing</span>
+    <span class="kicker">Anfrage</span>
     <h2 class="h2">Erzählen Sie mir von Ihrem Projekt</h2>
-    <p class="h2-sub">Ihre Angaben bleiben bei Ihnen, bis Sie das Briefing selbst per E-Mail losschicken, hier wird nichts automatisch irgendwo gespeichert.</p>
+    <p class="h2-sub">Ihre Angaben bleiben bei Ihnen, bis Sie die Anfrage selbst per E-Mail losschicken, hier wird nichts automatisch irgendwo gespeichert.</p>
 
     <form id="briefForm" class="form-shell" novalidate>
 
@@ -832,7 +832,7 @@
         <legend><span class="legend-num">7</span>Gestaltung</legend>
         <p class="fs-help">Wie soll die Seite wirken? Mehrfachauswahl möglich.</p>
         <div class="choice-grid" id="styleGrid"></div>
-        <p class="fs-help" style="margin-top:14px;">Fünf fertige Beispielseiten zum Anschauen: <a href="https://claude.ai/code/artifact/6bfcb8f8-1825-477b-a1cc-0a7afe13a37d" target="_blank" rel="noopener">Seriös / klassisch (Steuerkanzlei) ↗</a> · <a href="https://claude.ai/code/artifact/ba419faa-e31e-4fb6-89be-1d122a6333ef" target="_blank" rel="noopener">Bodenständig (Schreinerei) ↗</a> · <a href="https://claude.ai/code/artifact/5157635b-feb1-44ea-8aff-8bd07f372ce1" target="_blank" rel="noopener">Hochwertig (Weingut) ↗</a> · <a href="https://claude.ai/code/artifact/0c920d04-f96c-4406-b453-15c5c06f89e0" target="_blank" rel="noopener">Modern / kreativ (Fotostudio) ↗</a> · <a href="https://claude.ai/code/artifact/776eefee-ffae-4b74-b1ac-52b5865c511a" target="_blank" rel="noopener">Freundlich / verspielt mit 3D (Eiscafé) ↗</a></p>
+        <p class="fs-help" style="margin-top:14px;">Fünf fertige Beispielseiten zum Anschauen: <a href="/beispiele/steuerkanzlei/" target="_blank" rel="noopener">Seriös / klassisch (Steuerkanzlei) ↗</a> · <a href="/beispiele/schreinerei/" target="_blank" rel="noopener">Bodenständig (Schreinerei) ↗</a> · <a href="/beispiele/weingut/" target="_blank" rel="noopener">Hochwertig (Weingut) ↗</a> · <a href="/beispiele/fotostudio/" target="_blank" rel="noopener">Modern / kreativ (Fotostudio) ↗</a> · <a href="/beispiele/eiscafe/" target="_blank" rel="noopener">Freundlich / verspielt mit 3D (Eiscafé) ↗</a></p>
         <div class="field" style="margin-top:16px;">
           <label for="f-refs">Seiten, die Ihnen gefallen <span class="opt">(optional, gerne Links)</span></label>
           <textarea id="f-refs" name="refs" placeholder="z. B. Websites von Wettbewerbern oder Vorbildern, die Ihnen gefallen"></textarea>
@@ -860,12 +860,12 @@
       <div class="submit-row">
         <span class="req-note">* Pflichtfeld</span>
         <span class="error-msg" id="formError">Bitte Name und E-Mail-Adresse ausfüllen.</span>
-        <button type="submit" class="btn btn-primary">Briefing zusammenstellen</button>
+        <button type="submit" class="btn btn-primary">Anfrage zusammenstellen</button>
       </div>
 
       <div class="review" id="reviewPanel">
         <div class="review-box">
-          <h3>Ihr Briefing, zum Absenden bereit</h3>
+          <h3>Ihre Anfrage, zum Absenden bereit</h3>
           <pre id="reviewText"></pre>
           <div class="review-actions">
             <a href="#" id="mailtoBtn" class="btn btn-primary">Per E-Mail senden</a>
@@ -1265,7 +1265,7 @@
     var addonList = checkedTitles('addons', ADDONS.map(function(a){return {id:a.id,title:a.name};}));
 
     var lines = [
-      'WEBSITE-BRIEFING', '',
+      'ANFRAGE WEBSITE', '',
       'KONTAKT',
       'Name: ' + name,
       'Firma/Verein: ' + (val('f-org') || 'keine Angabe'),
@@ -1299,7 +1299,7 @@
     document.getElementById('reviewText').textContent = text;
     document.getElementById('reviewPanel').classList.add('show');
 
-    var subject = 'Website-Briefing: ' + (val('f-org') || name);
+    var subject = 'Anfrage Website: ' + (val('f-org') || name);
     var mailto = 'mailto:' + encodeURIComponent(CONTACT_EMAIL) +
       '?subject=' + encodeURIComponent(subject) +
       '&body=' + encodeURIComponent(text.replace(/\n/g,'\r\n'));

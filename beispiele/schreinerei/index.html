@@ -1,0 +1,456 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Schreinerei Marx, Beispielseite von Dominic Lutz</title>
+<meta name="description" content="Beispielseite im Stil bodenständig und handwerklich, mit Richtpreis-Rechner und Vorher-Nachher-Regler. Der Betrieb ist erfunden.">
+<!-- NICHT INDEXIEREN: Der Betrieb ist erfunden, samt Anschrift und
+     Telefonnummer. Ein Suchtreffer auf ein Unternehmen, das es nicht
+     gibt, waere irrefuehrend. Gilt auch nach dem Umzug auf die eigene
+     Domain, dort bleibt diese Zeile stehen. -->
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#F6F1EA">
+<style>
+  html{-webkit-text-size-adjust:100%}
+  body{margin:0}
+  img{max-width:100%}
+  [hidden]{display:none!important}
+</style>
+</head>
+<body>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F6F1EA; --surface:#FFFFFF; --surface-2:#EFE7DC; --ink:#2B211A; --ink-soft:#5E4F43; --ink-faint:#8E7F72;
+    --border:#E2D7C8; --oak:#B8865A; --oak-deep:#8C5F37; --cta:#D9581F; --cta-deep:#B0430F; --ok:#3B7A4A;
+    --shadow:0 12px 30px -16px rgba(43,33,26,.35);
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#1B1612; --surface:#241E19; --surface-2:#2C241E; --ink:#F3EBE1; --ink-soft:#C9BBAC; --ink-faint:#8F8073;
+      --border:#3A3129; --oak:#C9976A; --oak-deep:#E0B285; --cta:#E8692F; --cta-deep:#F58A55; --ok:#7CC48C;
+      --shadow:0 14px 32px -16px rgba(0,0,0,.6);
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#1B1612; --surface:#241E19; --surface-2:#2C241E; --ink:#F3EBE1; --ink-soft:#C9BBAC; --ink-faint:#8F8073;
+    --border:#3A3129; --oak:#C9976A; --oak-deep:#E0B285; --cta:#E8692F; --cta-deep:#F58A55; --ok:#7CC48C;
+    --shadow:0 14px 32px -16px rgba(0,0,0,.6);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0; background:var(--bg); color:var(--ink); font-family:"Barlow", ui-sans-serif, system-ui, sans-serif; font-size:17px; line-height:1.55; overflow-x:hidden;}
+  h1,h2,h3{font-family:"Barlow Condensed", "Barlow", sans-serif; margin:0; text-wrap:balance; color:var(--ink); letter-spacing:.005em;}
+  a{color:var(--oak-deep);}
+  :focus-visible{outline:3px solid var(--cta); outline-offset:3px; border-radius:4px;}
+  button, input, select{font-family:inherit;}
+  .wrap{max-width:1100px; margin:0 auto; padding:0 24px;}
+  .num{font-variant-numeric:tabular-nums;}
+
+  .sample-bar{position:sticky; top:0; z-index:60; background:var(--ink); color:var(--bg); font-size:13px; font-weight:600; padding:8px 16px; text-align:center;}
+  .sample-bar a{color:var(--oak);}
+
+  nav{display:flex; align-items:center; justify-content:space-between; gap:16px; padding:14px 24px; max-width:1100px; margin:0 auto;}
+  .logo{display:flex; align-items:center; gap:10px; font-family:"Barlow Condensed",sans-serif; font-weight:800; font-size:24px; text-transform:uppercase; letter-spacing:.03em; text-decoration:none; color:var(--ink);}
+  .logo i{width:30px; height:30px; background:var(--oak); display:block; clip-path:polygon(0 100%, 50% 0, 100% 100%);}
+  .nav-links{display:flex; gap:2px;}
+  .nav-links a{text-decoration:none; color:var(--ink-soft); font-weight:600; padding:8px 12px; border-radius:6px; font-size:15px;}
+  .nav-links a:hover{background:var(--surface-2); color:var(--ink);}
+  @media (max-width:820px){.nav-links{display:none;}}
+  .nav-right{display:flex; align-items:center; gap:10px;}
+  .theme-toggle{display:flex; gap:2px; background:var(--surface); border:1px solid var(--border); border-radius:999px; padding:3px;}
+  .theme-toggle button{border:none; background:transparent; color:var(--ink-soft); font-size:12.5px; font-weight:600; padding:5px 10px; border-radius:999px; cursor:pointer;}
+  .theme-toggle button[aria-pressed="true"]{background:var(--oak); color:#fff;}
+  .btn{display:inline-flex; align-items:center; gap:8px; font-weight:700; font-size:16px; padding:13px 20px; border-radius:8px; text-decoration:none; border:2px solid transparent; cursor:pointer; transition:transform .12s ease, background .15s ease;}
+  .btn:active{transform:scale(.98);}
+  .btn-cta{background:var(--cta); color:#fff;}
+  .btn-cta:hover{background:var(--cta-deep);}
+  .btn-line{background:transparent; border-color:var(--border); color:var(--ink);}
+  .btn-line:hover{border-color:var(--oak);}
+  .phone{font-family:"Barlow Condensed",sans-serif; font-weight:700; font-size:20px; text-decoration:none; color:var(--ink); display:inline-flex; align-items:center; gap:8px;}
+  .phone b{width:34px; height:34px; border-radius:50%; background:var(--cta); color:#fff; display:inline-flex; align-items:center; justify-content:center; font-size:15px;}
+
+  /* mobile sticky call bar */
+  .callbar{display:none; position:fixed; left:0; right:0; bottom:0; z-index:55; background:var(--cta); color:#fff; padding:12px 16px; font-weight:700; text-align:center; text-decoration:none; font-size:17px;}
+  @media (max-width:640px){ .callbar{display:block;} body{padding-bottom:56px;} }
+
+  header.hero{padding:56px 0 48px; border-bottom:1px solid var(--border); position:relative; overflow:hidden;}
+  .hero-grid{display:grid; grid-template-columns:1.1fr .9fr; gap:40px; align-items:center;}
+  @media (max-width:820px){.hero-grid{grid-template-columns:1fr;}}
+  .hero h1{font-size:clamp(44px,7vw,84px); line-height:.95; font-weight:800; text-transform:uppercase;}
+  .hero h1 span{color:var(--oak-deep);}
+  .hero p{font-size:19px; color:var(--ink-soft); max-width:46ch; margin:18px 0 26px;}
+  .hero-cta{display:flex; gap:12px; flex-wrap:wrap;}
+  .hero-art{position:relative; aspect-ratio:4/3; border-radius:14px; overflow:hidden; box-shadow:var(--shadow); background:var(--surface-2);}
+  .hero-art canvas{display:block; width:100%; height:100%;}
+  .hero-art .cap{position:absolute; left:12px; bottom:12px; background:rgba(43,33,26,.8); color:#fff; font-size:12.5px; padding:5px 9px; border-radius:6px;}
+  .trust{display:flex; gap:28px; flex-wrap:wrap; margin-top:36px; padding-top:22px; border-top:1px solid var(--border);}
+  .trust div{display:flex; flex-direction:column; gap:2px;}
+  .trust b{font-family:"Barlow Condensed",sans-serif; font-size:26px; font-weight:700; color:var(--oak-deep); line-height:1;}
+  .trust span{font-size:13.5px; color:var(--ink-soft);}
+
+  section{padding:72px 0; border-bottom:1px solid var(--border);}
+  .kicker{font-weight:700; color:var(--cta); text-transform:uppercase; letter-spacing:.1em; font-size:13px; display:block; margin-bottom:8px;}
+  h2{font-size:clamp(32px,4.5vw,50px); font-weight:800; text-transform:uppercase;}
+  .sub{color:var(--ink-soft); max-width:58ch; margin-top:10px;}
+
+  .services{display:grid; grid-template-columns:repeat(4,1fr); gap:16px; margin-top:36px;}
+  @media (max-width:900px){.services{grid-template-columns:1fr 1fr;}}
+  @media (max-width:520px){.services{grid-template-columns:1fr;}}
+  .service{background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:22px; border-top:4px solid var(--oak);}
+  .service h3{font-size:24px; font-weight:700;}
+  .service p{color:var(--ink-soft); font-size:15px; margin:8px 0 0;}
+
+  /* calculator */
+  .calc{display:grid; grid-template-columns:1fr 1fr; gap:28px; margin-top:36px; background:var(--surface); border:1px solid var(--border); border-radius:14px; padding:28px; box-shadow:var(--shadow);}
+  @media (max-width:760px){.calc{grid-template-columns:1fr;}}
+  .field{display:flex; flex-direction:column; gap:6px; margin-bottom:14px;}
+  label{font-weight:600; font-size:14px;}
+  input[type="text"], input[type="tel"], input[type="email"], select, textarea{font-size:16px; padding:11px 12px; border-radius:8px; border:1.5px solid var(--border); background:var(--bg); color:var(--ink); width:100%; font-family:inherit;}
+  input[type="range"]{width:100%; accent-color:var(--oak-deep);}
+  .range-row{display:flex; justify-content:space-between; font-size:13.5px; color:var(--ink-soft);}
+  .range-row output{font-weight:700; color:var(--ink);}
+  .segment{display:flex; gap:6px; flex-wrap:wrap;}
+  .segment button{border:1.5px solid var(--border); background:var(--bg); color:var(--ink-soft); padding:8px 12px; border-radius:8px; font-weight:600; cursor:pointer; font-size:14px;}
+  .segment button[aria-pressed="true"]{background:var(--oak); border-color:var(--oak); color:#fff;}
+  .result{background:var(--surface-2); border-radius:12px; padding:22px; display:flex; flex-direction:column; justify-content:center; gap:8px;}
+  .result .big{font-family:"Barlow Condensed",sans-serif; font-size:48px; font-weight:800; color:var(--oak-deep); line-height:1;}
+  .result small{color:var(--ink-soft); font-size:13.5px;}
+  .result ul{margin:8px 0 0; padding-left:18px; color:var(--ink-soft); font-size:14px;}
+
+  /* references */
+  .refs{display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:36px;}
+  @media (max-width:900px){.refs{grid-template-columns:1fr 1fr;}}
+  @media (max-width:520px){.refs{grid-template-columns:1fr;}}
+  .ref{background:var(--surface); border:1px solid var(--border); border-radius:12px; overflow:hidden;}
+  .ref canvas{display:block; width:100%; height:auto;}
+  .ref .body{padding:14px 16px;}
+  .ref h3{font-size:20px; font-weight:700;}
+  .ref p{margin:4px 0 0; color:var(--ink-soft); font-size:14px;}
+  .ref .meta{display:flex; justify-content:space-between; margin-top:10px; font-size:12.5px; color:var(--ink-faint);}
+
+  /* before/after */
+  .ba{position:relative; margin-top:36px; border-radius:14px; overflow:hidden; box-shadow:var(--shadow); aspect-ratio:16/8; background:var(--surface-2); user-select:none; touch-action:none;}
+  .ba canvas{position:absolute; inset:0; width:100%; height:100%; display:block;}
+  .ba .after{clip-path:inset(0 0 0 var(--cut, 50%));}
+  .ba .handle{position:absolute; top:0; bottom:0; left:var(--cut, 50%); width:3px; background:#fff; transform:translateX(-50%); box-shadow:0 0 0 1px rgba(0,0,0,.2);}
+  .ba .knob{position:absolute; top:50%; left:var(--cut, 50%); transform:translate(-50%,-50%); width:44px; height:44px; border-radius:50%; background:#fff; color:var(--ink); display:flex; align-items:center; justify-content:center; font-weight:800; box-shadow:0 4px 14px rgba(0,0,0,.3); cursor:ew-resize;}
+  .ba .lbl{position:absolute; top:12px; background:rgba(43,33,26,.8); color:#fff; font-size:12.5px; font-weight:700; padding:5px 9px; border-radius:6px;}
+  .ba .lbl.l{left:12px;} .ba .lbl.r{right:12px;}
+  .ba input[type="range"]{position:absolute; inset:0; width:100%; height:100%; opacity:0; margin:0; cursor:ew-resize;}
+
+  .area{display:grid; grid-template-columns:1fr 1fr; gap:36px; margin-top:36px; align-items:start;}
+  @media (max-width:760px){.area{grid-template-columns:1fr;}}
+  .towns{display:flex; flex-wrap:wrap; gap:8px; margin-top:14px;}
+  .towns span{background:var(--surface); border:1px solid var(--border); border-radius:999px; padding:6px 12px; font-size:14px; font-weight:600;}
+  table{width:100%; border-collapse:collapse; font-size:16px; margin-top:14px;}
+  td{padding:10px 0; border-bottom:1px solid var(--border);}
+  td:last-child{text-align:right; font-weight:700;}
+  .today td{color:var(--cta);}
+
+  .contact{margin-top:36px; display:grid; grid-template-columns:1fr 1fr; gap:16px; max-width:780px;}
+  @media (max-width:640px){.contact{grid-template-columns:1fr;}}
+  .contact .full{grid-column:1/-1;}
+  .toast{position:fixed; left:50%; bottom:72px; transform:translate(-50%, 20px); background:var(--ink); color:var(--bg); padding:12px 18px; border-radius:10px; font-weight:700; opacity:0; pointer-events:none; transition:opacity .25s, transform .25s; z-index:70; max-width:90vw; text-align:center;}
+  .toast.show{opacity:1; transform:translate(-50%,0);}
+  footer{padding:40px 24px 64px; text-align:center; color:var(--ink-faint); font-size:13.5px;}
+  footer a{color:var(--ink-soft);}
+  @media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto;} .btn{transition:none;} }
+</style>
+
+<div class="sample-bar">Beispielseite · Stil: Bodenständig / Handwerk · Der Betrieb ist erfunden · <a href="/">Zurück zur Übersicht</a></div>
+
+<nav>
+  <a href="#top" class="logo"><i aria-hidden="true"></i>Schreinerei Marx</a>
+  <div class="nav-links"><a href="#leistungen">Leistungen</a><a href="#rechner">Richtpreis</a><a href="#referenzen">Referenzen</a><a href="#gebiet">Einzugsgebiet</a><a href="#kontakt">Kontakt</a></div>
+  <div class="nav-right">
+    <div class="theme-toggle" role="group" aria-label="Darstellung">
+      <button type="button" data-theme-choice="light" aria-pressed="false">Hell</button>
+      <button type="button" data-theme-choice="dark" aria-pressed="false">Dunkel</button>
+      <button type="button" data-theme-choice="system" aria-pressed="true">Auto</button>
+    </div>
+    <a href="tel:+4965010000000" class="phone"><b>☎</b>06501 000 00 00</a>
+  </div>
+</nav>
+<a href="tel:+4965010000000" class="callbar">☎ Jetzt anrufen, 06501 000 00 00</a>
+
+<header class="hero" id="top">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <h1>Möbel nach Maß <span>aus Konz.</span></h1>
+        <p>Einbauschränke, Küchen, Türen und Treppen, geplant in unserer Werkstatt, gebaut von Meisterhand, eingebaut, bis es sitzt. Seit 1994 im Kreis Trier-Saarburg.</p>
+        <div class="hero-cta">
+          <a href="#kontakt" class="btn btn-cta">Angebot anfragen</a>
+          <a href="#rechner" class="btn btn-line">Richtpreis berechnen</a>
+        </div>
+        <div class="trust">
+          <div><b>1994</b><span>Meisterbetrieb seit</span></div>
+          <div><b>4</b><span>Gesellen + 1 Azubi</span></div>
+          <div><b>Innung</b><span>Tischler-Innung Trier</span></div>
+          <div><b>10 J.</b><span>Garantie auf Einbaumöbel</span></div>
+        </div>
+      </div>
+      <div class="hero-art"><canvas id="heroWood" width="800" height="600" aria-label="Holzmaserung Eiche"></canvas><span class="cap">Eiche, geölt, Maserung im Browser gezeichnet, kein Foto</span></div>
+    </div>
+  </div>
+</header>
+
+<section id="leistungen">
+  <div class="wrap">
+    <span class="kicker">Leistungen</span>
+    <h2>Was wir bauen</h2>
+    <p class="sub">Alles aus einer Hand: Aufmaß bei Ihnen zu Hause, Zeichnung zum Freigeben, Bau in der Werkstatt, Montage. Ohne Subunternehmer.</p>
+    <div class="services">
+      <div class="service"><h3>Einbauschränke</h3><p>Dachschräge, Nische, Flur, wir nutzen jeden Zentimeter. Fronten lackiert, furniert oder massiv.</p></div>
+      <div class="service"><h3>Küchen</h3><p>Massivholzküchen und Fronten nach Maß, auch Aufarbeitung bestehender Küchen.</p></div>
+      <div class="service"><h3>Türen &amp; Fenster</h3><p>Innentüren, Haustüren, Reparatur alter Holzfenster statt Austausch.</p></div>
+      <div class="service"><h3>Treppen &amp; Böden</h3><p>Massivholztreppen, Treppenrenovierung, Dielen- und Parkettverlegung.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="rechner">
+  <div class="wrap">
+    <span class="kicker">Richtpreis in 20 Sekunden</span>
+    <h2>Was kostet ein Einbauschrank?</h2>
+    <p class="sub">Schieben, klicken, fertig. Das Ergebnis ist ein Richtwert für die Beispielseite, das echte Angebot kommt nach dem Aufmaß.</p>
+    <div class="calc">
+      <div>
+        <div class="field">
+          <div class="range-row"><label for="w">Breite</label><output id="wOut">240 cm</output></div>
+          <input type="range" id="w" min="60" max="500" step="10" value="240">
+        </div>
+        <div class="field">
+          <div class="range-row"><label for="h">Höhe</label><output id="hOut">250 cm</output></div>
+          <input type="range" id="h" min="100" max="300" step="10" value="250">
+        </div>
+        <div class="field">
+          <label>Front</label>
+          <div class="segment" id="front" role="group" aria-label="Front">
+            <button type="button" data-v="lack" data-f="1" aria-pressed="true">Lackiert</button>
+            <button type="button" data-v="furnier" data-f="1.25" aria-pressed="false">Furniert</button>
+            <button type="button" data-v="massiv" data-f="1.6" aria-pressed="false">Massivholz</button>
+          </div>
+        </div>
+        <div class="field">
+          <label>Innenausstattung</label>
+          <div class="segment" id="inner" role="group" aria-label="Innenausstattung">
+            <button type="button" data-v="einfach" data-add="0" aria-pressed="true">Böden &amp; Stange</button>
+            <button type="button" data-v="mittel" data-add="180" aria-pressed="false">+ Schubladen</button>
+            <button type="button" data-v="voll" data-add="420" aria-pressed="false">+ Schubladen &amp; Licht</button>
+          </div>
+        </div>
+      </div>
+      <div class="result">
+        <small>Richtpreis inkl. Montage</small>
+        <div class="big num" id="price">noch offen</div>
+        <small id="priceRange"></small>
+        <ul>
+          <li>Aufmaß und Zeichnung inklusive</li>
+          <li>Lieferzeit ca. 6 bis 8 Wochen</li>
+          <li>Preise sind Beispielwerte dieser Musterseite</li>
+        </ul>
+        <a href="#kontakt" class="btn btn-cta" style="margin-top:12px; align-self:flex-start;">Genau anfragen</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="referenzen">
+  <div class="wrap">
+    <span class="kicker">Referenzen</span>
+    <h2>Zuletzt gebaut</h2>
+    <p class="sub">Sechs Projekte aus dem letzten Jahr. Auf der echten Seite stehen hier Fotos von der Baustelle, für die Beispielseite zeichnen wir die Holzarten im Browser.</p>
+    <div class="refs" id="refs"></div>
+  </div>
+</section>
+
+<section id="vorher">
+  <div class="wrap">
+    <span class="kicker">Vorher / Nachher</span>
+    <h2>Treppe aufgearbeitet statt neu</h2>
+    <p class="sub">Alte Buchentreppe, 1978: abgeschliffen, Kanten neu, geölt. Ziehen Sie den Regler.</p>
+    <div class="ba" id="ba">
+      <canvas class="before" id="baBefore" width="1200" height="600"></canvas>
+      <canvas class="after" id="baAfter" width="1200" height="600"></canvas>
+      <span class="lbl l">Vorher</span><span class="lbl r">Nachher</span>
+      <div class="handle" aria-hidden="true"></div><div class="knob" aria-hidden="true">⇔</div>
+      <input type="range" id="baRange" min="0" max="100" value="50" aria-label="Vorher-Nachher-Regler">
+    </div>
+  </div>
+</section>
+
+<section id="gebiet">
+  <div class="wrap">
+    <span class="kicker">Wo wir arbeiten</span>
+    <h2>Einzugsgebiet &amp; Zeiten</h2>
+    <div class="area">
+      <div>
+        <p style="margin:0; color:var(--ink-soft);">Werkstatt in Konz. Anfahrt ohne Aufpreis in:</p>
+        <div class="towns"><span>Konz</span><span>Trier</span><span>Saarburg</span><span>Schweich</span><span>Wittlich</span><span>Bitburg</span><span>Hermeskeil</span><span>Luxemburg-Stadt</span><span>Remich</span></div>
+        <p style="margin:16px 0 0; color:var(--ink-soft);">Darüber hinaus nach Absprache.</p>
+      </div>
+      <div>
+        <p style="margin:0; color:var(--ink-soft);">Werkstatt &amp; Ausstellung, Saarstraße 41, 54329 Konz</p>
+        <table id="hours">
+          <tr data-day="1"><td>Montag bis Donnerstag</td><td>7 bis 17 Uhr</td></tr>
+          <tr data-day="5"><td>Freitag</td><td>7 bis 14 Uhr</td></tr>
+          <tr data-day="6"><td>Samstag</td><td>nach Termin</td></tr>
+          <tr data-day="0"><td>Sonntag</td><td>geschlossen</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="kontakt" style="border-bottom:none;">
+  <div class="wrap">
+    <span class="kicker">Kontakt</span>
+    <h2>Angebot anfragen</h2>
+    <p class="sub">Kurz beschreiben, was Sie vorhaben, wir melden uns innerhalb eines Werktags und machen einen Termin fürs Aufmaß.</p>
+    <form class="contact" id="contactForm" novalidate>
+      <div class="field"><label for="c-name">Name</label><input id="c-name" type="text" autocomplete="name"></div>
+      <div class="field"><label for="c-phone">Telefon</label><input id="c-phone" type="tel" autocomplete="tel"></div>
+      <div class="field full"><label for="c-what">Was soll gebaut werden?</label><textarea id="c-what" rows="4" placeholder="z. B. Einbauschrank unter der Dachschräge, ca. 3 m breit"></textarea></div>
+      <div class="field full"><button type="submit" class="btn btn-cta">Anfrage senden</button></div>
+    </form>
+  </div>
+</section>
+
+<footer>Schreinerei Marx ist ein erfundener Betrieb. Diese Seite ist eine Beispielseite von Dominic Lutz, <a href="/">zur Übersicht</a>.</footer>
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+(function(){
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  // theme
+  var root = document.documentElement, saved = null;
+  try { saved = localStorage.getItem('marx-theme'); } catch(e){}
+  if (saved === 'light' || saved === 'dark') root.setAttribute('data-theme', saved);
+  function setPressed(c){ document.querySelectorAll('[data-theme-choice]').forEach(function(b){ b.setAttribute('aria-pressed', b.getAttribute('data-theme-choice')===c?'true':'false'); }); }
+  setPressed(saved || 'system');
+  document.querySelectorAll('[data-theme-choice]').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var c = btn.getAttribute('data-theme-choice');
+      if (c === 'system') root.removeAttribute('data-theme'); else root.setAttribute('data-theme', c);
+      try { localStorage.setItem('marx-theme', c); } catch(e){}
+      setPressed(c);
+    });
+  });
+  var toast = document.getElementById('toast');
+  function showToast(t){ toast.textContent = t; toast.classList.add('show'); setTimeout(function(){ toast.classList.remove('show'); }, 3200); }
+  document.getElementById('contactForm').addEventListener('submit', function(e){ e.preventDefault(); showToast('Beispielseite: Hier würde die Anfrage jetzt per E-Mail ankommen.'); });
+
+  // today's hours
+  var d = new Date().getDay();
+  var key = (d >= 1 && d <= 4) ? '1' : String(d);
+  var row = document.querySelector('#hours tr[data-day="'+key+'"]'); if (row) row.classList.add('today');
+
+  // ---------- procedural wood grain ----------
+  function hashf(x){ var s = Math.sin(x * 12.9898) * 43758.5453; return s - Math.floor(s); }
+  function wood(canvas, opts){
+    var ctx = canvas.getContext('2d'), w = canvas.width, h = canvas.height;
+    var base = opts.base, dark = opts.dark, light = opts.light, rings = opts.rings || 14, seed = opts.seed || 1, angle = opts.angle || 0;
+    var g = ctx.createLinearGradient(0,0,w,h); g.addColorStop(0, base); g.addColorStop(1, light);
+    ctx.fillStyle = g; ctx.fillRect(0,0,w,h);
+    ctx.save(); ctx.translate(w/2, h/2); ctx.rotate(angle); ctx.translate(-w/2, -h/2);
+    ctx.globalAlpha = .9;
+    for (var i=0;i<rings;i++){
+      var y = (i / rings) * h * 1.3 - h*.15 + hashf(seed + i) * 18;
+      var thick = 1.5 + hashf(seed*3 + i) * 7;
+      ctx.strokeStyle = (i % 3 === 0) ? dark : (i % 3 === 1 ? 'rgba(0,0,0,.18)' : 'rgba(255,255,255,.14)');
+      ctx.lineWidth = thick;
+      ctx.beginPath();
+      for (var x=-20; x<=w+20; x+=12){
+        var yy = y + Math.sin(x*.012 + seed + i*.7) * 12 + Math.sin(x*.045 + i) * 4 + Math.sin(x*.002 + seed) * 30;
+        x === -20 ? ctx.moveTo(x, yy) : ctx.lineTo(x, yy);
+      }
+      ctx.stroke();
+    }
+    // knot
+    if (opts.knot !== false){
+      var kx = w*(.25 + hashf(seed*7)*.5), ky = h*(.3 + hashf(seed*11)*.4);
+      for (var r=0;r<9;r++){ ctx.strokeStyle = r%2 ? dark : 'rgba(0,0,0,.25)'; ctx.lineWidth = 2 + hashf(r+seed)*3; ctx.beginPath(); ctx.ellipse(kx, ky, 8 + r*7, 5 + r*4.5, .3, 0, Math.PI*2); ctx.stroke(); }
+    }
+    ctx.restore();
+    // pores
+    ctx.globalAlpha = .12; ctx.fillStyle = '#000';
+    for (var p=0;p<w*h/900;p++){ var px = hashf(seed*13 + p)*w, py = hashf(seed*17 + p)*h; ctx.fillRect(px, py, 1 + hashf(p)*2, 6 + hashf(p*2)*14); }
+    ctx.globalAlpha = 1;
+    if (opts.sheen){ var sh = ctx.createLinearGradient(0,0,w,0); sh.addColorStop(0,'rgba(255,255,255,0)'); sh.addColorStop(.5,'rgba(255,255,255,.18)'); sh.addColorStop(1,'rgba(255,255,255,0)'); ctx.fillStyle = sh; ctx.fillRect(0,0,w,h); }
+  }
+  var SPECIES = {
+    eiche:   {base:'#C79A62', dark:'#7A4E26', light:'#E0BB86'},
+    nuss:    {base:'#6E4A33', dark:'#3B2417', light:'#8E6749'},
+    esche:   {base:'#E6D3B0', dark:'#A78C63', light:'#F3E6CB'},
+    buche:   {base:'#D9A882', dark:'#9E6A45', light:'#EBC5A6'},
+    kirsche: {base:'#B5613F', dark:'#6F3520', light:'#D48A66'},
+    laerche: {base:'#D8A25F', dark:'#8F5A2A', light:'#EFC38A'}
+  };
+  wood(document.getElementById('heroWood'), Object.assign({rings:16, seed:3, angle:-.08, sheen:true}, SPECIES.eiche));
+
+  // references
+  var REFS = [
+    ['Einbauschrank Dachschräge', 'Trier-Kürenz · Esche furniert, 3,4 m', 'esche', 5],
+    ['Massivholzküche', 'Saarburg · Eiche geölt, Arbeitsplatte 6 cm', 'eiche', 8],
+    ['Haustür mit Seitenteil', 'Konz-Könen · Lärche, dreifach verglast', 'laerche', 11],
+    ['Treppe & Geländer', 'Schweich · Buche, offene Stufen', 'buche', 14],
+    ['Ankleide', 'Luxemburg-Stadt · Nussbaum, LED', 'nuss', 17],
+    ['Esstisch 2,8 m', 'Wittlich · Kirsche massiv, Schweizer Kante', 'kirsche', 20]
+  ];
+  var refsEl = document.getElementById('refs');
+  REFS.forEach(function(r){
+    var el = document.createElement('div'); el.className = 'ref';
+    el.innerHTML = '<canvas width="480" height="300" aria-label="Holzart '+r[2]+'"></canvas><div class="body"><h3>'+r[0]+'</h3><p>'+r[1]+'</p><div class="meta"><span>2026</span><span>Beispiel</span></div></div>';
+    refsEl.appendChild(el);
+    wood(el.querySelector('canvas'), Object.assign({rings:11, seed:r[3], angle:(r[3]%2?.06:-.05), sheen:true}, SPECIES[r[2]]));
+  });
+
+  // before / after
+  var before = document.getElementById('baBefore'), after = document.getElementById('baAfter');
+  wood(after, Object.assign({rings:13, seed:31, angle:.04, sheen:true}, SPECIES.buche));
+  (function(){ // "before": worn, grey, scratched
+    wood(before, {base:'#9A8B79', dark:'#5C4F43', light:'#B3A490', rings:13, seed:31, angle:.04, knot:true});
+    var ctx = before.getContext('2d');
+    ctx.globalAlpha = .35; ctx.fillStyle = '#6B6259'; ctx.fillRect(0,0,before.width,before.height);
+    ctx.globalAlpha = .5; ctx.strokeStyle = '#3E3630'; ctx.lineWidth = 1.2;
+    for (var i=0;i<60;i++){ var x = hashf(i*3)*before.width, y = hashf(i*5)*before.height; ctx.beginPath(); ctx.moveTo(x,y); ctx.lineTo(x + (hashf(i)*160-80), y + (hashf(i*7)*40-20)); ctx.stroke(); }
+    ctx.globalAlpha = 1;
+  })();
+  var ba = document.getElementById('ba'), baRange = document.getElementById('baRange');
+  function setCut(v){ ba.style.setProperty('--cut', v + '%'); }
+  baRange.addEventListener('input', function(){ setCut(this.value); });
+  setCut(50);
+
+  // calculator
+  var W = document.getElementById('w'), H = document.getElementById('h'), front = 1, add = 0;
+  function seg(id, onPick){
+    var el = document.getElementById(id);
+    el.querySelectorAll('button').forEach(function(b){
+      b.addEventListener('click', function(){ el.querySelectorAll('button').forEach(function(x){ x.setAttribute('aria-pressed', x===b?'true':'false'); }); onPick(b); calc(); });
+    });
+  }
+  seg('front', function(b){ front = parseFloat(b.getAttribute('data-f')); });
+  seg('inner', function(b){ add = parseFloat(b.getAttribute('data-add')); });
+  function fmt(n){ return Math.round(n / 10) * 10; }
+  function calc(){
+    var w = parseInt(W.value, 10), h = parseInt(H.value, 10);
+    document.getElementById('wOut').textContent = w + ' cm'; document.getElementById('hOut').textContent = h + ' cm';
+    var area = (w/100) * (h/100);                 // m² Front
+    var base = 380 + area * 720 * front;           // Grundpreis + Fläche × Frontpreis
+    var inner = add * Math.max(1, Math.round(w/100)); // Ausstattung je laufendem Meter
+    var montage = 240 + area * 60;
+    var total = base + inner + montage;
+    document.getElementById('price').textContent = 'ca. ' + fmt(total).toLocaleString('de-DE') + ' €';
+    document.getElementById('priceRange').textContent = 'Spanne je nach Details: ' + fmt(total*.9).toLocaleString('de-DE') + ' bis ' + fmt(total*1.15).toLocaleString('de-DE') + ' €, zzgl. USt.';
+  }
+  W.addEventListener('input', calc); H.addEventListener('input', calc); calc();
+})();
+</script>
+
+</body>
+</html>
