@@ -4,13 +4,16 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Café Sonnenschein, Beispielseite von Dominic Lutz</title>
-<meta name="description" content="Beispielseite im Stil freundlich und verspielt, mit 3D-Szene im Kopfbereich. Der Betrieb ist erfunden.">
+<meta name="description" content="Beispielseite für eine Eisdiele: Sortentafel, Waffel zum Zusammenstellen mit gerechneten Allergenen, Hof und Öffnungszeiten. Der Betrieb ist erfunden.">
 <!-- NICHT INDEXIEREN: Der Betrieb ist erfunden, samt Anschrift und
      Telefonnummer. Ein Suchtreffer auf ein Unternehmen, das es nicht
      gibt, waere irrefuehrend. Gilt auch nach dem Umzug auf die eigene
-     Domain, dort bleibt diese Zeile stehen. -->
+     Domain, dort bleibt diese Zeile stehen.
+     ECHT sind die Allergene: die 14 kennzeichnungspflichtigen Stoffe
+     nach der Lebensmittelinformationsverordnung. Was der Rechner
+     ausgibt, ist die richtige Logik an erfundenen Sorten. -->
 <meta name="robots" content="noindex,nofollow">
-<meta name="theme-color" content="#F5B8C8">
+<meta name="theme-color" content="#FFFCF2">
 <style>
   html{-webkit-text-size-adjust:100%}
   body{margin:0}
@@ -21,303 +24,790 @@
 <body>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Nunito:wght@500;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@9..144,400..900,0..100,0..1&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
 <style>
-  :root{
-    --pink:#F5B8C8; --pink-deep:#C8325A; --cream:#FFF4E6; --green:#0F5C4A; --green-deep:#0A3F33; --lemon:#FFD24D; --sky:#8FD0E8;
-    --ink:#1E1414; --ink-soft:#5F4B4B; --paper:#FFFBF5; --border:rgba(30,20,20,.14);
-    --bg:var(--cream); --surface:var(--paper);
+/* ==========================================================
+   Cafe Sonnenschein
+   Nach zwei Vorbildern gebaut: Morgenstern's stellt das Produkt
+   ins Raster und laesst es die Gestaltung machen, Van Leeuwen
+   arbeitet mit Pastellfeldern hinter dickem Schwarz. Beides
+   zusammen ergibt die Sortentafel.
+   Schrift: Fraunces mit hohem WONK-Wert, das gibt der Seite die
+   leicht schiefe, altmodische Note einer Eisdiele. Instrument
+   Sans fuer alles, was gelesen und nicht angeschaut wird.
+   ========================================================== */
+:root{
+  --grund:#FFFCF2; --karte:#FFFFFF; --tinte:#16130D; --tinte-weich:#544E3F;
+  --rand:#16130D; --schatten:#16130D;
+
+  /* Die Farbfelder sind gedruckte Aufkleber. Sie wechseln NICHT mit dem
+     Modus, und die Schrift darauf bleibt schwarz. Haette ich sie im
+     Dunkelmodus mitgedunkelt und helle Schrift daraufgesetzt, waere aus
+     jedem Feld ein Kontrastproblem geworden. */
+  --sonne:#FFD84D; --minze:#A6D8C6; --beere:#F7B3C4; --pistazie:#C9DFA2;
+  --himmel:#AEC8EC; --sahne:#F6E5C6; --kakao:#D8B189; --lavendel:#D3C0E8;
+  --auf-farbe:#16130D; --papierweiss:#FFFDF6;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --grund:#15130E; --karte:#1E1B14; --tinte:#F7F2E4; --tinte-weich:#B3AC99;
+    --rand:#F7F2E4; --schatten:#F7F2E4;
   }
-  :root[data-theme="dark"]{
-    --pink:#5A2233; --pink-deep:#F07A9A; --cream:#1D1517; --green:#1B7A63; --green-deep:#12574A; --lemon:#FFD24D; --sky:#5FB2D4;
-    --ink:#FFF1E8; --ink-soft:#D5BFC0; --paper:#26191D; --border:rgba(255,241,232,.16);
-  }
-  *{box-sizing:border-box;}
-  html{scroll-behavior:smooth;}
-  body{margin:0; background:var(--bg); color:var(--ink); font-family:"Nunito", ui-sans-serif, system-ui, sans-serif; font-size:17px; line-height:1.55; overflow-x:hidden;}
-  h1,h2,h3{font-family:"Bricolage Grotesque", "Nunito", sans-serif; margin:0; font-weight:800; letter-spacing:-.02em; text-wrap:balance; color:var(--ink);}
-  a{color:var(--pink-deep);}
-  :focus-visible{outline:3px solid var(--lemon); outline-offset:3px; border-radius:6px;}
-  button, input, textarea, select{font-family:inherit;}
-  .caps{font-family:"Bricolage Grotesque",sans-serif; font-weight:700; text-transform:uppercase; letter-spacing:.06em; font-size:13px;}
-  .wrap{max-width:1180px; margin:0 auto; padding:0 28px;}
+}
+:root[data-theme="dark"]{
+  --grund:#15130E; --karte:#1E1B14; --tinte:#F7F2E4; --tinte-weich:#B3AC99;
+  --rand:#F7F2E4; --schatten:#F7F2E4;
+}
 
-  .sample-bar{position:sticky; top:0; z-index:60; background:var(--green-deep); color:#fff; font-size:12.5px; font-weight:700; padding:8px 16px; text-align:center;}
-  .sample-bar a{color:var(--lemon);}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  margin:0; background:var(--grund); color:var(--tinte);
+  font-family:"Instrument Sans", ui-sans-serif, system-ui, sans-serif;
+  font-size:17px; line-height:1.6; overflow-x:hidden;
+}
+h1,h2,h3{
+  font-family:"Fraunces", Georgia, serif; margin:0; text-wrap:balance;
+  font-variation-settings:"SOFT" 60, "WONK" 1; line-height:1.02; letter-spacing:-.015em;
+}
+p{margin:0 0 1em;}
+a{color:var(--tinte);}
+:focus-visible{outline:3px solid var(--tinte); outline-offset:3px;}
+button,input,select,textarea{font-family:inherit; font-size:inherit; color:inherit;}
+@media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto;} *{animation:none!important; transition:none!important;} }
 
-  /* pink nav bar, full bleed (Van Leeuwen) */
-  nav{background:var(--pink); border-bottom:2px solid var(--ink);}
-  .nav-in{max-width:1180px; margin:0 auto; padding:14px 28px; display:flex; align-items:center; gap:22px;}
-  .logo{font-family:"Bricolage Grotesque",sans-serif; font-weight:800; font-size:24px; letter-spacing:-.02em; text-decoration:none; color:var(--ink); display:flex; align-items:center; gap:10px;}
-  .logo i{width:26px; height:26px; border-radius:50%; background:conic-gradient(var(--pink-deep), var(--lemon), var(--green), var(--sky), var(--pink-deep)); border:2px solid var(--ink);}
-  .nav-links{display:flex; gap:4px; flex:1;}
-  .nav-links a{text-decoration:none; color:var(--ink); padding:8px 12px; border-radius:999px;}
-  .nav-links a:hover{background:var(--cream);}
-  @media (max-width:760px){.nav-links{display:none;}}
-  .pill{display:inline-flex; align-items:center; gap:8px; border-radius:999px; padding:12px 22px; font-weight:800; text-decoration:none; border:2px solid var(--ink); background:var(--lemon); color:var(--ink); cursor:pointer; box-shadow:3px 3px 0 var(--ink); transition:transform .12s, box-shadow .12s;}
-  .pill:hover{transform:translate(-1px,-1px); box-shadow:4px 4px 0 var(--ink);}
-  .pill:active{transform:translate(2px,2px); box-shadow:1px 1px 0 var(--ink);}
-  .pill.ghost{background:var(--paper);}
-  .pill.sm{padding:8px 14px; font-size:14px;}
-  .theme{display:inline-flex; gap:2px; border:2px solid var(--ink); border-radius:999px; padding:2px; background:var(--paper);}
-  .theme button{border:none; background:transparent; color:var(--ink-soft); font-weight:800; font-size:12px; padding:4px 10px; border-radius:999px; cursor:pointer;}
-  .theme button[aria-pressed="true"]{background:var(--ink); color:var(--cream);}
+.feld{max-width:1200px; margin:0 auto; padding:0 40px;}
+@media (max-width:760px){ .feld{padding:0 20px;} }
+section{padding:78px 0; scroll-margin-top:84px;}
 
-  /* hero: flat color block + framed 3D scene */
-  .hero{display:grid; grid-template-columns:1fr 1fr; min-height:600px; border-bottom:2px solid var(--ink);}
-  @media (max-width:860px){.hero{grid-template-columns:1fr;}}
-  .hero-copy{background:var(--pink-deep); color:#fff; padding:64px 48px; display:flex; flex-direction:column; justify-content:center; gap:22px;}
-  @media (max-width:860px){.hero-copy{padding:48px 28px;}}
-  .hero-copy .caps{color:var(--lemon);}
-  .hero-copy h1{font-size:clamp(46px,6.4vw,92px); line-height:.92; text-transform:uppercase; color:#fff; max-width:11ch;}
-  .hero-copy p{font-size:19px; max-width:42ch; margin:0; color:#FFE4EC;}
-  .hero-cta{display:flex; gap:12px; flex-wrap:wrap;}
-  .hero-scene{position:relative; background:var(--sky); border-left:2px solid var(--ink); min-height:420px; overflow:hidden;}
-  @media (max-width:860px){.hero-scene{border-left:none; border-top:2px solid var(--ink);}}
-  #gl{position:absolute; inset:0; width:100%; height:100%; display:block;}
-  .scene-note{position:absolute; left:16px; bottom:14px; background:var(--paper); color:var(--ink); border:2px solid var(--ink); padding:6px 10px; font-size:12.5px; font-weight:800; border-radius:999px;}
+.schild{
+  font-weight:700; font-size:11px; letter-spacing:.14em; text-transform:uppercase;
+  display:inline-block;
+}
+/* Der Kasten mit hartem Schatten ist das Grundelement dieser Seite.
+   Kein weicher Schlagschatten, sondern ein versetzter Block, wie bei
+   einem gedruckten Aufkleber. */
+.kasten{border:2.5px solid var(--rand); box-shadow:6px 6px 0 var(--schatten); background:var(--karte);}
 
-  /* marquee, scroll-driven where supported */
-  .marquee{background:var(--lemon); border-bottom:2px solid var(--ink); overflow:hidden; white-space:nowrap; padding:12px 0;}
-  .marquee .track{display:inline-block; font-family:"Bricolage Grotesque",sans-serif; font-weight:800; text-transform:uppercase; font-size:20px; letter-spacing:.02em;}
-  .marquee .track span{margin:0 28px;}
-  @media (prefers-reduced-motion: no-preference){
-    .marquee .track{animation:mq 26s linear infinite;}
-    @keyframes mq{from{transform:translateX(0);} to{transform:translateX(-50%);}}
-  }
+/* ---------- Musterband und Kopf ---------- */
+.muster{
+  background:var(--tinte); color:var(--grund); text-align:center;
+  font-size:11px; font-weight:700; letter-spacing:.12em; text-transform:uppercase; padding:9px 16px;
+}
+.muster a{color:inherit;}
+.kopf{
+  position:sticky; top:0; z-index:60; background:var(--grund);
+  border-bottom:2.5px solid var(--rand);
+}
+.kopf-innen{
+  max-width:1200px; margin:0 auto; padding:14px 40px;
+  display:flex; align-items:center; gap:20px;
+}
+.marke{
+  font-family:"Fraunces",serif; font-weight:900; font-size:25px; text-decoration:none;
+  font-variation-settings:"SOFT" 90, "WONK" 1; letter-spacing:-.02em; white-space:nowrap;
+}
+.kopf nav{display:flex; gap:22px; margin-left:auto;}
+.kopf nav a{
+  text-decoration:none; font-weight:600; font-size:14px;
+  padding:3px 0; border-bottom:2.5px solid transparent;
+}
+.kopf nav a:hover{border-color:var(--tinte);}
+.thema{display:flex; margin-left:8px;}
+.thema button{
+  background:none; border:2px solid var(--rand); color:var(--tinte);
+  font-weight:700; font-size:10px; letter-spacing:.08em; text-transform:uppercase;
+  padding:5px 8px; cursor:pointer; line-height:1;
+}
+.thema button+button{border-left:none;}
+.thema button[aria-pressed="true"]{background:var(--tinte); color:var(--grund);}
+@media (max-width:900px){
+  .kopf-innen{padding:12px 20px; gap:10px;}
+  .kopf nav a{display:none;}
+  .marke{font-size:20px;}
+  .thema{margin-left:auto;}
+  .thema button{padding:5px 6px; font-size:9px; letter-spacing:.05em;}
+}
 
-  section{padding:80px 0;}
-  .lead{font-size:clamp(28px,4vw,52px); line-height:1.02; text-transform:uppercase; max-width:16ch;}
-  .lead em{font-style:normal; color:var(--pink-deep);}
-  .cheeky{font-size:18px; color:var(--ink-soft); max-width:48ch; margin-top:14px;}
+/* ---------- Hero ---------- */
+.hero{padding:64px 0 56px;}
+.hero-raster{display:grid; grid-template-columns:1.12fr .88fr; gap:44px; align-items:center;}
+@media (max-width:900px){ .hero-raster{grid-template-columns:1fr; gap:30px;} }
+.hero h1{font-size:clamp(50px,7.4vw,104px); font-weight:900; font-variation-settings:"SOFT" 90,"WONK" 1;}
+.hero h1 em{
+  font-style:normal; background:var(--sonne); color:var(--auf-farbe); padding:0 .1em;
+  box-decoration-break:clone; -webkit-box-decoration-break:clone;
+}
+.hero .unter{font-size:20px; max-width:36ch; margin:26px 0 30px; color:var(--tinte-weich);}
+.knopf{
+  display:inline-block; text-decoration:none; background:var(--sonne); color:var(--auf-farbe);
+  border:2.5px solid var(--rand); box-shadow:6px 6px 0 var(--schatten);
+  font-weight:700; padding:15px 28px; font-size:16px;
+  transition:transform .12s, box-shadow .12s;
+}
+.knopf:hover{transform:translate(3px,3px); box-shadow:3px 3px 0 var(--schatten);}
+.hero-bild{position:relative;}
+/* height:auto ist Pflicht. Das height-Attribut im Markup setzt eine
+   echte Hoehe, und dagegen kommt aspect-ratio nicht an. Ohne diese
+   Zeile stand das Bild 1200 px hoch in der Seite. */
+.hero-bild img{display:block; width:100%; height:auto; aspect-ratio:3/2; object-fit:cover;}
+.hero-bild .klecks{
+  position:absolute; right:-14px; top:-22px; background:var(--beere);
+  border:2.5px solid var(--rand); border-radius:999px; padding:14px 18px;
+  font-family:"Fraunces",serif; font-weight:900; font-size:17px; line-height:1.05;
+  color:var(--auf-farbe); text-align:center; transform:rotate(-9deg); box-shadow:4px 4px 0 var(--schatten);
+}
 
-  /* flavour bands: sticky stack (NOPE's per-flavour sections) */
-  .stack{margin-top:40px;}
-  .band{position:sticky; top:52px; min-height:min(70vh, 520px); border:2px solid var(--ink); border-radius:26px; padding:36px; display:grid; grid-template-columns:1.1fr .9fr; gap:28px; align-items:center; margin-bottom:22px; box-shadow:0 -10px 30px -20px rgba(0,0,0,.35);}
-  @media (max-width:760px){.band{grid-template-columns:1fr; padding:26px; top:60px;}}
-  .band .n{font-family:"Bricolage Grotesque",sans-serif; font-weight:700; font-size:13px; letter-spacing:.08em; text-transform:uppercase; opacity:.8;}
-  .band h3{font-size:clamp(36px,5vw,72px); line-height:.95; text-transform:uppercase; margin-top:8px;}
-  .band p{font-size:17px; max-width:44ch; margin:14px 0 0;}
-  .band .price{font-family:"Bricolage Grotesque",sans-serif; font-weight:800; font-size:26px; margin-top:16px;}
-  .band .scoop{justify-self:center; width:min(260px, 60vw); aspect-ratio:1; border-radius:50%; border:2px solid var(--ink); box-shadow:inset -30px -26px 0 rgba(0,0,0,.08), 8px 8px 0 var(--ink); position:relative;}
-  .band .scoop::after{content:""; position:absolute; left:22%; top:18%; width:22%; height:14%; border-radius:50%; background:rgba(255,255,255,.5); transform:rotate(-20deg);}
-  .band.b1{background:#F7A8B8; color:var(--ink);} .band.b2{background:#9ED39B; color:var(--ink);} .band.b3{background:#FBE28A; color:var(--ink);} .band.b4{background:#5A3A2A; color:#FFF1E8;} .band.b4 h3{color:#FFF1E8;}
-  .band .tag{display:inline-block; background:var(--ink); color:var(--cream); border-radius:999px; padding:4px 10px; font-size:12px; font-weight:800; margin-left:8px; vertical-align:middle;}
+/* ---------- Laufband ---------- */
+.laufband{
+  border-top:2.5px solid var(--rand); border-bottom:2.5px solid var(--rand);
+  background:var(--minze); color:var(--auf-farbe); overflow:hidden; padding:11px 0;
+}
+.laufband .spur{
+  display:flex; gap:34px; white-space:nowrap; width:max-content;
+  animation:rollen 34s linear infinite;
+  font-family:"Fraunces",serif; font-weight:700; font-size:19px;
+  font-variation-settings:"SOFT" 80,"WONK" 1;
+}
+@keyframes rollen{ from{transform:translateX(0);} to{transform:translateX(-50%);} }
+@media (prefers-reduced-motion: reduce){ .laufband .spur{animation:none; flex-wrap:wrap; white-space:normal; width:auto;} }
 
-  /* polaroids: draggable */
-  .board{position:relative; height:520px; margin-top:36px; background:var(--green); border:2px solid var(--ink); border-radius:26px; overflow:hidden; touch-action:none;}
-  .board .hint{position:absolute; left:18px; top:14px; color:#fff; font-weight:800; font-size:13px; opacity:.85;}
-  .polaroid{position:absolute; width:200px; background:#fff; padding:10px 10px 30px; box-shadow:0 14px 30px -12px rgba(0,0,0,.5); cursor:grab; user-select:none; border:1px solid rgba(0,0,0,.08);}
-  .polaroid.drag{cursor:grabbing; box-shadow:0 26px 50px -16px rgba(0,0,0,.6); z-index:5;}
-  .polaroid canvas{display:block; width:100%; height:auto; background:#ddd;}
-  .polaroid span{display:block; text-align:center; font-family:"Bricolage Grotesque",sans-serif; font-weight:700; font-size:14px; color:#1E1414; margin-top:8px;}
-  @media (max-width:640px){.board{height:440px;} .polaroid{width:150px; padding-bottom:24px;}}
+/* ---------- Sortentafel ---------- */
+.abschnitt-kopf{display:flex; align-items:flex-end; justify-content:space-between; gap:22px; flex-wrap:wrap; margin-bottom:30px;}
+.abschnitt-kopf h2{font-size:clamp(34px,4.4vw,58px); font-weight:900;}
+.abschnitt-kopf p{margin:0; max-width:44ch; color:var(--tinte-weich);}
+.tafel{display:grid; grid-template-columns:repeat(auto-fill,minmax(214px,1fr)); gap:20px;}
+.sorte{
+  border:2.5px solid var(--rand); box-shadow:6px 6px 0 var(--schatten);
+  padding:20px 18px 16px; display:flex; flex-direction:column; min-height:186px;
+  color:var(--auf-farbe); text-align:left; cursor:pointer; transition:transform .12s, box-shadow .12s;
+}
+.sorte:hover{transform:translate(3px,3px); box-shadow:3px 3px 0 var(--schatten);}
+.sorte h3{font-size:26px; font-weight:800; margin-bottom:6px;}
+.sorte .preis{font-family:"Fraunces",serif; font-weight:800; font-size:19px; margin-top:auto;}
+.sorte .marken{display:flex; gap:6px; flex-wrap:wrap; margin-top:10px;}
+.sorte .marke-chip{
+  border:2px solid var(--auf-farbe); background:var(--papierweiss); color:var(--auf-farbe); font-size:10.5px; font-weight:700;
+  letter-spacing:.06em; text-transform:uppercase; padding:3px 7px;
+}
+.sorte .weg{position:absolute;}
+.sorte[data-heute="nein"]{opacity:.42; box-shadow:none; cursor:default;}
+.sorte[data-heute="nein"]:hover{transform:none; box-shadow:none;}
 
-  /* events: index rows */
-  .events{margin-top:36px; border-top:2px solid var(--ink);}
-  .ev{display:grid; grid-template-columns:120px 1fr auto; gap:20px; align-items:center; padding:18px 0; border-bottom:2px solid var(--border); text-decoration:none; color:inherit;}
-  @media (max-width:640px){.ev{grid-template-columns:90px 1fr;} .ev .pill{grid-column:1/-1; justify-self:start;}}
-  .ev .d{font-family:"Bricolage Grotesque",sans-serif; font-weight:800; font-size:22px; line-height:1;}
-  .ev .d small{display:block; font-size:12px; letter-spacing:.08em; text-transform:uppercase; opacity:.7; margin-top:4px;}
-  .ev h3{font-size:22px;}
-  .ev p{margin:2px 0 0; color:var(--ink-soft); font-size:15px;}
+/* ---------- Waffel bauen ---------- */
+.bauen{background:var(--karte); border-top:2.5px solid var(--rand); border-bottom:2.5px solid var(--rand);}
+.bau-raster{display:grid; grid-template-columns:1fr 340px; gap:44px; align-items:start;}
+@media (max-width:920px){ .bau-raster{grid-template-columns:1fr; gap:30px;} }
+.wahlzeile{margin-bottom:26px;}
+.wahlzeile > .schild{margin-bottom:10px;}
+.knoepfe{display:flex; gap:10px; flex-wrap:wrap;}
+.knoepfe button{
+  border:2.5px solid var(--rand); background:var(--grund); color:var(--tinte);
+  font-weight:700; font-size:15px; padding:10px 16px; cursor:pointer;
+}
+.knoepfe button[aria-pressed="true"]{background:var(--sonne); color:var(--auf-farbe);}
+.kugelwahl{display:grid; grid-template-columns:repeat(auto-fill,minmax(158px,1fr)); gap:10px;}
+.kugelwahl button{
+  display:flex; align-items:center; gap:10px; text-align:left;
+  border:2.5px solid var(--rand); background:var(--grund); color:var(--tinte);
+  font-weight:600; font-size:15px; padding:9px 12px; cursor:pointer;
+}
+.kugelwahl button .punkt{width:20px; height:20px; border:2px solid var(--auf-farbe); border-radius:999px; flex:none;}
+.kugelwahl button[aria-pressed="true"]{background:var(--sonne); color:var(--auf-farbe);}
+.kugelwahl button[disabled]{opacity:.4; cursor:not-allowed;}
+.kugelwahl button .anzahl{margin-left:auto; font-family:"Fraunces",serif; font-weight:800;}
 
-  /* find us + reservation */
-  .find{display:grid; grid-template-columns:1fr 1fr; gap:0; border:2px solid var(--ink); border-radius:26px; overflow:hidden; margin-top:36px;}
-  @media (max-width:760px){.find{grid-template-columns:1fr;}}
-  .find > div{padding:36px;}
-  .find .l{background:var(--sky); color:var(--ink); border-right:2px solid var(--ink);}
-  @media (max-width:760px){.find .l{border-right:none; border-bottom:2px solid var(--ink);}}
-  .find .r{background:var(--paper);}
-  .hours{margin-top:16px; border-top:2px solid var(--ink);}
-  .hours div{display:flex; justify-content:space-between; padding:9px 0; border-bottom:1px solid rgba(30,20,20,.2); font-weight:700;}
-  .hours div.today{color:var(--pink-deep);}
-  .field{display:flex; flex-direction:column; gap:6px; margin-bottom:12px;}
-  label{font-weight:800; font-size:13px; text-transform:uppercase; letter-spacing:.06em;}
-  input, textarea, select{font-size:16px; padding:11px 13px; border-radius:12px; border:2px solid var(--ink); background:var(--cream); color:var(--ink); width:100%;}
-  input:focus, textarea:focus{outline:none; border-color:var(--pink-deep);}
-  .two{display:grid; grid-template-columns:1fr 1fr; gap:12px;}
-  .toast{position:fixed; left:50%; bottom:24px; transform:translate(-50%, 20px); background:var(--ink); color:var(--cream); padding:12px 18px; border-radius:999px; font-weight:800; opacity:0; pointer-events:none; transition:opacity .25s, transform .25s; z-index:70; max-width:90vw; text-align:center;}
-  .toast.show{opacity:1; transform:translate(-50%,0);}
-  footer{background:var(--pink); border-top:2px solid var(--ink); padding:36px 28px 56px; text-align:center; font-weight:700; font-size:14px; color:var(--ink);}
-  footer a{color:var(--ink);}
-  @media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto;} .pill{transition:none;} }
+.becher{border:2.5px solid var(--rand); box-shadow:6px 6px 0 var(--schatten); background:var(--grund); padding:22px;}
+.becher h3{font-size:24px; font-weight:800; margin-bottom:14px;}
+.stapel{display:flex; justify-content:center; padding:6px 0 14px; min-height:190px; align-items:flex-end;}
+.stapel svg{display:block; width:150px; height:auto; overflow:visible;}
+.rechnung{border-top:2.5px solid var(--rand); padding-top:12px; margin-top:6px;}
+.rechnung .zeile{display:flex; justify-content:space-between; gap:14px; padding:4px 0; font-size:15px; color:var(--tinte-weich);}
+.rechnung .summe{
+  display:flex; justify-content:space-between; gap:14px; margin-top:10px; padding-top:10px;
+  border-top:2.5px solid var(--rand); font-family:"Fraunces",serif; font-weight:900; font-size:24px; color:var(--tinte);
+}
+.hinweis{margin-top:16px; font-size:14px; line-height:1.5;}
+.hinweis b{display:block; font-size:11px; letter-spacing:.12em; text-transform:uppercase; margin-bottom:5px;}
+.hinweis .frei{background:var(--pistazie); color:var(--auf-farbe); border:2px solid var(--auf-farbe); padding:2px 7px; font-weight:700; display:inline-block;}
+
+/* ---------- Bildbaender ---------- */
+.band{border-top:2.5px solid var(--rand); border-bottom:2.5px solid var(--rand);}
+.band img{display:block; width:100%; height:clamp(230px,38vh,420px); object-fit:cover;}
+
+/* ---------- Hof ---------- */
+.hof-raster{display:grid; grid-template-columns:1fr 1fr; gap:44px; align-items:center;}
+@media (max-width:900px){ .hof-raster{grid-template-columns:1fr; gap:28px;} }
+.hof-raster img{display:block; width:100%; height:auto; aspect-ratio:3/2; object-fit:cover;}
+.hof-raster h2{font-size:clamp(32px,4vw,52px); font-weight:900; margin-bottom:18px;}
+.termine{list-style:none; padding:0; margin:22px 0 0;}
+.termine li{
+  display:flex; gap:16px; align-items:baseline; padding:13px 0;
+  border-top:2px solid var(--rand);
+}
+.termine li b{font-family:"Fraunces",serif; font-weight:800; font-size:17px; flex:none; width:104px;}
+
+/* ---------- Finden ---------- */
+.finden-raster{display:grid; grid-template-columns:1fr 1.1fr; gap:44px;}
+@media (max-width:900px){ .finden-raster{grid-template-columns:1fr; gap:32px;} }
+.zeiten{width:100%; border-collapse:collapse; margin:0 0 18px;}
+.zeiten td{padding:9px 0; border-bottom:2px solid var(--rand);}
+.zeiten td+td{text-align:right; font-weight:700;}
+.zeiten tr.heute td{background:var(--sonne); color:var(--auf-farbe);}
+.zeiten tr.zu td+td{font-weight:400; color:var(--tinte-weich);}
+.formular{display:grid; grid-template-columns:1fr 1fr; gap:18px;}
+@media (max-width:620px){ .formular{grid-template-columns:1fr;} }
+.eingabe.voll{grid-column:1/-1;}
+.eingabe{display:flex; flex-direction:column; gap:6px;}
+.eingabe label{font-weight:700; font-size:11px; letter-spacing:.12em; text-transform:uppercase;}
+.eingabe input,.eingabe textarea{
+  border:2.5px solid var(--rand); background:var(--karte); padding:11px 12px; font-size:16px;
+}
+.eingabe textarea{resize:vertical;}
+.senden{
+  justify-self:start; background:var(--beere); color:var(--auf-farbe);
+  border:2.5px solid var(--rand); box-shadow:6px 6px 0 var(--schatten);
+  font-weight:700; padding:14px 30px; font-size:16px; cursor:pointer;
+  transition:transform .12s, box-shadow .12s;
+}
+.senden:hover{transform:translate(3px,3px); box-shadow:3px 3px 0 var(--schatten);}
+.meldung{
+  position:fixed; left:50%; bottom:22px; transform:translate(-50%,16px);
+  background:var(--tinte); color:var(--grund); border:2.5px solid var(--rand);
+  padding:13px 22px; font-weight:600; opacity:0; pointer-events:none;
+  transition:opacity .2s, transform .2s; z-index:90; max-width:92vw; text-align:center;
+}
+.meldung.zeigen{opacity:1; transform:translate(-50%,0);}
+
+/* ---------- Fuss ---------- */
+footer{border-top:2.5px solid var(--rand); padding:44px 0 58px; font-size:14.5px; color:var(--tinte-weich);}
+.fuss-raster{display:grid; grid-template-columns:1.6fr 1fr 1fr; gap:36px;}
+@media (max-width:850px){ .fuss-raster{grid-template-columns:1fr; gap:24px;} }
+footer b{display:block; font-weight:700; font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:var(--tinte); margin-bottom:9px;}
 </style>
+</head>
+<body>
 
-<div class="sample-bar">Beispielseite · Stil: Freundlich / verspielt · 3D-Effekt · Der Betrieb ist erfunden · <a href="/">Zurück zur Übersicht</a></div>
+<div class="muster">Beispielseite &middot; Betrieb, Anschrift und Preise sind erfunden &middot; <a href="/">Zurück zur Übersicht</a></div>
 
-<nav>
-  <div class="nav-in">
-    <a href="#top" class="logo"><i aria-hidden="true"></i>Café Sonnenschein</a>
-    <div class="nav-links caps"><a href="#sorten">Sorten</a><a href="#hof">Der Hof</a><a href="#events">Events</a><a href="#finden">Finden</a></div>
-    <span class="theme" role="group" aria-label="Darstellung"><button type="button" data-theme-choice="light" aria-pressed="true">Hell</button><button type="button" data-theme-choice="dark" aria-pressed="false">Dunkel</button></span>
-    <a href="#finden" class="pill sm">Tisch im Hof</a>
-  </div>
-</nav>
-
-<header class="hero" id="top">
-  <div class="hero-copy">
-    <span class="caps">Jetzt im Becher: Erdbeer-Basilikum</span>
-    <h1>Eis, das nach Sommer schmeckt.</h1>
-    <p>Milch vom Hof nebenan, Obst vom Wochenmarkt, Kringel aus dem eigenen Ofen. Und der schönste Innenhof der Trierer Altstadt, mit Sonne, sobald es welche gibt.</p>
-    <div class="hero-cta"><a href="#sorten" class="pill">Sorten der Woche</a><a href="#finden" class="pill ghost">So findet ihr uns</a></div>
-  </div>
-  <div class="hero-scene" id="scene">
-    <canvas id="gl" aria-hidden="true"></canvas>
-    <span class="scene-note">Maus bewegen, die Kringel folgen</span>
+<header class="kopf">
+  <div class="kopf-innen">
+    <a class="marke" href="#oben">Café Sonnenschein</a>
+    <nav>
+      <a href="#tafel">Sorten</a>
+      <a href="#bauen">Waffel bauen</a>
+      <a href="#hof">Der Hof</a>
+      <a href="#finden">Finden</a>
+    </nav>
+    <span class="thema" role="group" aria-label="Darstellung">
+      <button type="button" data-thema="system" aria-pressed="true">Auto</button>
+      <button type="button" data-thema="light" aria-pressed="false">Hell</button>
+      <button type="button" data-thema="dark" aria-pressed="false">Dunkel</button>
+    </span>
   </div>
 </header>
 
-<div class="marquee" aria-hidden="true"><div class="track" id="track"></div></div>
+<main id="oben">
 
-<section id="sorten">
-  <div class="wrap">
-    <h2 class="lead">Vier Sorten, <em>die gerade alle bestellen.</em></h2>
-    <p class="cheeky">Alles hausgemacht, keine Fertigmischung. Scrollt weiter, die Sorten stapeln sich.</p>
-    <div class="stack">
-      <div class="band b1"><div><span class="n">01 · Neu</span><h3>Erdbeer-Basilikum</h3><p>Erdbeeren vom Wochenmarkt, ein Hauch Basilikum aus dem Hof. Schmeckt wie Juni, auch im Oktober.</p><div class="price">1,80 € / Kugel <span class="tag">Neu</span></div></div><div class="scoop" style="background:#F7A8B8;"></div></div>
-      <div class="band b2"><div><span class="n">02 · Klassiker</span><h3>Pistazie</h3><p>Sizilianische Pistazien, langsam geröstet. Kein Farbstoff, deshalb eher beige als giftgrün. Ehrlich.</p><div class="price">2,10 € / Kugel</div></div><div class="scoop" style="background:#D9D39B;"></div></div>
-      <div class="band b3"><div><span class="n">03 · Leicht</span><h3>Zitrone-Joghurt</h3><p>Frisch und leicht, mit Joghurt vom Hof Weber. Das Eis für die, die "nur einen kleinen Becher" sagen.</p><div class="price">1,80 € / Kugel</div></div><div class="scoop" style="background:#FBE28A;"></div></div>
-      <div class="band b4"><div><span class="n">04 · Vegan</span><h3>Dunkle Schokolade</h3><p>70 % Kakao, auf Haferbasis, dunkel und cremig. Wer es probiert, fragt nicht mehr nach Sahne.</p><div class="price">1,90 € / Kugel <span class="tag">Vegan</span></div></div><div class="scoop" style="background:#7A4E3A;"></div></div>
-    </div>
-  </div>
-</section>
-
-<section id="hof" style="padding-top:20px;">
-  <div class="wrap">
-    <h2 class="lead">Der Hof. <em>Zieht die Bilder ruhig durcheinander.</em></h2>
-    <p class="cheeky">Auf der echten Seite hängen hier Fotos aus dem Hof. Für die Beispielseite zeichnen wir sie im Browser, verschieben geht trotzdem.</p>
-    <div class="board" id="board"><span class="hint">Polaroids anfassen und ziehen</span></div>
-  </div>
-</section>
-
-<section id="events" style="padding-top:20px;">
-  <div class="wrap">
-    <h2 class="lead">Im Hof <em>passiert was.</em></h2>
-    <div class="events">
-      <a class="ev" href="#finden"><span class="d">14<small>Sept · Sa</small></span><div><h3>Eiswerkstatt für Kinder</h3><p>Zwei Stunden, eine Sorte, alle Hände klebrig. Ab 6 Jahren, 12 € inklusive Becher.</p></div><span class="pill sm">Platz sichern</span></a>
-      <a class="ev" href="#finden"><span class="d">20<small>Sept · Fr</small></span><div><h3>Sommerkino im Hof</h3><p>Leinwand an der Hofmauer, Decken gibt es bei uns, Eis sowieso. Film ab bei Dunkelheit.</p></div><span class="pill sm">Platz sichern</span></a>
-      <a class="ev" href="#finden"><span class="d">05<small>Okt · So</small></span><div><h3>Jazz-Frühstück</h3><p>Kringel, Kaffee, ein Trio aus Trier. 10 bis 13 Uhr, ohne Reservierung, aber früh kommen.</p></div><span class="pill sm">Merken</span></a>
-    </div>
-  </div>
-</section>
-
-<section id="finden" style="padding-top:20px;">
-  <div class="wrap">
-    <h2 class="lead">Ihr werdet <em>wärmer.</em> Und mit wärmer meinen wir kälter.</h2>
-    <div class="find">
-      <div class="l">
-        <span class="caps">So findet ihr uns</span>
-        <p style="margin:10px 0 0; font-weight:700;">Jakobstraße 12, 54290 Trier, im Innenhof hinter dem blauen Tor. Fünf Minuten vom Hauptmarkt, Fahrradständer direkt am Tor.</p>
-        <div class="hours" id="hours">
-          <div data-day="1"><span>Montag</span><span>Ruhetag</span></div>
-          <div data-day="2"><span>Dienstag bis Donnerstag</span><span>11 bis 19 Uhr</span></div>
-          <div data-day="5"><span>Freitag</span><span>11 bis 21 Uhr</span></div>
-          <div data-day="6"><span>Samstag</span><span>10 bis 21 Uhr</span></div>
-          <div data-day="0"><span>Sonntag</span><span>10 bis 19 Uhr</span></div>
+  <div class="hero">
+    <div class="feld">
+      <div class="hero-raster">
+        <div>
+          <h1>Eis, das nach <em>Sommer</em> schmeckt.</h1>
+          <p class="unter">Seit 1968 im Hof hinter der Bäckerei. Alles selbst gerührt,
+            jeden Morgen, in kleinen Mengen. Was heute in der Theke steht, steht hier.</p>
+          <a class="knopf" href="#tafel">Was heute da ist</a>
         </div>
-        <p style="margin:14px 0 0; font-weight:800;">Heute: <span id="todayText"></span></p>
-      </div>
-      <div class="r">
-        <span class="caps">Tisch im Hof</span>
-        <p style="margin:10px 0 18px; color:var(--ink-soft);">Ab sechs Personen nehmen wir gern eine Reservierung. Sonst: einfach kommen.</p>
-        <form id="contactForm" novalidate>
-          <div class="two"><div class="field"><label for="c-name">Name</label><input id="c-name" type="text" autocomplete="name"></div><div class="field"><label for="c-phone">Telefon</label><input id="c-phone" type="tel" autocomplete="tel"></div></div>
-          <div class="two"><div class="field"><label for="c-date">Wann?</label><input id="c-date" type="text" placeholder="Samstag, 15 Uhr"></div><div class="field"><label for="c-n">Wie viele?</label><input id="c-n" type="text" placeholder="8 Personen"></div></div>
-          <div class="field"><label for="c-msg">Noch etwas?</label><textarea id="c-msg" rows="2" placeholder="Kindergeburtstag, Allergien, Hund dabei …"></textarea></div>
-          <button type="submit" class="pill">Anfrage senden</button>
-        </form>
+        <div class="hero-bild kasten">
+          <img src="bilder/hand.jpg" alt="Eine Hand hält eine Waffel mit bunten Streuseln vor gelbem Hintergrund" width="1800" height="1200" fetchpriority="high">
+          <span class="klecks" id="klecks">Heute<br>offen</span>
+        </div>
       </div>
     </div>
   </div>
-</section>
 
-<footer>Café Sonnenschein ist ein erfundener Betrieb. Beispielseite von Dominic Lutz, <a href="/">zur Übersicht</a>. Aufbau nach Vorbild von NOPE Ice Cream (Awwwards 2025) und Van Leeuwen.</footer>
-<div class="toast" id="toast" role="status"></div>
+  <div class="laufband" aria-hidden="true"><div class="spur" id="spur"></div></div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <!-- ================= SORTENTAFEL ================= -->
+  <section id="tafel">
+    <div class="feld">
+      <div class="abschnitt-kopf">
+        <h2>Die Tafel</h2>
+        <p id="tafelSatz">Blasse Felder heißen: heute nicht in der Theke. Preis gilt je Kugel.</p>
+      </div>
+      <div class="tafel" id="tafelRaster"></div>
+    </div>
+  </section>
+
+  <div class="band"><img src="bilder/reihe.jpg" alt="Fünf Schälchen mit bunten Eiskugeln in einer Reihe" loading="lazy" width="1800" height="1200"></div>
+
+  <!-- ================= WAFFEL BAUEN ================= -->
+  <section class="bauen" id="bauen">
+    <div class="feld">
+      <div class="abschnitt-kopf">
+        <h2>Bau dir deine Waffel</h2>
+        <p>Bis zu drei Kugeln. Der Preis rechnet sich mit, und die Allergene darunter
+          auch. Die Waffel selbst bringt Gluten und Ei mit, der Becher nicht.</p>
+      </div>
+      <div class="bau-raster">
+        <div>
+          <div class="wahlzeile">
+            <span class="schild">Waffel oder Becher</span>
+            <div class="knoepfe" id="gefaess"></div>
+          </div>
+          <div class="wahlzeile">
+            <span class="schild">Kugeln, höchstens drei</span>
+            <div class="kugelwahl" id="kugelwahl"></div>
+          </div>
+          <div class="wahlzeile">
+            <span class="schild">Dazu</span>
+            <div class="knoepfe" id="extras"></div>
+          </div>
+        </div>
+        <div class="becher kasten">
+          <h3>Dein Eis</h3>
+          <div class="stapel" id="stapel"></div>
+          <div class="rechnung" id="rechnung"></div>
+          <div class="hinweis" id="hinweis"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= DER HOF ================= -->
+  <section id="hof">
+    <div class="feld">
+      <div class="hof-raster">
+        <div class="kasten" style="padding:0; line-height:0;">
+          <img src="bilder/gruen.jpg" alt="Leute mit Eis vor einem minzgrünen Eiswagen" loading="lazy" width="1800" height="1200">
+        </div>
+        <div>
+          <h2>Im Hof passiert was</h2>
+          <p>Der Hof gehört im Sommer nicht uns, sondern allen, die drin sitzen. Zwölf
+            Tische, ein Kastanienbaum, kein Musikprogramm außer dem, was die Leute selbst
+            mitbringen. Hunde sind willkommen, es gibt einen Napf neben der Tür.</p>
+          <p>Ein paar Mal im Jahr räumen wir die Tische weg:</p>
+          <ul class="termine">
+            <li><b>Mai</b><span>Saisonstart, die erste Kugel geht aufs Haus, solange der Vorrat reicht.</span></li>
+            <li><b>Juli</b><span>Hofkino, eine Leinwand an der Scheunenwand, Beginn wenn es dunkel ist.</span></li>
+            <li><b>September</b><span>Sortenwahl. Wer kommt, probiert sechs Versuche und stimmt ab, was nächstes Jahr in die Theke kommt.</span></li>
+            <li><b>Oktober</b><span>Letzter Tag. Danach ist zu bis Ostern, das ist keine Faulheit, das ist Eiszeitrechnung.</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="band"><img src="bilder/kugel.jpg" alt="Eine Kugel Eis wird mit dem Portionierer aus der Wanne gestochen" loading="lazy" width="1800" height="1200"></div>
+
+  <!-- ================= FINDEN ================= -->
+  <section id="finden">
+    <div class="feld">
+      <div class="abschnitt-kopf">
+        <h2>Uns finden</h2>
+        <p>Hinterhof, Lindenstraße 12. Durch die Toreinfahrt neben der Bäckerei, dann
+          immer dem Geräusch nach.</p>
+      </div>
+      <div class="finden-raster">
+        <div>
+          <span class="schild">Geöffnet</span>
+          <table class="zeiten" id="zeiten"></table>
+          <p style="font-size:14.5px; color:var(--tinte-weich)">Von Ostern bis Mitte Oktober.
+            Bei Dauerregen machen wir früher zu, das steht dann an der Tür und nirgends sonst.</p>
+        </div>
+        <div>
+          <span class="schild">Schreib uns</span>
+          <form class="formular" id="anfrage" novalidate style="margin-top:12px">
+            <div class="eingabe"><label for="f-name">Name</label><input id="f-name" type="text" autocomplete="name"></div>
+            <div class="eingabe"><label for="f-tel">Telefon</label><input id="f-tel" type="tel" autocomplete="tel"></div>
+            <div class="eingabe"><label for="f-wann">Wann?</label><input id="f-wann" type="text" placeholder="Samstag, 15 Uhr"></div>
+            <div class="eingabe"><label for="f-viele">Wie viele?</label><input id="f-viele" type="text" placeholder="8 Personen"></div>
+            <div class="eingabe voll"><label for="f-text">Noch etwas?</label><textarea id="f-text" rows="3" placeholder="Kindergeburtstag, Allergien, Hund dabei"></textarea></div>
+            <div class="eingabe voll"><button type="submit" class="senden">Abschicken</button></div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="feld">
+    <div class="fuss-raster">
+      <div>
+        <b>Café Sonnenschein</b>
+        Ein erfundenes Eiscafé. Ort, Anschrift, Sorten und Preise gibt es nicht.
+        Diese Seite ist eine Beispielseite von Dominic Lutz, <a href="/">zurück zur Übersicht</a>.
+        Echt ist die Allergenlogik dahinter: die kennzeichnungspflichtigen Stoffe nach der
+        Lebensmittelinformationsverordnung.
+      </div>
+      <div>
+        <b>Auf der echten Seite</b>
+        stünden hier Impressum, Datenschutz und die vollständige Zusatzstoff- und
+        Allergenkennzeichnung, wie sie in der Gastronomie vorgeschrieben ist.
+      </div>
+      <div>
+        <b>Bilder und Schrift</b>
+        Fotos sind Platzhalter von Unsplash und werden vor einer echten Übergabe durch
+        eigene ersetzt. Schriften: Fraunces und Instrument Sans.
+      </div>
+    </div>
+  </div>
+</footer>
+
+<div class="meldung" id="meldung" role="status"></div>
+
 <script>
 (function(){
-  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var root = document.documentElement, saved = null;
-  try { saved = localStorage.getItem('cafe-theme'); } catch(e){}
-  if (saved === 'dark') root.setAttribute('data-theme','dark');
-  function setPressed(c){ document.querySelectorAll('[data-theme-choice]').forEach(function(b){ b.setAttribute('aria-pressed', b.getAttribute('data-theme-choice')===c?'true':'false'); }); }
-  setPressed(saved === 'dark' ? 'dark' : 'light');
-  document.querySelectorAll('[data-theme-choice]').forEach(function(btn){
-    btn.addEventListener('click', function(){ var c = btn.getAttribute('data-theme-choice'); if (c === 'dark') root.setAttribute('data-theme','dark'); else root.removeAttribute('data-theme'); try { localStorage.setItem('cafe-theme', c); } catch(e){} setPressed(c); });
+"use strict";
+
+/* ---------- Darstellung ---------- */
+var wurzel = document.documentElement, gemerkt = null;
+try { gemerkt = localStorage.getItem('eis-thema'); } catch(e){}
+if (gemerkt === 'light' || gemerkt === 'dark') wurzel.setAttribute('data-theme', gemerkt);
+function gedrueckt(w){
+  document.querySelectorAll('[data-thema]').forEach(function(b){
+    b.setAttribute('aria-pressed', b.getAttribute('data-thema') === w ? 'true' : 'false');
   });
-  var toast = document.getElementById('toast');
-  function showToast(t){ toast.textContent = t; toast.classList.add('show'); setTimeout(function(){ toast.classList.remove('show'); }, 3200); }
-  document.getElementById('contactForm').addEventListener('submit', function(e){ e.preventDefault(); showToast('Beispielseite: Hier würde die Reservierung jetzt per E-Mail ankommen.'); });
+}
+gedrueckt(gemerkt || 'system');
+document.querySelectorAll('[data-thema]').forEach(function(b){
+  b.addEventListener('click', function(){
+    var w = b.getAttribute('data-thema');
+    if (w === 'system') wurzel.removeAttribute('data-theme'); else wurzel.setAttribute('data-theme', w);
+    try { localStorage.setItem('eis-thema', w); } catch(e){}
+    gedrueckt(w);
+  });
+});
 
-  // marquee content (duplicated for seamless loop)
-  var items = ['Jetzt im Becher: Erdbeer-Basilikum', 'Kringel ab 7 Uhr', 'Hof geöffnet bis 21 Uhr', 'Vegan: Dunkle Schokolade', 'Milch vom Hof Weber', 'Sommerkino am 20. Sept'];
-  var track = document.getElementById('track'); var html = items.map(function(t){ return '<span>' + t + ' ✦</span>'; }).join(''); track.innerHTML = html + html;
+var meldung = document.getElementById('meldung');
+function sagen(t){
+  meldung.textContent = t; meldung.classList.add('zeigen');
+  setTimeout(function(){ meldung.classList.remove('zeigen'); }, 3200);
+}
+document.getElementById('anfrage').addEventListener('submit', function(e){
+  e.preventDefault();
+  sagen('Beispielseite: hier ginge die Nachricht jetzt ins Café.');
+});
 
-  // today
-  var day = new Date().getDay(); var key = (day >= 2 && day <= 4) ? '2' : String(day);
-  var row = document.querySelector('#hours div[data-day="'+key+'"]'); if (row){ row.classList.add('today'); document.getElementById('todayText').textContent = row.children[1].textContent; }
+function nz(n,k){ return n.toLocaleString('de-DE',{minimumFractionDigits:k,maximumFractionDigits:k}); }
+function euro(n){ return nz(n,2) + ' €'; }
 
-  // ---------- polaroids: procedural "photos" + drag ----------
-  var board = document.getElementById('board');
-  function drawPhoto(canvas, kind){
-    var ctx = canvas.getContext('2d'), w = canvas.width, h = canvas.height;
-    var sky = ctx.createLinearGradient(0,0,0,h); sky.addColorStop(0,'#8FD0E8'); sky.addColorStop(1,'#FFF0C8'); ctx.fillStyle = sky; ctx.fillRect(0,0,w,h);
-    ctx.fillStyle = '#FFD24D'; ctx.beginPath(); ctx.arc(w*.78, h*.25, h*.14, 0, Math.PI*2); ctx.fill();
-    if (kind === 'hof'){ ctx.fillStyle = '#C8325A'; ctx.fillRect(0, h*.55, w, h*.45); ctx.fillStyle = '#FFF4E6'; for (var i=0;i<4;i++){ ctx.beginPath(); ctx.arc(w*(.18 + i*.22), h*.72, h*.09, 0, Math.PI*2); ctx.fill(); } }
-    if (kind === 'eis'){ ctx.fillStyle = '#D9A066'; ctx.beginPath(); ctx.moveTo(w*.5, h*.95); ctx.lineTo(w*.35, h*.55); ctx.lineTo(w*.65, h*.55); ctx.closePath(); ctx.fill(); ['#F7A8B8','#9ED39B','#FBE28A'].forEach(function(c, i){ ctx.fillStyle = c; ctx.beginPath(); ctx.arc(w*.5, h*(.5 - i*.14), h*.13, 0, Math.PI*2); ctx.fill(); }); }
-    if (kind === 'kringel'){ ctx.fillStyle = '#0F5C4A'; ctx.fillRect(0, h*.6, w, h*.4); for (var k=0;k<3;k++){ ctx.strokeStyle = ['#F7A8B8','#8FD0E8','#FBE28A'][k]; ctx.lineWidth = h*.1; ctx.beginPath(); ctx.arc(w*(.25 + k*.25), h*.62, h*.14, 0, Math.PI*2); ctx.stroke(); } }
-    if (kind === 'tor'){ ctx.fillStyle = '#5FA8D0'; ctx.fillRect(w*.3, h*.3, w*.4, h*.7); ctx.fillStyle = '#1E1414'; ctx.fillRect(w*.48, h*.32, w*.04, h*.68); ctx.fillStyle = '#FFD24D'; ctx.beginPath(); ctx.arc(w*.42, h*.62, h*.03, 0, Math.PI*2); ctx.fill(); }
+/* ============================================================
+   DIE SORTEN
+   allergene: die kennzeichnungspflichtigen Stoffe, die wirklich
+   drin sind. Fruchteis kommt ohne Milch aus, deshalb ist es
+   nebenbei auch vegan. Das wird GERECHNET, nicht danebengeschrieben.
+   tag: an welchen Wochentagen die Sorte in der Theke steht.
+        0 = Sonntag, 1 = Montag, ... 6 = Samstag. null = immer.
+   ============================================================ */
+var SORTEN = [
+  { id:'vanille',      name:'Vanille',            farbe:'sahne',    preis:1.80, allergene:['Milch','Eier'],           tage:null },
+  { id:'schoko',       name:'Schokolade',         farbe:'kakao',    preis:1.80, allergene:['Milch','Soja'],           tage:null },
+  { id:'erdbeere',     name:'Erdbeere',           farbe:'beere',    preis:1.80, allergene:[],                          tage:null, frucht:true },
+  { id:'stracciatella',name:'Stracciatella',      farbe:'sahne',    preis:1.80, allergene:['Milch','Soja'],           tage:null },
+  { id:'zitrone',      name:'Zitrone',            farbe:'sonne',    preis:1.80, allergene:[],                          tage:null, frucht:true },
+  /* Die fuenf Wechselsorten sind so verteilt, dass an JEDEM Wochentag
+     genau drei davon in der Theke stehen. Wer eine Reihe aendert, muss
+     nachzaehlen, sonst stimmt der Satz auf der Tafel nicht mehr. */
+  { id:'pistazie',     name:'Pistazie',           farbe:'pistazie', preis:2.10, allergene:['Milch','Pistazien'],      tage:[2,3,5,6] },
+  { id:'haselnuss',    name:'Haselnuss',          farbe:'kakao',    preis:2.10, allergene:['Milch','Haselnüsse'],     tage:[1,4,5,6] },
+  { id:'karamell',     name:'Salzkaramell',       farbe:'sahne',    preis:2.10, allergene:['Milch','Eier'],           tage:[0,3,4,6] },
+  { id:'mango',        name:'Mango',              farbe:'sonne',    preis:1.80, allergene:[],                          tage:[0,1,2,5], frucht:true },
+  { id:'heidelbeere',  name:'Joghurt Heidelbeere',farbe:'lavendel', preis:1.90, allergene:['Milch'],                  tage:[0,1,2,3,4] }
+];
+
+var GEFAESSE = [
+  { id:'waffel', name:'Waffel',  preis:0.60, allergene:['Gluten','Eier'] },
+  { id:'becher', name:'Becher',  preis:0.00, allergene:[] }
+];
+var EXTRAS = [
+  { id:'sahne',    name:'Sahne',    preis:0.80, allergene:['Milch'] },
+  { id:'streusel', name:'Streusel', preis:0.40, allergene:['Gluten','Soja'] }
+];
+
+var HEUTE = new Date();
+var WOCHENTAG = HEUTE.getDay();
+var TAGNAMEN = ['Sonntag','Montag','Dienstag','Mittwoch','Donnerstag','Freitag','Samstag'];
+
+function heuteDa(s){ return s.tage === null || s.tage.indexOf(WOCHENTAG) >= 0; }
+var IMSORTIMENT = SORTEN.filter(heuteDa);
+
+/* ---------- Laufband ---------- */
+(function laufband(){
+  var namen = IMSORTIMENT.map(function(s){ return s.name; });
+  var text = namen.join('  •  ') + '  •  ';
+  var spur = document.getElementById('spur');
+  /* zweimal, damit die Schleife nahtlos umspringt */
+  for (var i = 0; i < 2; i++){
+    var span = document.createElement('span');
+    span.textContent = text + text;
+    spur.appendChild(span);
   }
-  var PHOTOS = [['hof','Der Hof, Juli'],['eis','Drei Kugeln, klar'],['kringel','Kringel, 7 Uhr'],['tor','Das blaue Tor']];
-  PHOTOS.forEach(function(p, i){
-    var el = document.createElement('div'); el.className = 'polaroid';
-    el.innerHTML = '<canvas width="360" height="300"></canvas><span>' + p[1] + '</span>';
-    el.style.left = (8 + i*22) + '%'; el.style.top = (12 + (i%2)*34) + '%'; el.style.transform = 'rotate(' + ((i%2? -1:1) * (4 + i*2)) + 'deg)';
-    board.appendChild(el); drawPhoto(el.querySelector('canvas'), p[0]);
-    var drag = null;
-    el.addEventListener('pointerdown', function(e){ drag = {x:e.clientX - el.offsetLeft, y:e.clientY - el.offsetTop}; el.classList.add('drag'); el.setPointerCapture(e.pointerId); });
-    el.addEventListener('pointermove', function(e){ if (!drag) return; var br = board.getBoundingClientRect(); var x = Math.max(-40, Math.min(br.width - el.offsetWidth + 40, e.clientX - drag.x)), y = Math.max(-30, Math.min(br.height - el.offsetHeight + 30, e.clientY - drag.y)); el.style.left = x + 'px'; el.style.top = y + 'px'; });
-    ['pointerup','pointercancel'].forEach(function(ev){ el.addEventListener(ev, function(){ drag = null; el.classList.remove('drag'); }); });
+})();
+
+/* ---------- Sortentafel ---------- */
+(function tafel(){
+  /* Der Satz wird gerechnet, nicht behauptet. Sonst steht irgendwann
+     "drei wechseln" da, waehrend vier in der Theke stehen. */
+  var worte = ['keine','eine','zwei','drei','vier','fünf','sechs','sieben','acht','neun','zehn'];
+  var fest = SORTEN.filter(function(s){ return s.tage === null; }).length;
+  var wechsel = IMSORTIMENT.length - fest;
+  document.getElementById('tafelSatz').textContent =
+    worte[fest].charAt(0).toUpperCase() + worte[fest].slice(1) + ' Sorten stehen immer da, heute, am ' +
+    TAGNAMEN[WOCHENTAG] + ', kommen ' + worte[wechsel] + ' dazu. Blasse Felder heißen: heute nicht in ' +
+    'der Theke. Preis gilt je Kugel.';
+
+  var raster = document.getElementById('tafelRaster');
+  SORTEN.forEach(function(s){
+    var da = heuteDa(s);
+    var k = document.createElement(da ? 'button' : 'div');
+    if (da) k.type = 'button';
+    k.className = 'sorte';
+    k.setAttribute('data-heute', da ? 'ja' : 'nein');
+    k.style.background = 'var(--' + s.farbe + ')';
+
+    var marken = [];
+    if (!s.allergene.length) marken.push('vegan');
+    if (s.frucht) marken.push('Fruchteis');
+    s.allergene.forEach(function(a){ marken.push(a); });
+
+    k.innerHTML =
+      '<h3>' + s.name + '</h3>' +
+      '<span style="font-size:14px">' + (da ? 'heute in der Theke' : 'heute nicht da') + '</span>' +
+      '<div class="marken">' + marken.map(function(m){
+        return '<span class="marke-chip">' + m + '</span>'; }).join('') + '</div>' +
+      '<span class="preis">' + euro(s.preis) + '</span>';
+
+    if (da) k.addEventListener('click', function(){
+      waehleKugel(s.id);
+      document.getElementById('bauen').scrollIntoView({ behavior:'smooth' });
+    });
+    raster.appendChild(k);
+  });
+})();
+
+/* ============================================================
+   WAFFEL BAUEN
+   Der Preis und die Allergenliste kommen aus derselben Auswahl.
+   Wer eine Zeile oben aendert, aendert beides mit.
+   ============================================================ */
+var wahl = { gefaess:'waffel', kugeln:[], extras:[] };
+
+function waehleKugel(id){
+  if (wahl.kugeln.length >= 3) { sagen('Drei Kugeln sind das Höchste. Mehr fällt runter.'); return; }
+  wahl.kugeln.push(id);
+  zeichneBau();
+}
+
+(function knoepfe(){
+  var g = document.getElementById('gefaess');
+  GEFAESSE.forEach(function(x){
+    var b = document.createElement('button');
+    b.type = 'button';
+    b.textContent = x.name + (x.preis ? '  +' + euro(x.preis) : '');
+    b.setAttribute('aria-pressed', wahl.gefaess === x.id ? 'true' : 'false');
+    b.addEventListener('click', function(){ wahl.gefaess = x.id; zeichneBau(); });
+    b.dataset.id = x.id;
+    g.appendChild(b);
   });
 
-  // ---------- Three.js scene (framed, right half) ----------
-  var canvas = document.getElementById('gl'), scene0 = document.getElementById('scene');
-  if (!window.THREE || !window.WebGLRenderingContext){ canvas.style.display = 'none'; return; }
-  var renderer; try { renderer = new THREE.WebGLRenderer({canvas: canvas, alpha: true, antialias: true}); } catch(e){ canvas.style.display = 'none'; return; }
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2)); renderer.outputEncoding = THREE.sRGBEncoding; renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFSoftShadowMap;
-  var scene = new THREE.Scene(); var camera = new THREE.PerspectiveCamera(38, 1, 0.1, 100); camera.position.set(0, 0.3, 10);
-  scene.add(new THREE.HemisphereLight(0xfff4e0, 0xffd9c2, 0.95));
-  var sun = new THREE.DirectionalLight(0xffffff, 0.9); sun.position.set(4, 7, 6); sun.castShadow = true; sun.shadow.mapSize.set(1024,1024); sun.shadow.camera.left=-10; sun.shadow.camera.right=10; sun.shadow.camera.top=10; sun.shadow.camera.bottom=-10; scene.add(sun);
-  var group = new THREE.Group(); scene.add(group);
-  var pastel = [0xF7A8B8, 0x9ED39B, 0xFBE28A, 0xFFFFFF, 0xC9A0E8, 0xFFC9A3];
-  function mat(c){ return new THREE.MeshStandardMaterial({color: c, roughness: .55, metalness: .05}); }
-  var itemsG = [];
-  function add(mesh, x, y, z, s){ mesh.position.set(x, y, z); mesh.scale.setScalar(s); mesh.castShadow = true; mesh.receiveShadow = true; mesh.userData = {baseY: y, phase: Math.random()*Math.PI*2, spin: (Math.random()-.5)*.01, bob: .12 + Math.random()*.18}; group.add(mesh); itemsG.push(mesh); }
-  for (var i=0;i<5;i++){
-    var donut = new THREE.Mesh(new THREE.TorusGeometry(1, .42, 32, 64), mat(pastel[i % pastel.length])); donut.rotation.set(Math.random()*1.2, Math.random()*1.2, 0);
-    var spr = new THREE.Group(); for (var k=0;k<26;k++){ var sp = new THREE.Mesh(new THREE.CylinderGeometry(.05, .05, .22, 6), mat(pastel[(k+2) % pastel.length])); var a = Math.random()*Math.PI*2, r = 1 + (Math.random()-.5)*.5; sp.position.set(Math.cos(a)*r, Math.sin(a)*r, .42 + Math.random()*.04); sp.rotation.set(Math.random()*3, Math.random()*3, Math.random()*3); spr.add(sp); }
-    donut.add(spr); add(donut, (Math.random()-.5)*6, (Math.random()-.5)*4.5, (Math.random()-.5)*3, .55 + Math.random()*.4);
+  var e = document.getElementById('extras');
+  EXTRAS.forEach(function(x){
+    var b = document.createElement('button');
+    b.type = 'button';
+    b.textContent = x.name + '  +' + euro(x.preis);
+    b.setAttribute('aria-pressed', 'false');
+    b.dataset.id = x.id;
+    b.addEventListener('click', function(){
+      var i = wahl.extras.indexOf(x.id);
+      if (i >= 0) wahl.extras.splice(i,1); else wahl.extras.push(x.id);
+      zeichneBau();
+    });
+    e.appendChild(b);
+  });
+})();
+
+function zeichneKugelwahl(){
+  var box = document.getElementById('kugelwahl');
+  box.innerHTML = '';
+  IMSORTIMENT.forEach(function(s){
+    var wieoft = wahl.kugeln.filter(function(k){ return k === s.id; }).length;
+    var b = document.createElement('button');
+    b.type = 'button';
+    b.setAttribute('aria-pressed', wieoft ? 'true' : 'false');
+    if (!wieoft && wahl.kugeln.length >= 3) b.disabled = true;
+    b.innerHTML = '<span class="punkt" style="background:var(--' + s.farbe + ')"></span>' +
+                  '<span>' + s.name + '</span>' +
+                  (wieoft ? '<span class="anzahl">' + wieoft + '×</span>' : '');
+    b.addEventListener('click', function(){
+      if (wieoft){ wahl.kugeln.splice(wahl.kugeln.indexOf(s.id), 1); zeichneBau(); }
+      else waehleKugel(s.id);
+    });
+    box.appendChild(b);
+  });
+}
+
+function zeichneStapel(){
+  var box = document.getElementById('stapel');
+  var n = wahl.kugeln.length;
+  var istWaffel = wahl.gefaess === 'waffel';
+  var farben = wahl.kugeln.map(function(id){
+    return SORTEN.filter(function(s){ return s.id === id; })[0].farbe;
+  });
+
+  var W = 150, H = 200, mitte = W/2, r = 30;
+  var s = '<svg viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="' +
+          (n ? n + ' Kugeln in der ' + (istWaffel ? 'Waffel' : 'im Becher') : 'noch nichts gewählt') + '">';
+
+  /* Gefaess zuerst, damit die Kugeln darauf liegen */
+  if (istWaffel){
+    s += '<path d="M ' + (mitte-34) + ' 118 L ' + mitte + ' 194 L ' + (mitte+34) + ' 118 Z" ' +
+         'fill="var(--sahne)" stroke="var(--auf-farbe)" stroke-width="3" stroke-linejoin="round"/>';
+    for (var i = 1; i <= 3; i++){
+      var t = i / 4;
+      s += '<line x1="' + (mitte-34+68*t) + '" y1="118" x2="' + (mitte - 34*(1-t) + 0) + '" y2="' +
+           (118 + 76*t) + '" stroke="var(--auf-farbe)" stroke-width="1.4" opacity=".55"/>';
+    }
+  } else {
+    s += '<path d="M ' + (mitte-38) + ' 120 L ' + (mitte-30) + ' 190 L ' + (mitte+30) + ' 190 L ' +
+         (mitte+38) + ' 120 Z" fill="var(--papierweiss)" stroke="var(--auf-farbe)" stroke-width="3" stroke-linejoin="round"/>';
   }
-  for (var j=0;j<4;j++){
-    var cone = new THREE.Group(); var wafer = new THREE.Mesh(new THREE.ConeGeometry(.55, 1.6, 24), mat(0xD9A066)); wafer.rotation.x = Math.PI; wafer.position.y = -.9;
-    var s1 = new THREE.Mesh(new THREE.SphereGeometry(.62, 32, 32), mat(pastel[(j*2) % pastel.length])); var s2 = new THREE.Mesh(new THREE.SphereGeometry(.5, 32, 32), mat(pastel[(j*2+1) % pastel.length])); s2.position.y = .85;
-    [wafer, s1, s2].forEach(function(m){ m.castShadow = true; m.receiveShadow = true; cone.add(m); });
-    add(cone, (Math.random()-.5)*6, (Math.random()-.5)*4.5, (Math.random()-.5)*3, .7 + Math.random()*.35);
+
+  if (!n){
+    s += '<text x="' + mitte + '" y="86" text-anchor="middle" font-family="Instrument Sans, sans-serif" ' +
+         'font-size="13" fill="var(--tinte-weich)">noch leer</text>';
   }
-  var ground = new THREE.Mesh(new THREE.PlaneGeometry(40, 40), new THREE.ShadowMaterial({opacity: .14})); ground.rotation.x = -Math.PI/2; ground.position.y = -4; ground.receiveShadow = true; scene.add(ground);
-  var target = {x:0, y:0}, cur = {x:0, y:0}, scrollRot = 0;
-  scene0.addEventListener('pointermove', function(e){ var r = scene0.getBoundingClientRect(); target.x = (e.clientX - r.left)/r.width - .5; target.y = (e.clientY - r.top)/r.height - .5; });
-  window.addEventListener('scroll', function(){ scrollRot = window.scrollY * .0012; }, {passive:true});
-  function resize(){ var w = scene0.clientWidth, h = scene0.clientHeight; if (w < 10 || h < 10){ requestAnimationFrame(resize); return; } renderer.setSize(w, h, false); camera.aspect = w/h; camera.updateProjectionMatrix(); group.scale.setScalar(w > 600 ? 1 : .75); }
-  window.addEventListener('resize', resize); resize();
-  var t0 = performance.now(), running = true;
-  function frame(now){ if (!running) return; var t = (now - t0)/1000; cur.x += (target.x - cur.x)*.05; cur.y += (target.y - cur.y)*.05; group.rotation.y = cur.x*.5 + scrollRot; group.rotation.x = cur.y*.3;
-    itemsG.forEach(function(m){ var u = m.userData; m.position.y = u.baseY + Math.sin(t*.9 + u.phase)*u.bob; m.rotation.y += u.spin; m.rotation.x += u.spin*.6; });
-    renderer.render(scene, camera); if (!reduceMotion) requestAnimationFrame(frame); }
-  document.addEventListener('visibilitychange', function(){ if (reduceMotion) return; if (document.hidden) running = false; else { running = true; requestAnimationFrame(frame); } });
-  requestAnimationFrame(frame);
+  /* Von unten nach oben stapeln, die letzte Kugel liegt obenauf */
+  for (var k = 0; k < n; k++){
+    var cy = 112 - k * 40;
+    s += '<circle cx="' + mitte + '" cy="' + cy + '" r="' + r + '" fill="var(--' + farben[k] + ')" ' +
+         'stroke="var(--auf-farbe)" stroke-width="3"/>';
+  }
+  if (wahl.extras.indexOf('sahne') >= 0 && n){
+    var oben = 112 - (n-1) * 40 - r;
+    s += '<path d="M ' + (mitte-16) + ' ' + oben + ' q 6 -16 16 -16 q 10 0 16 16 Z" ' +
+         'fill="var(--papierweiss)" stroke="var(--auf-farbe)" stroke-width="3" stroke-linejoin="round"/>';
+  }
+  if (wahl.extras.indexOf('streusel') >= 0 && n){
+    var punkte = [[-20,-8],[-6,-18],[8,-14],[19,-4],[-13,4],[13,6],[0,-6]];
+    var basis = 112 - (n-1) * 40;
+    punkte.forEach(function(p, idx){
+      s += '<rect x="' + (mitte + p[0]) + '" y="' + (basis + p[1]) + '" width="6" height="2.6" rx="1.3" ' +
+           'fill="var(--auf-farbe)" transform="rotate(' + (idx * 37) + ' ' + (mitte + p[0] + 3) + ' ' +
+           (basis + p[1] + 1.3) + ')"/>';
+    });
+  }
+  s += '</svg>';
+  box.innerHTML = s;
+}
+
+function zeichneRechnung(){
+  var g = GEFAESSE.filter(function(x){ return x.id === wahl.gefaess; })[0];
+  var zeilen = [];
+  var summe = 0;
+
+  wahl.kugeln.forEach(function(id){
+    var s = SORTEN.filter(function(x){ return x.id === id; })[0];
+    zeilen.push([s.name, s.preis]); summe += s.preis;
+  });
+  if (g.preis) { zeilen.push([g.name, g.preis]); summe += g.preis; }
+  else if (wahl.kugeln.length) zeilen.push([g.name, 0]);
+  wahl.extras.forEach(function(id){
+    var x = EXTRAS.filter(function(e){ return e.id === id; })[0];
+    zeilen.push([x.name, x.preis]); summe += x.preis;
+  });
+
+  var box = document.getElementById('rechnung');
+  box.innerHTML = (zeilen.length
+      ? zeilen.map(function(z){
+          return '<div class="zeile"><span>' + z[0] + '</span><span>' +
+                 (z[1] ? euro(z[1]) : 'ohne Aufpreis') + '</span></div>'; }).join('')
+      : '<div class="zeile"><span>Noch nichts gewählt</span><span></span></div>') +
+    '<div class="summe"><span>Zusammen</span><span>' + euro(summe) + '</span></div>';
+
+  /* Allergene aus allem, was gewaehlt wurde, ohne Doppelte */
+  var alle = [];
+  function dazu(liste){ liste.forEach(function(a){ if (alle.indexOf(a) < 0) alle.push(a); }); }
+  wahl.kugeln.forEach(function(id){ dazu(SORTEN.filter(function(x){ return x.id===id; })[0].allergene); });
+  if (wahl.kugeln.length) dazu(g.allergene);
+  wahl.extras.forEach(function(id){ dazu(EXTRAS.filter(function(e){ return e.id===id; })[0].allergene); });
+
+  var h = document.getElementById('hinweis');
+  if (!wahl.kugeln.length){
+    h.innerHTML = '<b>Allergene</b>Sobald eine Kugel drin ist, steht hier, was zu kennzeichnen wäre.';
+  } else if (!alle.length){
+    h.innerHTML = '<b>Allergene</b><span class="frei">Nichts zu kennzeichnen</span> ' +
+      'Diese Zusammenstellung ist nebenbei auch vegan, weil nur Fruchteis drin ist und der Becher nichts mitbringt.';
+  } else {
+    h.innerHTML = '<b>Allergene</b>' + alle.join(', ') + '.' +
+      (wahl.gefaess === 'waffel'
+        ? ' Gluten und Eier kommen aus der Waffel, im Becher fallen sie weg.'
+        : '');
+  }
+}
+
+function zeichneBau(){
+  document.querySelectorAll('#gefaess button').forEach(function(b){
+    b.setAttribute('aria-pressed', b.dataset.id === wahl.gefaess ? 'true' : 'false');
+  });
+  document.querySelectorAll('#extras button').forEach(function(b){
+    b.setAttribute('aria-pressed', wahl.extras.indexOf(b.dataset.id) >= 0 ? 'true' : 'false');
+  });
+  zeichneKugelwahl(); zeichneStapel(); zeichneRechnung();
+}
+
+/* Beim ersten Laden nicht leer dastehen: zwei Kugeln liegen schon drin,
+   damit man sofort sieht, wozu das Ding gut ist. */
+wahl.kugeln = [IMSORTIMENT[0].id, IMSORTIMENT[2] ? IMSORTIMENT[2].id : IMSORTIMENT[1].id];
+zeichneBau();
+
+/* ============================================================
+   OEFFNUNGSZEITEN
+   Der heutige Tag wird hervorgehoben und der Klecks im Kopfbereich
+   sagt, ob gerade offen ist. Beides aus derselben Tabelle.
+   ============================================================ */
+var ZEITEN = [
+  { tag:1, name:'Montag',     von:null, bis:null },
+  { tag:2, name:'Dienstag',   von:13,   bis:19 },
+  { tag:3, name:'Mittwoch',   von:13,   bis:19 },
+  { tag:4, name:'Donnerstag', von:13,   bis:19 },
+  { tag:5, name:'Freitag',    von:13,   bis:21 },
+  { tag:6, name:'Samstag',    von:11,   bis:21 },
+  { tag:0, name:'Sonntag',    von:11,   bis:20 }
+];
+
+(function zeiten(){
+  var t = document.getElementById('zeiten');
+  ZEITEN.forEach(function(z){
+    var tr = document.createElement('tr');
+    if (z.tag === WOCHENTAG) tr.className = 'heute';
+    else if (z.von === null) tr.className = 'zu';
+    tr.innerHTML = '<td>' + z.name + '</td><td>' +
+      (z.von === null ? 'Ruhetag' : z.von + ' bis ' + z.bis + ' Uhr') + '</td>';
+    t.appendChild(tr);
+  });
+
+  var heute = ZEITEN.filter(function(z){ return z.tag === WOCHENTAG; })[0];
+  var stunde = HEUTE.getHours() + HEUTE.getMinutes() / 60;
+  var klecks = document.getElementById('klecks');
+  if (heute.von === null){
+    klecks.innerHTML = 'Heute<br>Ruhetag';
+    klecks.style.background = 'var(--himmel)';
+  } else if (stunde >= heute.von && stunde < heute.bis){
+    klecks.innerHTML = 'Jetzt<br>offen';
+    klecks.style.background = 'var(--pistazie)';
+  } else if (stunde < heute.von){
+    klecks.innerHTML = 'Heute ab<br>' + heute.von + ' Uhr';
+    klecks.style.background = 'var(--sonne)';
+  } else {
+    klecks.innerHTML = 'Für heute<br>zu';
+    klecks.style.background = 'var(--himmel)';
+  }
+})();
+
 })();
 </script>
 
