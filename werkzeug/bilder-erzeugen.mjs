@@ -155,34 +155,6 @@ const AUFTRAEGE = {
     },
   },
 
-  /* Studio Raster. Fotostudio, also muessen die Bilder selbst als
-     Arbeitsprobe durchgehen. Hoechster Anspruch von allen Auftraegen. */
-  fotostudio: {
-    ordner: "beispiele/fotostudio/bilder",
-    format: "1024x1536",
-    handschrift:
-      "Studio photography, single large softbox, clean seamless backdrop, " +
-      "precise focus, controlled contrast, contemporary editorial look. No " +
-      "text, no lettering, no logos, no watermarks.",
-    motive: {
-      portraet:
-        "Editorial studio portrait of a person in their forties in a plain dark " +
-        "shirt against a mid grey seamless backdrop, one big soft light from " +
-        "the left, calm direct expression, shoulders square.",
-      aufbau:
-        "A studio seen from the side while set up: softbox on a boom, C-stand, " +
-        "sandbags, a roll of grey seamless paper half unrolled, cables taped to " +
-        "the floor, nobody in the frame.",
-      produkt:
-        "A single glass perfume bottle on a matte grey surface lit with one " +
-        "hard light from behind, long clean shadow, dark background, no label.",
-      arbeit:
-        "A photographer's desk during editing: a large calibrated monitor " +
-        "showing a grid of contact sheet thumbnails, a colour checker card and " +
-        "a graphics tablet beside it, dim room.",
-    },
-  },
-
   /* Kanzlei Weber & Kollegen. Zurueckhaltend. Keine Handschlag-Stockfotos,
      keine Menschen im Anzug, die in die Kamera laecheln. */
   steuerkanzlei: {
