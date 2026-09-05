@@ -26,8 +26,8 @@
    abgeglichen wurde (Hays Woodworking, Awwwards Honorable Mention,
    und Final Touch Carpentry, Awwwards Nominee), sind reine
    Portfolios: 15 bis 17 Fotos, die Arbeit IST die Seite. Fuer einen
-   erfundenen Betrieb gibt es keine Fotos. Gezeichnete Maserung als
-   Foto-Ersatz sieht aus wie Ersatz.
+   erfundenen Betrieb gibt es keine eigenen Fotos. Gezeichnete Maserung
+   als Foto-Ersatz sieht aus wie Ersatz.
 
    Deshalb hier der andere Weg: die Abwesenheit wird Absicht. Die
    Seite spricht die eigene Bildsprache des Handwerks, technische
@@ -39,7 +39,8 @@
    UEBERNOMMEN von den Vorbildern: Telefon dauerhaft in der
    Kopfleiste (ftcc), Held ohne Dachzeile und ohne Knopfpaar (Hays),
    genau ein Handlungsknopf.
-   BEWUSST NICHT: Vollbild-Foto im Held (keine Fotos), Dachzeile ueber
+   BEWUSST NICHT: Vollbild-Foto im Held (der Riss fuehrt, die Fotos
+   kommen erst danach als Beleg), Dachzeile ueber
    der Ueberschrift (steht bei uns auf allen fuenf Beispielseiten und
    ist reine Gewohnheit).
    ============================================================ */
@@ -330,6 +331,22 @@ input[type="range"]{width:100%; accent-color:var(--rot);}
 .zelle span{color:var(--graphit);}
 .zelle.breit{grid-column:1/-1; border-right:0; border-bottom:0; color:var(--gedaempft); line-height:1.75;}
 .zelle.breit a{color:var(--rot);}
+
+/* ---------- Fotos als eingeklebte Abzuege ----------
+   Die Seite ist ein Werkstattriss, deshalb liegen die Fotos darin wie
+   ein aufgeklebter Abzug: Haarlinie aussen, Beschriftung in derselben
+   Schrift wie die Masszahlen. Die Zeichnung bleibt der Hauptdarsteller,
+   das Foto ist Beleg. */
+.abzug{padding:52px 0; background:var(--blatt-2); border-top:1px solid var(--riss-fein); border-bottom:1px solid var(--riss-fein);}
+.abzug-innen{max-width:1180px; margin:0 auto; padding:0 40px;}
+.abzug figure{margin:0; background:var(--blatt); border:1px solid var(--riss); padding:11px;}
+.abzug img{display:block; width:100%; height:clamp(210px,31vh,370px); object-fit:cover;}
+.abzug figcaption{
+  display:flex; justify-content:space-between; align-items:baseline; gap:16px; margin-top:10px;
+  font-family:"Chivo Mono", ui-monospace, monospace; font-size:10.5px; letter-spacing:.08em;
+  text-transform:uppercase; color:var(--schwach);
+}
+@media (max-width:760px){ .abzug-innen{padding:0 20px;} .abzug{padding:36px 0;} }
 </style>
 </head>
 <body>
@@ -374,8 +391,9 @@ input[type="range"]{width:100%; accent-color:var(--rot);}
       <a class="einzel" href="#kontakt">Angebot anfragen</a>
       <div class="held-vermerk">
         JEDES MÖBEL BEGINNT ALS RISS.<br>
-        Was hier steht, ist gezeichnet und nicht fotografiert. Auf der
-        Seite eines echten Betriebs stünden hier Fotos von der Baustelle.
+        Erst die Zeichnung, dann das Holz, dann das Foto. In dieser
+        Reihenfolge entsteht ein Möbel, und in dieser Reihenfolge
+        steht es auf dieser Seite.
       </div>
     </div>
     <div class="riss">
@@ -415,6 +433,15 @@ input[type="range"]{width:100%; accent-color:var(--rot);}
         <text class="t-teil" x="350" y="318" text-anchor="middle">SCHUBKÄSTEN</text>
       </svg>
     </div>
+  </div>
+</div>
+
+<div class="abzug">
+  <div class="abzug-innen">
+    <figure>
+      <img src="bilder/s_werkzeug.jpg" alt="Wand mit alten Handhobeln und Sägen in der Werkstatt" loading="lazy" width="1600" height="1067">
+      <figcaption><span>Werkzeugwand, Werkstatt Niedermühle</span><span>Abb. 01</span></figcaption>
+    </figure>
   </div>
 </div>
 
@@ -517,6 +544,15 @@ input[type="range"]{width:100%; accent-color:var(--rot);}
   </div>
 </section>
 
+<div class="abzug">
+  <div class="abzug-innen">
+    <figure>
+      <img src="bilder/s_stapel.jpg" alt="Gestapelte, sägerauhe Eichenbretter von der Stirnseite" loading="lazy" width="1600" height="1067">
+      <figcaption><span>Eiche, sägerau, luftgetrocknet</span><span>Abb. 02</span></figcaption>
+    </figure>
+  </div>
+</div>
+
 <section id="rechner">
   <div class="blatt">
     <div class="kapitel"><span class="nr">03</span><h2>Der Riss rechnet mit</h2></div>
@@ -573,6 +609,15 @@ input[type="range"]{width:100%; accent-color:var(--rot);}
   </div>
 </section>
 
+<div class="abzug">
+  <div class="abzug-innen">
+    <figure>
+      <img src="bilder/s_spaene.jpg" alt="Handsäge und Hobelspäne auf der Hobelbank" loading="lazy" width="1600" height="1067">
+      <figcaption><span>Hobelbank nach dem Zuschnitt</span><span>Abb. 03</span></figcaption>
+    </figure>
+  </div>
+</div>
+
 <section id="werkstatt">
   <div class="blatt">
     <div class="kapitel"><span class="nr">05</span><h2>Werkstatt und Einzugsgebiet</h2></div>
@@ -596,6 +641,15 @@ input[type="range"]{width:100%; accent-color:var(--rot);}
     </div>
   </div>
 </section>
+
+<div class="abzug">
+  <div class="abzug-innen">
+    <figure>
+      <img src="bilder/s_arbeit.jpg" alt="Schreiner in Lederschürze bei der Arbeit an der Hobelbank" loading="lazy" width="1600" height="1067">
+      <figcaption><span>Zwei Leute, eine Werkstatt</span><span>Abb. 04</span></figcaption>
+    </figure>
+  </div>
+</div>
 
 <section id="kontakt">
   <div class="blatt">
@@ -624,6 +678,7 @@ input[type="range"]{width:100%; accent-color:var(--rot);}
       <div class="zelle"><b>MASSSTAB</b><span>M 1:20</span></div>
       <div class="zelle"><b>BLATT</b><span>1 von 1</span></div>
       <div class="zelle"><b>STAND</b><span>05.09.2026</span></div>
+      <div class="zelle"><b>ABBILDUNGEN</b><span>Platzhalter, Unsplash</span></div>
       <div class="zelle breit">
         Schreinerei Marx ist ein erfundener Betrieb. Anschrift und Telefonnummer gibt es nicht.
         Diese Seite ist eine Beispielseite von Dominic Lutz, <a href="/">zurück zur Übersicht</a>.

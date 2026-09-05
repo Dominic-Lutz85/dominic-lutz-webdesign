@@ -37,7 +37,9 @@
    Feuerwehren. Tagsueber sind die Leute auf Arbeit, die Mindeststaerke
    kommt nicht zusammen. Genau das zeigt die Seite offen, statt es zu
    verschweigen, und macht daraus den Grund, warum jemand mitmachen
-   soll. Das ist die Vereinsgeschichte, die keine Fotos braucht.
+   soll. Das ist die Vereinsgeschichte, die ohne Heldenfotos auskommt.
+   Die drei Bilder auf der Seite zeigen Geraet und Halle, kein Personal:
+   fuer eine erfundene Wehr waeren Gesichter echter Menschen falsch.
 
    ALLE ZAHLEN WERDEN GERECHNET, nicht behauptet: die Gesamtzahl der
    Einsaetze ist die Summe der Stundenwerte, die Nachtquote wird daraus
@@ -300,6 +302,21 @@ footer .feld{display:grid; grid-template-columns:1.5fr 1fr; gap:32px;}
 footer b{display:block; font-family:"Anton",sans-serif; font-size:17px; text-transform:uppercase; color:var(--tinte); margin-bottom:6px; letter-spacing:.02em;}
 footer ul{list-style:none; margin:6px 0 0; padding:0;}
 footer a{color:var(--gedaempft);}
+
+/* ---------- Fotobaender ----------
+   Randlos und ohne Rahmen, damit sie sich vom warnband-Motiv der Seite
+   absetzen. Nur neutrale Nahaufnahmen: Unsplash hat keine brauchbaren
+   Bilder deutscher Feuerwehren, und ein amerikanisches Fahrzeug auf der
+   Seite einer Freiwilligen Feuerwehr faellt sofort auf. */
+.fotoband{position:relative; border-top:1px solid var(--linie-fein); border-bottom:1px solid var(--linie-fein);}
+.fotoband img{display:block; width:100%; height:clamp(230px,34vh,400px); object-fit:cover;}
+.fotoband figcaption{
+  position:absolute; left:0; right:0; bottom:0; padding:26px 32px 16px;
+  background:linear-gradient(180deg, transparent, rgba(16,17,20,.72));
+  color:#F4F4F5; font-family:"Azeret Mono", ui-monospace, monospace;
+  font-size:10.5px; letter-spacing:.12em; text-transform:uppercase;
+}
+@media (max-width:760px){ .fotoband figcaption{padding:20px 20px 12px;} }
 </style>
 </head>
 <body>
@@ -364,6 +381,11 @@ footer a{color:var(--gedaempft);}
   </div>
 </div>
 
+<figure class="fotoband" style="margin:0">
+  <img src="bilder/f_nacht.jpg" alt="Schmale Dorfgasse bei Nacht, eine Laterne brennt, alle Fensterläden zu" loading="lazy" width="1600" height="1067">
+  <figcaption>Der Ort um kurz nach drei, wenn der Melder geht</figcaption>
+</figure>
+
 <section id="einsaetze">
   <div class="feld">
     <div class="kapitel"><span class="nr">01</span><h2>Das Einsatzjahr</h2></div>
@@ -400,6 +422,11 @@ footer a{color:var(--gedaempft);}
     <p class="vorsatz" style="margin-top:22px">Wer hier im Ort arbeitet oder im Homeoffice sitzt, ist deshalb besonders wertvoll. Nicht wegen Muskeln, sondern wegen Anwesenheit.</p>
   </div>
 </section>
+
+<figure class="fotoband" style="margin:0">
+  <img src="bilder/f_fach.jpg" alt="Gerollte Feuerwehrschläuche in Holzfächern mit Lederriemen" loading="lazy" width="1600" height="1067">
+  <figcaption>Schlauchlager, jeder Schlauch an seinem Platz</figcaption>
+</figure>
 
 <section id="fahrzeuge">
   <div class="feld">
@@ -449,6 +476,11 @@ footer a{color:var(--gedaempft);}
     <a class="knopf" href="#kontakt">Ich will mitmachen</a>
   </div>
 </section>
+
+<figure class="fotoband" style="margin:0">
+  <img src="bilder/f_schlaeuche.jpg" alt="Gerollter roter Feuerwehrschlauch mit Kupplungen" loading="lazy" width="1600" height="1067">
+  <figcaption>B-Schlauch, nach der Übung gerollt</figcaption>
+</figure>
 
 <section id="jugend">
   <div class="feld">
@@ -516,6 +548,12 @@ footer a{color:var(--gedaempft);}
         <li>Einwilligung für Fotos von Einsatzkräften</li>
         <li>Hinweis: Notruf 112, niemals über ein Formular</li>
       </ul>
+    </div>
+    <div>
+      <b>Bilder</b>
+      Die drei Fotos sind Platzhalter von Unsplash und werden vor einer echten Übergabe
+      durch eigene ersetzt. Sie zeigen bewusst nur Gerät und Ort, keine Menschen: Gesichter
+      echter Einsatzkräfte auf der Seite einer erfundenen Wehr wären falsch.
     </div>
   </div>
 </footer>
