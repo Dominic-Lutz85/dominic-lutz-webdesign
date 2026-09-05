@@ -1,0 +1,433 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Anfrage stellen, Dominic Lutz Webdesign</title>
+<meta name="description" content="Beschreiben Sie Ihr Projekt in ein paar Minuten. Die Preisspanne rechnet beim Ausfüllen mit, verschickt wird erst, wenn Sie es selbst tun.">
+<meta name="author" content="Dominic Lutz">
+<!-- Vorschaubild-Angaben fuer geteilte Links -->
+<meta property="og:type" content="website">
+<meta property="og:locale" content="de_DE">
+<meta property="og:title" content="Anfrage stellen">
+<meta property="og:description" content="Projekt beschreiben, Preisspanne sehen, Anfrage selbst abschicken.">
+<!-- Vorlaeufige Adresse: noch nicht in Suchmaschinen, siehe robots.txt -->
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#0E6B5C" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#14181A" media="(prefers-color-scheme: dark)">
+<style>
+  :root{color-scheme:light dark}
+  html{-webkit-text-size-adjust:100%}
+  body{margin:0}
+  img{max-width:100%}
+  [hidden]{display:none!important}
+</style>
+</head>
+<body>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800;900&family=Source+Sans+3:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/seite.css">
+
+<nav class="topnav">
+  <div class="wrap topnav-inner">
+    <a href="/" class="brand" aria-label="Dominic Lutz Webdesign, zur Startseite"><i aria-hidden="true"></i><b>Dominic Lutz<small>Webdesign</small></b></a>
+    <div class="nav-links">
+      <a href="/#arbeiten">Arbeiten</a>
+      <a href="/#preise">Preise</a>
+      <a href="/#ablauf">Ablauf</a>
+    </div>
+    <div class="nav-right">
+      <div class="theme-toggle" role="group" aria-label="Darstellung">
+        <button type="button" data-theme-choice="light" aria-pressed="false">Hell</button>
+        <button type="button" data-theme-choice="dark" aria-pressed="false">Dunkel</button>
+        <button type="button" data-theme-choice="system" aria-pressed="true">System</button>
+      </div>
+      <a href="/" class="btn btn-ghost btn-sm">Zurück zur Startseite</a>
+    </div>
+  </div>
+</nav>
+
+<section id="briefing">
+  <div class="wrap-narrow">
+    <span class="kicker">Anfrage</span>
+    <h2 class="h2">Erzählen Sie mir von Ihrem Projekt</h2>
+    <p class="h2-sub">Ihre Angaben bleiben bei Ihnen, bis Sie die Anfrage selbst per E-Mail losschicken, hier wird nichts automatisch irgendwo gespeichert.</p>
+
+    <form id="briefForm" class="form-shell" novalidate>
+
+      <fieldset>
+        <legend><span class="legend-num">1</span>Kontakt</legend>
+        <p class="fs-help">Damit ich mich bei Ihnen melden kann.</p>
+        <div class="field-grid">
+          <div class="field in-grid"><label for="f-name">Name *</label><input type="text" id="f-name" name="name" required autocomplete="name"></div>
+          <div class="field in-grid"><label for="f-org">Firma / Verein <span class="opt">(optional)</span></label><input type="text" id="f-org" name="org" autocomplete="organization"></div>
+          <div class="field in-grid"><label for="f-email">E-Mail *</label><input type="email" id="f-email" name="email" required autocomplete="email"></div>
+          <div class="field in-grid"><label for="f-phone">Telefon <span class="opt">(optional)</span></label><input type="tel" id="f-phone" name="phone" autocomplete="tel"></div>
+          <div class="field in-grid full">
+            <label for="f-branche">Bereich</label>
+            <select id="f-branche" name="branche" class="fancy">
+              <option>Handwerk</option><option>Einzelhandel</option><option>Gastronomie</option>
+              <option>Verein / Non-Profit</option><option>Beratung / Dienstleistung</option>
+              <option>Handel / Online-Shop</option><option>IT / Technik</option><option>Sonstiges</option>
+            </select>
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend><span class="legend-num">2</span>Ausgangslage</legend>
+        <div class="field">
+          <label for="f-existing">Gibt es schon eine Website?</label>
+          <input type="text" id="f-existing" name="existing" placeholder="Link, oder „Nein, ganz neu“">
+        </div>
+        <div class="field">
+          <label for="f-why">Warum jetzt eine neue oder überarbeitete Seite?</label>
+          <textarea id="f-why" name="why" placeholder="Kurz in eigenen Worten reicht."></textarea>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend><span class="legend-num">3</span>Ziel der Website</legend>
+        <p class="fs-help">Mehrfachauswahl möglich.</p>
+        <div class="choice-grid" id="goalGrid"></div>
+      </fieldset>
+
+      <fieldset>
+        <legend><span class="legend-num">4</span>Paket</legend>
+        <p class="fs-help">Was am ehesten passt, im Angebot wird es genau zugeschnitten.</p>
+        <div class="radio-list" id="pkgRadioList"></div>
+      </fieldset>
+
+      <fieldset>
+        <legend><span class="legend-num">5</span>Gewünschte Funktionen</legend>
+        <p class="fs-help">Ein Kontaktformular ist immer dabei. Alles hier kommt zusätzlich obendrauf.</p>
+        <div class="choice-grid" id="addonGrid"></div>
+        <div class="summary-bar" id="summaryBar">
+          <span class="label">Geschätzte Spanne (Paket + gewählte Funktionen)</span>
+          <span class="amount" id="liveTotal">noch offen</span>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend><span class="legend-num">6</span>Inhalte</legend>
+        <div class="field">
+          <label for="f-texte">Wer liefert die Texte?</label>
+          <select id="f-texte" name="texte" class="fancy">
+            <option>Ich liefere fertige Texte</option>
+            <option>Ich brauche Unterstützung beim Formulieren</option>
+            <option>Noch unsicher</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="f-bilder">Wer liefert Bilder / Logo?</label>
+          <select id="f-bilder" name="bilder" class="fancy">
+            <option>Vorhanden, ich schicke sie</option>
+            <option>Kein Logo, brauche eine Empfehlung</option>
+            <option>Noch unsicher</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="f-cd">Gibt es schon Farben / Schrift / ein Corporate Design?</label>
+          <select id="f-cd" name="cd" class="fancy">
+            <option>Ja, vorhanden</option>
+            <option>Teilweise (z. B. nur Logo)</option>
+            <option>Nein, komplett offen</option>
+          </select>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend><span class="legend-num">7</span>Gestaltung</legend>
+        <p class="fs-help">Wie soll die Seite wirken? Mehrfachauswahl möglich.</p>
+        <div class="choice-grid" id="styleGrid"></div>
+        <p class="fs-help" style="margin-top:14px;">Fünf fertige Beispielseiten zum Anschauen: <a href="/beispiele/steuerkanzlei/" target="_blank" rel="noopener">Seriös / klassisch (Steuerkanzlei) ↗</a> · <a href="/beispiele/schreinerei/" target="_blank" rel="noopener">Bodenständig (Schreinerei) ↗</a> · <a href="/beispiele/weingut/" target="_blank" rel="noopener">Hochwertig (Weingut) ↗</a> · <a href="/beispiele/eiscafe/" target="_blank" rel="noopener">Freundlich / verspielt (Eiscafé) ↗</a> · <a href="/beispiele/feuerwehr/" target="_blank" rel="noopener">Verein (Feuerwehr) ↗</a></p>
+        <div class="field" style="margin-top:16px;">
+          <label for="f-refs">Seiten, die Ihnen gefallen <span class="opt">(optional, gerne Links)</span></label>
+          <textarea id="f-refs" name="refs" placeholder="z. B. Websites von Wettbewerbern oder Vorbildern, die Ihnen gefallen"></textarea>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend><span class="legend-num">8</span>Rahmen</legend>
+        <div class="field-grid">
+          <div class="field in-grid"><label for="f-domain">Domain vorhanden?</label><input type="text" id="f-domain" name="domain" placeholder="z. B. meine-firma.de, oder „Nein“"></div>
+          <div class="field in-grid"><label for="f-deadline">Wunschtermin <span class="opt">(optional)</span></label><input type="text" id="f-deadline" name="deadline" placeholder="z. B. „bis Ende Oktober“"></div>
+        </div>
+        <div class="field">
+          <label class="choice" style="display:inline-flex; width:auto;">
+            <input type="checkbox" id="f-pflege" name="pflege">
+            <span class="choice-body"><span class="choice-title">Interesse an laufender Pflege/Wartung nach dem Launch</span></span>
+          </label>
+        </div>
+        <div class="field">
+          <label for="f-notes">Sonstiges <span class="opt">(optional)</span></label>
+          <textarea id="f-notes" name="notes"></textarea>
+        </div>
+      </fieldset>
+
+      <div class="submit-row">
+        <span class="req-note">* Pflichtfeld</span>
+        <span class="error-msg" id="formError">Bitte Name und E-Mail-Adresse ausfüllen.</span>
+        <button type="submit" class="btn btn-primary">Anfrage zusammenstellen</button>
+      </div>
+
+      <div class="review" id="reviewPanel">
+        <div class="review-box">
+          <h3>Ihre Anfrage, zum Absenden bereit</h3>
+          <pre id="reviewText"></pre>
+          <div class="review-actions">
+            <a href="#" id="mailtoBtn" class="btn btn-primary">Per E-Mail senden</a>
+            <button type="button" id="copyBtn" class="btn btn-ghost">Text kopieren</button>
+            <span class="copy-feedback" id="copyFeedback">Kopiert.</span>
+          </div>
+        </div>
+      </div>
+
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">Dominic Lutz · Websites für kleine Unternehmen und Vereine · <a href="mailto:dominicvonlutz@gmail.com">dominicvonlutz@gmail.com</a></div>
+</footer>
+
+<script src="/js/preise.js"></script>
+<script>
+(function(){
+  "use strict";
+
+  // ---------- THEME ----------
+  var root = document.documentElement;
+  var saved = null;
+  try { saved = localStorage.getItem('wb-theme'); } catch(e){}
+  if (saved === 'light' || saved === 'dark') root.setAttribute('data-theme', saved);
+  function setPressed(choice){
+    document.querySelectorAll('[data-theme-choice]').forEach(function(b){
+      b.setAttribute('aria-pressed', b.getAttribute('data-theme-choice') === choice ? 'true':'false');
+    });
+  }
+  setPressed(saved || 'system');
+  document.querySelectorAll('[data-theme-choice]').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var choice = btn.getAttribute('data-theme-choice');
+      if (choice === 'system'){ root.removeAttribute('data-theme'); }
+      else { root.setAttribute('data-theme', choice); }
+      try { localStorage.setItem('wb-theme', choice); } catch(e){}
+      setPressed(choice);
+    });
+  });
+
+  // ---------- PREISE, aus der gemeinsamen Datei ----------
+  var PACKAGES = PREISE.PACKAGES, ADDONS = PREISE.ADDONS,
+      GOALS = PREISE.GOALS, STYLES = PREISE.STYLES;
+  var adj = PREISE.adj, fmt = PREISE.fmt, rangeLabel = PREISE.rangeLabel;
+
+  // ---------- CUSTOM DROPDOWNS (for select.fancy and demo sort) ----------
+  var allDd = [];
+  function closeAllDd(except){ allDd.forEach(function(d){ if (d !== except) d.close(); }); }
+  function makeDropdown(host, options, initial, onChange, labelledBy){
+    // options: [{value, label}]
+    host.classList.add('dd');
+    var btn = document.createElement('button'); btn.type = 'button'; btn.className = 'dd-btn';
+    btn.setAttribute('aria-haspopup','listbox'); btn.setAttribute('aria-expanded','false');
+    if (labelledBy) btn.setAttribute('aria-labelledby', labelledBy);
+    var list = document.createElement('ul'); list.className = 'dd-list'; list.setAttribute('role','listbox'); list.tabIndex = -1;
+    var current = initial, active = -1;
+    function render(){
+      btn.textContent = options.filter(function(o){return o.value===current;})[0].label;
+      list.innerHTML = '';
+      options.forEach(function(o, i){
+        var li = document.createElement('li'); li.setAttribute('role','option'); li.textContent = o.label;
+        li.setAttribute('aria-selected', o.value === current ? 'true':'false');
+        if (i === active) li.classList.add('active');
+        li.addEventListener('click', function(){ choose(o.value); });
+        list.appendChild(li);
+      });
+    }
+    function open(){ closeAllDd(api); host.classList.add('open'); btn.setAttribute('aria-expanded','true'); active = options.findIndex(function(o){return o.value===current;}); render(); }
+    function close(){ host.classList.remove('open'); btn.setAttribute('aria-expanded','false'); }
+    function choose(v){ current = v; render(); close(); btn.focus(); onChange(v); }
+    btn.addEventListener('click', function(){ host.classList.contains('open') ? close() : open(); });
+    btn.addEventListener('keydown', function(e){
+      var isOpen = host.classList.contains('open');
+      if (e.key === 'ArrowDown' || e.key === 'ArrowUp'){
+        e.preventDefault(); if (!isOpen) open();
+        active = Math.max(0, Math.min(options.length-1, active + (e.key === 'ArrowDown' ? 1 : -1))); render();
+      } else if (e.key === 'Enter' || e.key === ' '){
+        e.preventDefault(); if (isOpen && active >= 0) choose(options[active].value); else open();
+      } else if (e.key === 'Escape'){ close(); }
+      else if (e.key === 'Home' && isOpen){ active = 0; render(); }
+      else if (e.key === 'End' && isOpen){ active = options.length-1; render(); }
+      else if (e.key.length === 1 && isOpen){
+        var idx = options.findIndex(function(o){ return o.label.toLowerCase().indexOf(e.key.toLowerCase()) === 0; });
+        if (idx >= 0){ active = idx; render(); }
+      }
+    });
+    host.appendChild(btn); host.appendChild(list);
+    var api = {close:close, host:host}; allDd.push(api); render();
+    return api;
+  }
+  document.addEventListener('click', function(e){ if (!e.target.closest('.dd')) closeAllDd(); });
+
+  document.querySelectorAll('select.fancy').forEach(function(sel){
+    var host = document.createElement('div');
+    sel.parentNode.insertBefore(host, sel.nextSibling);
+    var opts = Array.prototype.map.call(sel.options, function(o){ return {value:o.value, label:o.textContent}; });
+    var lab = document.querySelector('label[for="'+sel.id+'"]');
+    if (lab && !lab.id) lab.id = 'lbl-' + sel.id;
+    makeDropdown(host, opts, sel.value, function(v){ sel.value = v; }, lab ? lab.id : null);
+  });
+
+  // ---------- RENDER: form choice groups ----------
+  function renderChoiceGroup(container, items, name, type, withPrice){
+    items.forEach(function(item){
+      var label = document.createElement('label');
+      label.className = 'choice';
+      var priceHtml = withPrice ? '<span class="choice-price num" data-for="'+item.id+'">'+rangeLabel(item)+'</span>' : '';
+      label.innerHTML =
+        '<input type="'+type+'" name="'+name+'" value="'+item.id+'" id="'+item.id+'">'+
+        '<span class="choice-body"><span class="choice-title">'+item.title+'</span>'+
+        (item.sub ? '<span class="choice-sub">'+item.sub+'</span>' : '')+'</span>'+
+        priceHtml;
+      container.appendChild(label);
+    });
+  }
+  renderChoiceGroup(document.getElementById('goalGrid'), GOALS, 'goals', 'checkbox', false);
+  renderChoiceGroup(document.getElementById('styleGrid'), STYLES, 'stil', 'checkbox', false);
+  renderChoiceGroup(document.getElementById('addonGrid'),
+    ADDONS.map(function(a){ return {id:a.id, title:a.name, sub:a.note, low:a.low, high:a.high, custom:a.custom}; }),
+    'addons', 'checkbox', true);
+
+  var pkgRadioList = document.getElementById('pkgRadioList');
+  PACKAGES.concat([{id:'unsicher', name:'Bin mir noch nicht sicher', desc:'Wird im Gespräch geklärt.'}]).forEach(function(p, i){
+    var label = document.createElement('label');
+    label.className = 'choice';
+    var priceHtml = p.low ? '<span class="choice-price num" data-for="'+p.id+'">'+rangeLabel(p)+'</span>' : '';
+    label.innerHTML =
+      '<input type="radio" name="paket" value="'+p.id+'" id="pkg-'+p.id+'"'+(i===1?' checked':'')+'>'+
+      '<span class="choice-body"><span class="choice-title">'+(p.name)+'</span>'+
+      '<span class="choice-sub">'+(p.desc||'')+'</span></span>'+priceHtml;
+    pkgRadioList.appendChild(label);
+  });
+
+  // renderPricing() faellt hier weg: den Preisabschnitt gibt es nur
+  // auf der Startseite. Die Zahlen kommen trotzdem aus derselben Quelle.
+
+  // ---------- LIVE PRICE CALC ----------
+  var liveTotal = document.getElementById('liveTotal');
+  var summaryBar = document.getElementById('summaryBar');
+  function recalc(){
+    var pkgId = (document.querySelector('input[name="paket"]:checked') || {}).value;
+    var pkg = PACKAGES.filter(function(p){ return p.id === pkgId; })[0];
+    var low = pkg ? pkg.low : 0;
+    var high = pkg ? pkg.high : 0;
+    var openEnded = pkg ? (pkg.high == null) : false;
+
+    var hasCustom = false;
+    document.querySelectorAll('input[name="addons"]:checked').forEach(function(cb){
+      var a = ADDONS.filter(function(x){ return x.id === cb.value; })[0];
+      if (!a) return;
+      if (a.custom) { hasCustom = true; return; }
+      low += a.low;
+      if (a.high == null) { openEnded = true; } else { high += a.high; }
+    });
+
+    var text;
+    if (!pkg) text = 'noch offen';
+    else if (openEnded) text = 'ab ' + fmt(adj(low)) + ' €';
+    else text = fmt(adj(low)) + ' bis ' + fmt(adj(high)) + ' €';
+    if (hasCustom && pkg) text += ' + individuelles Angebot';
+    if (liveTotal.textContent !== text){
+      liveTotal.textContent = text;
+      summaryBar.classList.remove('bump'); void summaryBar.offsetWidth; summaryBar.classList.add('bump');
+    }
+  }
+  document.getElementById('briefForm').addEventListener('change', recalc);
+  recalc();
+
+  // ---------- SUBMIT: build summary + mailto ----------
+  var CONTACT_EMAIL = 'dominicvonlutz@gmail.com'; // ggf. eigene Geschäftsadresse eintragen
+
+  function val(id){ return (document.getElementById(id).value || '').trim(); }
+  function checkedTitles(name, source){
+    return Array.prototype.slice.call(document.querySelectorAll('input[name="'+name+'"]:checked'))
+      .map(function(cb){ var item = source.filter(function(x){return x.id===cb.value;})[0]; return item ? (item.title||item.name) : cb.value; });
+  }
+
+  document.getElementById('briefForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    var name = val('f-name'), email = val('f-email');
+    var errorEl = document.getElementById('formError');
+    if (!name || !email){ errorEl.classList.add('show'); return; }
+    errorEl.classList.remove('show');
+
+    var pkgId = (document.querySelector('input[name="paket"]:checked') || {}).value;
+    var pkg = PACKAGES.filter(function(p){ return p.id === pkgId; })[0];
+    var pkgLabel = pkg ? pkg.name : 'Noch unsicher';
+
+    var goalList = checkedTitles('goals', GOALS);
+    var styleList = checkedTitles('stil', STYLES);
+    var addonList = checkedTitles('addons', ADDONS.map(function(a){return {id:a.id,title:a.name};}));
+
+    var lines = [
+      'ANFRAGE WEBSITE', '',
+      'KONTAKT',
+      'Name: ' + name,
+      'Firma/Verein: ' + (val('f-org') || 'keine Angabe'),
+      'E-Mail: ' + email,
+      'Telefon: ' + (val('f-phone') || 'keine Angabe'),
+      'Bereich: ' + document.getElementById('f-branche').value, '',
+      'AUSGANGSLAGE',
+      'Bestehende Website: ' + (val('f-existing') || 'keine Angabe'),
+      'Warum jetzt: ' + (val('f-why') || 'keine Angabe'), '',
+      'ZIEL',
+      goalList.length ? goalList.join(', ') : 'keine Angabe', '',
+      'PAKET',
+      pkgLabel + ' (geschätzt: ' + liveTotal.textContent + ')', '',
+      'GEWÜNSCHTE FUNKTIONEN',
+      addonList.length ? addonList.join(', ') : 'Keine zusätzlichen Funktionen ausgewählt', '',
+      'INHALTE',
+      'Texte: ' + document.getElementById('f-texte').value,
+      'Bilder/Logo: ' + document.getElementById('f-bilder').value,
+      'Corporate Design: ' + document.getElementById('f-cd').value, '',
+      'GESTALTUNG',
+      'Stil: ' + (styleList.length ? styleList.join(', ') : 'keine Angabe'),
+      'Referenzen: ' + (val('f-refs') || 'keine Angabe'), '',
+      'RAHMEN',
+      'Domain: ' + (val('f-domain') || 'keine Angabe'),
+      'Wunschtermin: ' + (val('f-deadline') || 'keine Angabe'),
+      'Interesse an Pflege/Wartung: ' + (document.getElementById('f-pflege').checked ? 'Ja' : 'Nein'),
+      'Sonstiges: ' + (val('f-notes') || 'keine Angabe'),
+    ];
+    var text = lines.join('\n');
+
+    document.getElementById('reviewText').textContent = text;
+    document.getElementById('reviewPanel').classList.add('show');
+
+    var subject = 'Anfrage Website: ' + (val('f-org') || name);
+    var mailto = 'mailto:' + encodeURIComponent(CONTACT_EMAIL) +
+      '?subject=' + encodeURIComponent(subject) +
+      '&body=' + encodeURIComponent(text.replace(/\n/g,'\r\n'));
+    document.getElementById('mailtoBtn').setAttribute('href', mailto);
+    document.getElementById('reviewPanel').scrollIntoView({behavior: reduceMotion ? 'auto' : 'smooth', block:'start'});
+  });
+
+  document.getElementById('copyBtn').addEventListener('click', function(){
+    var text = document.getElementById('reviewText').textContent;
+    var fb = document.getElementById('copyFeedback');
+    function shown(){ fb.classList.add('show'); setTimeout(function(){ fb.classList.remove('show'); }, 2200); }
+    if (navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(text).then(shown).catch(function(){});
+    } else {
+      var ta = document.createElement('textarea');
+      ta.value = text; document.body.appendChild(ta); ta.select();
+      try { document.execCommand('copy'); shown(); } catch(e){}
+      document.body.removeChild(ta);
+    }
+  });
+})();
+</script>
+
+</body>
+</html>
