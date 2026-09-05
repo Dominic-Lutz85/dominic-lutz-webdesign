@@ -1,0 +1,644 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Musikverein Harmonie, Beispielseite von Dominic Lutz</title>
+<meta name="description" content="Beispielseite für einen Musikverein: Konzertprogramm als Programmblatt, anklickbare Sitzordnung, Probenplan und Fördermitgliedschaft. Der Verein ist erfunden.">
+<!-- NICHT INDEXIEREN: Der Verein ist erfunden, samt Ort, Anschrift und
+     Ansprechpartnern. Ein Suchtreffer auf einen Verein, den es nicht
+     gibt, waere irrefuehrend. Gilt auch nach dem Umzug auf die eigene
+     Domain, dort bleibt diese Zeile stehen. -->
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#FBF8F1" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#111214" media="(prefers-color-scheme: dark)">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,600;0,6..96,700;1,6..96,400&family=Karla:wght@400;500;600&family=Spline+Sans+Mono:wght@400;500&display=swap">
+
+<style>
+/* ============================================================
+   MUSIKVEREIN HARMONIE NIEDERSCHEID, Beispielseite
+   ------------------------------------------------------------
+   LEITBILD: ein Konzertprogramm, kein Vereinsheft.
+
+   WARUM SO: Referenz war die Seite der Berliner Philharmoniker.
+   Befund dort: die Startseite oeffnet mit einer Geschichte ueber
+   Menschen statt mit dem Namen des Hauses, und "Kalender" ist der
+   erste echte Navigationspunkt. Acht Datumsangaben und sechs
+   Uhrzeiten stehen allein auf der Startseite, der Kalender traegt
+   also die Seite. In den Preistraeger-Galerien (Awwwards Kategorie
+   Musik) gibt es keinen einzigen Musikverein und kein Laienorchester,
+   dort stehen Elektro-Kuenstler und Festivals. Deshalb kommt die
+   Referenz aus der Praxis statt aus einer Galerie, und das ist im
+   Protokoll so vermerkt.
+
+   UEBERNOMMEN: Der Termin ist der Aufmacher, nicht der Vereinsname.
+   NICHT UEBERNOMMEN: Vollbild-Foto (haben wir nicht, wie ueberall auf
+   diesen Musterseiten).
+
+   EIGENE SPRACHE STATT FOTO-ERSATZ: Ein Musikverein hat zwei Bilder,
+   die nur ihm gehoeren, das Programmblatt und die Sitzordnung. Beides
+   ist gezeichnet, nicht fotografiert. Die Notenlinien trennen die
+   Abschnitte. Das ist bewusst etwas voellig anderes als der
+   Werkstattriss der Schreinerei, damit die beiden Seiten nicht
+   wieder derselbe Bauplan in anderer Farbe sind.
+   ============================================================ */
+
+:root{
+  --grund:#FBF8F1;
+  --blatt:#FFFFFF;
+  --blatt-2:#F1ECE0;
+  --tinte:#141517;
+  --gedaempft:#5A5C61;
+  --schwach:#8B8E95;
+  --linie:#D8D3C6;
+  --linie-fein:#E9E4D8;
+  --signal:#C8A200;
+  --signal-tief:#8A7100;
+  --signal-weich:#F7EFC8;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --grund:#111214;
+    --blatt:#191B1E;
+    --blatt-2:#212429;
+    --tinte:#F2EFE8;
+    --gedaempft:#A8ABB2;
+    --schwach:#767A82;
+    --linie:#2E3238;
+    --linie-fein:#232629;
+    --signal:#F0C42A;
+    --signal-tief:#FBDA6B;
+    --signal-weich:#332B0D;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --grund:#111214;
+  --blatt:#191B1E;
+  --blatt-2:#212429;
+  --tinte:#F2EFE8;
+  --gedaempft:#A8ABB2;
+  --schwach:#767A82;
+  --linie:#2E3238;
+  --linie-fein:#232629;
+  --signal:#F0C42A;
+  --signal-tief:#FBDA6B;
+  --signal-weich:#332B0D;
+  color-scheme:dark;
+}
+
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth; -webkit-text-size-adjust:100%;}
+body{
+  margin:0; background:var(--grund); color:var(--tinte);
+  font-family:"Karla",-apple-system,"Segoe UI",sans-serif;
+  font-size:17px; line-height:1.64; -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3{font-family:"Bodoni Moda",Didot,Georgia,serif; font-weight:600; margin:0; line-height:1.08; text-wrap:balance;}
+p{margin:0;}
+a{color:var(--signal-tief);}
+:root[data-theme="dark"] a, :root:not([data-theme="light"]) a{color:var(--signal);}
+:focus-visible{outline:2px solid var(--signal); outline-offset:3px;}
+button,input,textarea{font-family:inherit;}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto;} *{animation:none!important; transition:none!important;}}
+
+.takt{font-family:"Spline Sans Mono",ui-monospace,monospace; font-variant-numeric:tabular-nums;}
+.bogen{max-width:1180px; margin:0 auto; padding:0 30px;}
+@media (max-width:640px){.bogen{padding:0 18px;}}
+
+/* Notenlinien als Trenner, das Ordnungsmittel dieser Seite */
+.notenlinien{height:22px; display:block; width:100%;}
+.notenlinien line{stroke:var(--linie); stroke-width:1;}
+
+/* ---------- Musterhinweis ---------- */
+.muster{
+  background:var(--tinte); color:var(--grund);
+  font-family:"Spline Sans Mono",monospace; font-size:11.5px; letter-spacing:.05em;
+  padding:9px 16px; text-align:center;
+}
+.muster a{color:var(--grund);}
+
+/* ---------- Kopf ---------- */
+.kopf{border-bottom:1px solid var(--linie); background:var(--grund);}
+.kopf-innen{max-width:1180px; margin:0 auto; padding:16px 30px; display:flex; align-items:center; gap:26px;}
+@media (max-width:640px){.kopf-innen{padding:12px 18px; gap:14px;}}
+.wortmarke{text-decoration:none; color:var(--tinte); line-height:1.1;}
+.wortmarke b{display:block; font-family:"Bodoni Moda",serif; font-weight:700; font-size:23px; letter-spacing:.01em;}
+.wortmarke span{font-family:"Spline Sans Mono",monospace; font-size:10.5px; color:var(--schwach); letter-spacing:.14em;}
+.kopf nav{display:flex; gap:2px; margin-left:auto;}
+.kopf nav a{
+  font-size:15px; font-weight:500; color:var(--gedaempft); text-decoration:none; padding:7px 11px;
+}
+.kopf nav a:hover{color:var(--tinte);}
+.kopf nav a.jetzt{color:var(--tinte); font-weight:600; border-bottom:2px solid var(--signal);}
+@media (max-width:920px){.kopf nav{display:none;}}
+.themenwahl{display:inline-flex; border:1px solid var(--linie); margin-left:auto;}
+@media (min-width:921px){.themenwahl{margin-left:0;}}
+.themenwahl button{
+  border:0; background:transparent; color:var(--schwach); cursor:pointer;
+  font-family:"Spline Sans Mono",monospace; font-size:10.5px; letter-spacing:.05em; padding:6px 9px;
+}
+.themenwahl button[aria-pressed="true"]{background:var(--tinte); color:var(--grund);}
+
+/* ---------- Aufmacher: das Programmblatt ---------- */
+.programmblatt{padding:52px 0 60px;}
+.termin-kopf{display:flex; flex-wrap:wrap; align-items:baseline; gap:10px 26px; margin-bottom:10px;}
+.termin-kopf .marke{font-family:"Spline Sans Mono",monospace; font-size:11.5px; letter-spacing:.16em; color:var(--signal-tief);}
+:root[data-theme="dark"] .termin-kopf .marke, :root:not([data-theme="light"]) .termin-kopf .marke{color:var(--signal);}
+.programmblatt h1{font-size:clamp(40px,6vw,78px); margin-top:6px;}
+.programmblatt h1 em{font-style:italic;}
+.wann{
+  display:flex; flex-wrap:wrap; gap:8px 30px; margin-top:22px; padding:16px 0;
+  border-top:1px solid var(--tinte); border-bottom:1px solid var(--tinte);
+}
+.wann div{display:flex; flex-direction:column; gap:2px;}
+.wann b{font-family:"Spline Sans Mono",monospace; font-size:10.5px; letter-spacing:.14em; color:var(--schwach); font-weight:400;}
+.wann span{font-size:18px; font-weight:600;}
+
+.programm{margin-top:34px; display:grid; grid-template-columns:minmax(0,1.35fr) minmax(0,1fr); gap:56px; align-items:start;}
+@media (max-width:900px){.programm{grid-template-columns:1fr; gap:32px;}}
+.stuecke{list-style:none; margin:0; padding:0;}
+.stueck{
+  display:grid; grid-template-columns:auto 1fr auto; gap:18px; align-items:baseline;
+  padding:15px 0; border-bottom:1px solid var(--linie-fein);
+}
+.stueck .nr{font-family:"Spline Sans Mono",monospace; font-size:12px; color:var(--schwach);}
+.stueck .werk{font-family:"Bodoni Moda",serif; font-size:21px; font-weight:600;}
+.stueck .werk i{font-style:italic; font-weight:400;}
+.stueck .komponist{display:block; font-size:14.5px; color:var(--gedaempft); margin-top:2px; font-family:"Karla",sans-serif;}
+.stueck .dauer{font-family:"Spline Sans Mono",monospace; font-size:13px; color:var(--schwach);}
+.pause{padding:12px 0; border-bottom:1px solid var(--linie-fein); font-family:"Spline Sans Mono",monospace; font-size:12px; letter-spacing:.14em; color:var(--signal-tief);}
+:root[data-theme="dark"] .pause, :root:not([data-theme="light"]) .pause{color:var(--signal);}
+.programm-summe{margin-top:16px; font-family:"Spline Sans Mono",monospace; font-size:12.5px; color:var(--schwach);}
+
+.karten{background:var(--blatt); border:1px solid var(--linie); padding:26px 28px;}
+.karten h3{font-size:24px;}
+.preisliste{list-style:none; margin:16px 0 0; padding:0;}
+.preisliste li{display:flex; justify-content:space-between; gap:14px; padding:9px 0; border-bottom:1px solid var(--linie-fein); font-size:15.5px;}
+.preisliste li span:last-child{font-family:"Spline Sans Mono",monospace;}
+.karten .hinweis{margin-top:16px; font-size:14.5px; color:var(--gedaempft);}
+.karten .knopf{
+  display:inline-block; margin-top:20px; background:var(--tinte); color:var(--grund);
+  text-decoration:none; padding:13px 24px; font-weight:600; font-size:16px;
+}
+.karten .knopf:hover{background:var(--signal-tief); color:var(--grund);}
+
+/* ---------- Weitere Termine ---------- */
+.termine{list-style:none; margin:30px 0 0; padding:0; border-top:1px solid var(--tinte);}
+.termine li{
+  display:grid; grid-template-columns:96px 1fr auto; gap:24px; align-items:baseline;
+  padding:17px 0; border-bottom:1px solid var(--linie-fein);
+}
+@media (max-width:640px){.termine li{grid-template-columns:78px 1fr; gap:14px;} .termine li .ort{grid-column:2;}}
+.termine .datum{font-family:"Spline Sans Mono",monospace; font-size:13.5px; color:var(--signal-tief);}
+:root[data-theme="dark"] .termine .datum, :root:not([data-theme="light"]) .termine .datum{color:var(--signal);}
+.termine .was{font-family:"Bodoni Moda",serif; font-size:19px; font-weight:600;}
+.termine .ort{font-size:14.5px; color:var(--gedaempft);}
+
+/* ---------- Abschnitte ---------- */
+section{padding:70px 0;}
+.abschnittskopf{display:flex; align-items:baseline; gap:16px; margin-bottom:14px;}
+.abschnittskopf .zahl{font-family:"Spline Sans Mono",monospace; font-size:12px; color:var(--schwach);}
+h2{font-size:clamp(30px,4vw,48px);}
+.vorspann{color:var(--gedaempft); max-width:56ch; margin-top:10px; font-size:17px;}
+
+/* ---------- Sitzordnung ---------- */
+.sitz{display:grid; grid-template-columns:minmax(0,1.25fr) minmax(0,1fr); gap:48px; margin-top:36px; align-items:center;}
+@media (max-width:900px){.sitz{grid-template-columns:1fr; gap:28px;}}
+.sitz-bild{background:var(--blatt); border:1px solid var(--linie); padding:10px;}
+.sitz-bild svg{display:block; width:100%; height:auto;}
+.stuhl{fill:var(--linie); stroke:none; transition:fill .18s ease;}
+.stuhl.an{fill:var(--signal);}
+.pult{fill:none; stroke:var(--tinte); stroke-width:1.4;}
+.t-register{font-family:"Spline Sans Mono",monospace; font-size:11px; fill:var(--schwach);}
+.bogenlinie{fill:none; stroke:var(--linie-fein); stroke-width:1;}
+.registerliste{list-style:none; margin:0; padding:0;}
+.registerliste li{border-bottom:1px solid var(--linie-fein);}
+.registerliste button{
+  width:100%; display:grid; grid-template-columns:1fr auto auto; gap:14px; align-items:baseline;
+  background:none; border:0; cursor:pointer; padding:12px 2px; text-align:left; color:var(--tinte);
+}
+.registerliste button:hover .name{color:var(--signal-tief);}
+:root[data-theme="dark"] .registerliste button:hover .name{color:var(--signal);}
+.registerliste button[aria-pressed="true"] .name{font-weight:600;}
+.registerliste button[aria-pressed="true"]{background:var(--signal-weich);}
+.registerliste .name{font-family:"Bodoni Moda",serif; font-size:19px;}
+.registerliste .anzahl{font-family:"Spline Sans Mono",monospace; font-size:13.5px; color:var(--schwach);}
+.registerliste .balken{width:74px; height:8px; background:var(--linie-fein);}
+.registerliste .balken i{display:block; height:100%; background:var(--signal);}
+.sitz-fuss{margin-top:18px; font-size:15px; color:var(--gedaempft); min-height:3.2em;}
+
+/* ---------- Proben ---------- */
+.proben{display:grid; grid-template-columns:repeat(3,1fr); gap:0; margin-top:34px; border-top:1px solid var(--tinte);}
+@media (max-width:820px){.proben{grid-template-columns:1fr;}}
+.probe{padding:22px 26px 24px 0; border-right:1px solid var(--linie-fein);}
+.probe:last-child{border-right:0;}
+@media (max-width:820px){.probe{border-right:0; border-bottom:1px solid var(--linie-fein); padding-right:0;} .probe:last-child{border-bottom:0;}}
+.probe .wann2{font-family:"Spline Sans Mono",monospace; font-size:12px; color:var(--signal-tief); letter-spacing:.08em;}
+:root[data-theme="dark"] .probe .wann2, :root:not([data-theme="light"]) .probe .wann2{color:var(--signal);}
+.probe h3{font-size:22px; margin-top:8px;}
+.probe p{color:var(--gedaempft); font-size:15.5px; margin-top:6px;}
+
+/* ---------- Jugend und Foerdern ---------- */
+.zweispalt{display:grid; grid-template-columns:1fr 1fr; gap:52px; margin-top:34px;}
+@media (max-width:820px){.zweispalt{grid-template-columns:1fr; gap:34px;}}
+.stufen{list-style:none; margin:18px 0 0; padding:0;}
+.stufen li{display:grid; grid-template-columns:auto 1fr auto; gap:16px; padding:12px 0; border-bottom:1px solid var(--linie-fein); align-items:baseline;}
+.stufen .alter{font-family:"Spline Sans Mono",monospace; font-size:12.5px; color:var(--schwach); white-space:nowrap;}
+.stufen .titel{font-weight:600;}
+.stufen .titel span{display:block; font-weight:400; font-size:14.5px; color:var(--gedaempft);}
+.stufen .geld{font-family:"Spline Sans Mono",monospace; font-size:13.5px; white-space:nowrap;}
+
+/* ---------- Kontakt ---------- */
+.formular{display:grid; grid-template-columns:1fr 1fr; gap:20px; margin-top:30px; max-width:800px;}
+@media (max-width:640px){.formular{grid-template-columns:1fr;}}
+.feld{display:flex; flex-direction:column; gap:6px;}
+.feld.voll{grid-column:1/-1;}
+.feld label{font-family:"Spline Sans Mono",monospace; font-size:11px; letter-spacing:.09em; color:var(--schwach);}
+.feld input,.feld textarea,.feld select{
+  background:transparent; border:0; border-bottom:1.5px solid var(--linie);
+  padding:9px 0; font-size:17px; color:var(--tinte); border-radius:0;
+}
+.feld input:focus,.feld textarea:focus,.feld select:focus{outline:none; border-bottom-color:var(--signal);}
+.senden{
+  justify-self:start; background:var(--tinte); color:var(--grund); border:0; cursor:pointer;
+  padding:14px 28px; font-weight:600; font-size:16px;
+}
+.senden:hover{background:var(--signal-tief);}
+.meldung{
+  position:fixed; left:50%; bottom:22px; transform:translate(-50%,18px);
+  background:var(--tinte); color:var(--grund); padding:12px 20px;
+  font-family:"Spline Sans Mono",monospace; font-size:12.5px; opacity:0; pointer-events:none;
+  transition:opacity .25s, transform .25s; z-index:70; max-width:92vw; text-align:center;
+}
+.meldung.zeigen{opacity:1; transform:translate(-50%,0);}
+
+footer{padding:44px 0 72px; color:var(--schwach); font-size:14px;}
+footer .bogen{display:grid; grid-template-columns:1.4fr 1fr; gap:34px;}
+@media (max-width:760px){footer .bogen{grid-template-columns:1fr;}}
+footer b{display:block; color:var(--tinte); font-family:"Bodoni Moda",serif; font-size:17px; margin-bottom:6px;}
+footer ul{list-style:none; margin:6px 0 0; padding:0;}
+footer a{color:var(--gedaempft);}
+</style>
+</head>
+<body>
+
+<div class="muster">BEISPIELSEITE &middot; DER VEREIN IST ERFUNDEN &middot; <a href="/">Zurück zur Übersicht</a></div>
+
+<header class="kopf">
+  <div class="kopf-innen">
+    <a href="#oben" class="wortmarke">
+      <b>Musikverein Harmonie</b>
+      <span>NIEDERSCHEID &middot; GEGRÜNDET 1911</span>
+    </a>
+    <nav>
+      <a href="#oben" class="jetzt">Konzerte</a>
+      <a href="#orchester">Orchester</a>
+      <a href="#proben">Proben</a>
+      <a href="#jugend">Jugend</a>
+      <a href="#foerdern">Fördern</a>
+      <a href="#kontakt">Kontakt</a>
+    </nav>
+    <div class="themenwahl" role="group" aria-label="Darstellung">
+      <button type="button" data-thema="light" aria-pressed="false">HELL</button>
+      <button type="button" data-thema="dark" aria-pressed="false">DUNKEL</button>
+      <button type="button" data-thema="system" aria-pressed="true">AUTO</button>
+    </div>
+  </div>
+</header>
+
+<main id="oben">
+
+<div class="programmblatt">
+  <div class="bogen">
+    <div class="termin-kopf"><span class="marke">NÄCHSTES KONZERT</span></div>
+    <h1>Herbstkonzert:<br><em>Aus der neuen Welt</em></h1>
+
+    <div class="wann">
+      <div><b>DATUM</b><span>Samstag, 18. Oktober 2026</span></div>
+      <div><b>BEGINN</b><span class="takt">19:30 Uhr</span></div>
+      <div><b>EINLASS</b><span class="takt">18:45 Uhr</span></div>
+      <div><b>ORT</b><span>Bürgerhaus Niederscheid</span></div>
+      <div><b>LEITUNG</b><span>Andrea Thiel</span></div>
+    </div>
+
+    <div class="programm">
+      <div>
+        <ol class="stuecke">
+          <li class="stueck"><span class="nr takt">01</span>
+            <span><span class="werk">Festliche Ouvertüre</span><span class="komponist">Dmitri Schostakowitsch, Bearbeitung für Blasorchester</span></span>
+            <span class="dauer">6′</span></li>
+          <li class="stueck"><span class="nr takt">02</span>
+            <span><span class="werk"><i>Nimrod</i> aus den Enigma-Variationen</span><span class="komponist">Edward Elgar</span></span>
+            <span class="dauer">4′</span></li>
+          <li class="stueck"><span class="nr takt">03</span>
+            <span><span class="werk">Zwei Sätze für Solo-Klarinette und Orchester</span><span class="komponist">Solistin: Merle Kranz, 17 Jahre, aus der eigenen Jugendausbildung</span></span>
+            <span class="dauer">11′</span></li>
+          <li class="pause">PAUSE &middot; 20 MINUTEN</li>
+          <li class="stueck"><span class="nr takt">04</span>
+            <span><span class="werk">Sinfonie Nr. 9 <i>Aus der neuen Welt</i>, Largo</span><span class="komponist">Antonín Dvořák, Bearbeitung Jan Rieks</span></span>
+            <span class="dauer">12′</span></li>
+          <li class="stueck"><span class="nr takt">05</span>
+            <span><span class="werk">Böhmischer Traum</span><span class="komponist">Norbert Gälle</span></span>
+            <span class="dauer">4′</span></li>
+          <li class="stueck"><span class="nr takt">06</span>
+            <span><span class="werk">Zugabe, wenn Sie lange genug klatschen</span><span class="komponist">wird nicht verraten</span></span>
+            <span class="dauer">3′</span></li>
+        </ol>
+        <p class="programm-summe">SPIELDAUER RUND 60 MINUTEN OHNE PAUSE &middot; PROGRAMMÄNDERUNGEN VORBEHALTEN</p>
+      </div>
+
+      <aside class="karten">
+        <h3>Karten</h3>
+        <ul class="preisliste">
+          <li><span>Erwachsene</span><span>12 €</span></li>
+          <li><span>Ermäßigt, Schüler und Studenten</span><span>8 €</span></li>
+          <li><span>Kinder bis 12 Jahre</span><span>frei</span></li>
+          <li><span>Fördermitglieder</span><span>frei</span></li>
+        </ul>
+        <p class="hinweis">Karten an der Abendkasse, im Vorverkauf bei der Bäckerei Ohlert und beim Getränkemarkt Reis. Reservierung telefonisch bei Familie Klein, 06501 000 00 00.</p>
+        <a class="knopf" href="#kontakt">Karten reservieren</a>
+      </aside>
+    </div>
+
+    <ul class="termine">
+      <li><span class="datum">01.11.2026</span><span class="was">Allerheiligen, Gang zum Friedhof</span><span class="ort">Pfarrkirche, 14:00 Uhr</span></li>
+      <li><span class="datum">29.11.2026</span><span class="was">Adventsmarkt, Platzkonzert</span><span class="ort">Dorfplatz, 16:00 Uhr</span></li>
+      <li><span class="datum">06.01.2027</span><span class="was">Neujahrsempfang der Gemeinde</span><span class="ort">Bürgerhaus, 11:00 Uhr</span></li>
+      <li><span class="datum">14.03.2027</span><span class="was">Frühjahrskonzert mit dem Jugendorchester</span><span class="ort">Bürgerhaus, 19:00 Uhr</span></li>
+    </ul>
+  </div>
+</div>
+
+<svg class="notenlinien" aria-hidden="true" preserveAspectRatio="none" viewBox="0 0 100 22">
+  <line x1="0" y1="3" x2="100" y2="3"/><line x1="0" y1="7.5" x2="100" y2="7.5"/>
+  <line x1="0" y1="12" x2="100" y2="12"/><line x1="0" y1="16.5" x2="100" y2="16.5"/>
+  <line x1="0" y1="21" x2="100" y2="21"/>
+</svg>
+
+<section id="orchester">
+  <div class="bogen">
+    <div class="abschnittskopf"><span class="zahl takt">01</span><h2>Wer da vorne sitzt</h2></div>
+    <p class="vorspann">Einundvierzig Leute, vom Realschüler bis zum Rentner. Klicken Sie ein Register an, dann sehen Sie, wo es sitzt und wie viele es sind.</p>
+    <div class="sitz">
+      <div class="sitz-bild">
+        <svg id="sitzplan" viewBox="0 0 620 380" role="img" aria-label="Sitzordnung des Orchesters, Register in drei Bögen um das Dirigentenpult"></svg>
+      </div>
+      <div>
+        <ul class="registerliste" id="registerliste"></ul>
+        <p class="sitz-fuss" id="sitzFuss">Ein Register anklicken.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<svg class="notenlinien" aria-hidden="true" preserveAspectRatio="none" viewBox="0 0 100 22">
+  <line x1="0" y1="3" x2="100" y2="3"/><line x1="0" y1="7.5" x2="100" y2="7.5"/>
+  <line x1="0" y1="12" x2="100" y2="12"/><line x1="0" y1="16.5" x2="100" y2="16.5"/>
+  <line x1="0" y1="21" x2="100" y2="21"/>
+</svg>
+
+<section id="proben">
+  <div class="bogen">
+    <div class="abschnittskopf"><span class="zahl takt">02</span><h2>Wann geprobt wird</h2></div>
+    <p class="vorspann">Wer mitspielen will, kommt einfach vorbei. Instrument mitbringen, wenn eins da ist. Wenn nicht, haben wir welche.</p>
+    <div class="proben">
+      <div class="probe"><div class="wann2">DIENSTAG &middot; 19:30 BIS 21:15</div><h3>Großes Orchester</h3><p>Probenraum im Bürgerhaus, Untergeschoss. In den Sommerferien vier Wochen Pause.</p></div>
+      <div class="probe"><div class="wann2">FREITAG &middot; 17:30 BIS 18:45</div><h3>Jugendorchester</h3><p>Ab dem zweiten Jahr Unterricht. Eigenes Konzert im Frühjahr.</p></div>
+      <div class="probe"><div class="wann2">NACH ABSPRACHE</div><h3>Registerproben</h3><p>Vor Konzerten proben Holz und Blech getrennt, meist an einem Samstagvormittag.</p></div>
+    </div>
+  </div>
+</section>
+
+<svg class="notenlinien" aria-hidden="true" preserveAspectRatio="none" viewBox="0 0 100 22">
+  <line x1="0" y1="3" x2="100" y2="3"/><line x1="0" y1="7.5" x2="100" y2="7.5"/>
+  <line x1="0" y1="12" x2="100" y2="12"/><line x1="0" y1="16.5" x2="100" y2="16.5"/>
+  <line x1="0" y1="21" x2="100" y2="21"/>
+</svg>
+
+<section id="jugend">
+  <div class="bogen">
+    <div class="abschnittskopf"><span class="zahl takt">03</span><h2>Ausbildung und Fördern</h2></div>
+    <div class="zweispalt">
+      <div>
+        <h3 style="font-size:26px">Vom ersten Ton bis ins Orchester</h3>
+        <p class="vorspann" style="margin-top:8px">Unterricht bei eigenen Ausbildern im Ort, nicht in der Kreisstadt. Ein Leihinstrument stellt der Verein, solange es eins gibt.</p>
+        <ul class="stufen">
+          <li><span class="alter">AB 6</span><span class="titel">Musikalische Früherziehung<span>In Gruppen, einmal wöchentlich, ohne Instrument</span></span><span class="geld">12 €/Monat</span></li>
+          <li><span class="alter">AB 8</span><span class="titel">Instrumentalunterricht<span>Einzeln oder zu zweit, 30 Minuten</span></span><span class="geld">28 €/Monat</span></li>
+          <li><span class="alter">AB 10</span><span class="titel">Jugendorchester<span>Sobald die ersten Stücke sitzen</span></span><span class="geld">im Beitrag</span></li>
+          <li><span class="alter">AB 14</span><span class="titel">Großes Orchester<span>Nach Absprache mit der Dirigentin</span></span><span class="geld">im Beitrag</span></li>
+        </ul>
+      </div>
+      <div id="foerdern">
+        <h3 style="font-size:26px">Fördermitglied werden</h3>
+        <p class="vorspann" style="margin-top:8px">Fördermitglieder spielen nicht mit, sondern halten den Verein am Laufen: Noten, Instrumente, Ausbildung. Freier Eintritt zu allen eigenen Konzerten.</p>
+        <ul class="stufen">
+          <li><span class="alter">EINZELN</span><span class="titel">Fördermitgliedschaft<span>Jährlich, jederzeit kündbar</span></span><span class="geld">30 €/Jahr</span></li>
+          <li><span class="alter">FAMILIE</span><span class="titel">Familienmitgliedschaft<span>Zwei Erwachsene, Kinder frei</span></span><span class="geld">45 €/Jahr</span></li>
+          <li><span class="alter">FIRMA</span><span class="titel">Firmenmitgliedschaft<span>Nennung im Programmheft</span></span><span class="geld">ab 150 €/Jahr</span></li>
+          <li><span class="alter">EINMALIG</span><span class="titel">Instrumentenpatenschaft<span>Ihr Name im Kasten des Instruments</span></span><span class="geld">ab 400 €</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<svg class="notenlinien" aria-hidden="true" preserveAspectRatio="none" viewBox="0 0 100 22">
+  <line x1="0" y1="3" x2="100" y2="3"/><line x1="0" y1="7.5" x2="100" y2="7.5"/>
+  <line x1="0" y1="12" x2="100" y2="12"/><line x1="0" y1="16.5" x2="100" y2="16.5"/>
+  <line x1="0" y1="21" x2="100" y2="21"/>
+</svg>
+
+<section id="kontakt">
+  <div class="bogen">
+    <div class="abschnittskopf"><span class="zahl takt">04</span><h2>Schreiben Sie uns</h2></div>
+    <p class="vorspann">Karten reservieren, mitspielen, Fördermitglied werden oder einfach fragen. Wir melden uns innerhalb weniger Tage, wir sind ein Verein und kein Callcenter.</p>
+    <form class="formular" id="anfrage" novalidate>
+      <div class="feld"><label for="v-name">Name</label><input id="v-name" type="text" autocomplete="name"></div>
+      <div class="feld"><label for="v-mail">E-Mail</label><input id="v-mail" type="email" autocomplete="email"></div>
+      <div class="feld voll"><label for="v-worum">Worum geht es?</label>
+        <select id="v-worum">
+          <option>Karten für das Herbstkonzert</option>
+          <option>Ich möchte mitspielen</option>
+          <option>Unterricht für mein Kind</option>
+          <option>Fördermitglied werden</option>
+          <option>Auftritt anfragen</option>
+          <option>Etwas anderes</option>
+        </select>
+      </div>
+      <div class="feld voll"><label for="v-text">Nachricht</label><textarea id="v-text" rows="3"></textarea></div>
+      <div class="feld voll"><button type="submit" class="senden">Absenden</button></div>
+    </form>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="bogen">
+    <div>
+      <b>Musikverein Harmonie Niederscheid 1911</b>
+      Ein erfundener Verein. Ort, Anschrift, Ansprechpartner und Termine gibt es nicht.
+      Diese Seite ist eine Beispielseite von Dominic Lutz, <a href="/">zurück zur Übersicht</a>.
+      Aufbau nach Abgleich mit der Seite der Berliner Philharmoniker: der Termin ist der
+      Aufmacher, nicht der Vereinsname, und der Kalender trägt die Startseite. In den
+      Preisträger-Galerien gibt es keinen vergleichbaren Musikverein, deshalb kommt die
+      Referenz aus der Praxis.
+    </div>
+    <div>
+      <b>Auf der echten Seite</b>
+      <ul>
+        <li>Impressum mit Vorstand nach § 26 BGB</li>
+        <li>Datenschutzerklärung</li>
+        <li>Satzung und Beitragsordnung</li>
+        <li>Einwilligung für Fotos von Mitgliedern</li>
+      </ul>
+    </div>
+  </div>
+</footer>
+
+<div class="meldung" id="meldung" role="status"></div>
+
+<script>
+(function(){
+  /* ---------- Darstellung ---------- */
+  var wurzel = document.documentElement, gemerkt = null;
+  try { gemerkt = localStorage.getItem('mv-thema'); } catch(e){}
+  if (gemerkt === 'light' || gemerkt === 'dark') wurzel.setAttribute('data-theme', gemerkt);
+  function gedrueckt(w){
+    document.querySelectorAll('[data-thema]').forEach(function(b){
+      b.setAttribute('aria-pressed', b.getAttribute('data-thema') === w ? 'true' : 'false');
+    });
+  }
+  gedrueckt(gemerkt || 'system');
+  document.querySelectorAll('[data-thema]').forEach(function(b){
+    b.addEventListener('click', function(){
+      var w = b.getAttribute('data-thema');
+      if (w === 'system') wurzel.removeAttribute('data-theme'); else wurzel.setAttribute('data-theme', w);
+      try { localStorage.setItem('mv-thema', w); } catch(e){}
+      gedrueckt(w);
+    });
+  });
+
+  /* ---------- Meldung ---------- */
+  var meldung = document.getElementById('meldung');
+  document.getElementById('anfrage').addEventListener('submit', function(e){
+    e.preventDefault();
+    meldung.textContent = 'Beispielseite: hier ginge die Nachricht jetzt an den Vorstand.';
+    meldung.classList.add('zeigen');
+    setTimeout(function(){ meldung.classList.remove('zeigen'); }, 3400);
+  });
+
+  /* ============================================================
+     DIE SITZORDNUNG
+     Das Bild, das nur ein Orchester hat. Drei Boegen um das Pult,
+     jedes Register bekommt einen Winkelabschnitt, die Stuehle werden
+     daraus gerechnet. Anklicken hebt das Register hervor.
+     ============================================================ */
+  var RAUM = 'http://www.w3.org/2000/svg';
+  var plan = document.getElementById('sitzplan');
+  var liste = document.getElementById('registerliste');
+  var fuss = document.getElementById('sitzFuss');
+
+  // bogen: 0 innen, 1 mitte, 2 aussen
+  var REGISTER = [
+    {id:'floete',    name:'Flöte und Oboe',   anzahl:4, bogen:0, von:-58, bis:-8,
+     text:'Sitzen ganz vorne links. Bei uns spielen zwei Schwestern nebeneinander, seit elf Jahren.'},
+    {id:'klarinette',name:'Klarinette',       anzahl:9, bogen:0, von:-4,  bis:62,
+     text:'Das größte Register und der Kern des Klangs. Neun Leute, davon drei unter achtzehn.'},
+    {id:'saxophon',  name:'Saxophon',         anzahl:5, bogen:1, von:-62, bis:-14,
+     text:'Alt, Tenor und ein Bariton. Sitzen zwischen Holz und Blech, weil sie zu beidem passen.'},
+    {id:'trompete',  name:'Trompete und Flügelhorn', anzahl:7, bogen:1, von:-8, bis:58,
+     text:'Sieben Stück. Bei Platzkonzerten hört man vor allem sie, das ist so gewollt.'},
+    {id:'horn',      name:'Horn',             anzahl:4, bogen:2, von:-64, bis:-24,
+     text:'Vier Hörner, das schwerste Register zu besetzen. Wer Horn lernt, wird überall gebraucht.'},
+    {id:'posaune',   name:'Posaune und Tenorhorn', anzahl:5, bogen:2, von:-18, bis:26,
+     text:'Fünf. Sitzen hinten, weil sie sonst alles übertönen, und wissen das auch.'},
+    {id:'bass',      name:'Tuba und Bass',    anzahl:3, bogen:2, von:32, bis:58,
+     text:'Drei. Das Fundament. Ohne sie klingt ein Blasorchester wie ein Chor ohne Bässe.'},
+    {id:'schlag',    name:'Schlagwerk',       anzahl:4, bogen:2, von:64, bis:88,
+     text:'Vier, ganz hinten rechts. Pauken, kleine Trommel, Becken und alles, was sonst noch scheppert.'}
+  ];
+  var RADIEN = [122, 178, 236];
+  var MX = 310, MY = 330;
+
+  function el(name, werte){
+    var k = document.createElementNS(RAUM, name);
+    for (var s in werte) k.setAttribute(s, werte[s]);
+    return k;
+  }
+
+  function zeichnePlan(){
+    while (plan.firstChild) plan.removeChild(plan.firstChild);
+
+    // Boegen als feine Hilfslinien
+    RADIEN.forEach(function(r){
+      plan.appendChild(el('path', {
+        class:'bogenlinie',
+        d:'M ' + (MX - r) + ' ' + MY + ' A ' + r + ' ' + r + ' 0 0 1 ' + (MX + r) + ' ' + MY
+      }));
+    });
+
+    // Dirigentenpult
+    plan.appendChild(el('path', {class:'pult', d:'M' + (MX-26) + ' ' + (MY+4) + ' h52 v10 h-52 Z'}));
+    plan.appendChild(el('path', {class:'pult', d:'M' + MX + ' ' + (MY+14) + ' v12'}));
+    var t = el('text', {class:'t-register', x:MX, y:MY+40, 'text-anchor':'middle'});
+    t.textContent = 'DIRIGENTIN'; plan.appendChild(t);
+
+    REGISTER.forEach(function(reg){
+      var r = RADIEN[reg.bogen];
+      var n = reg.anzahl;
+      for (var i = 0; i < n; i++){
+        var anteil = n === 1 ? 0.5 : i / (n - 1);
+        var grad = reg.von + (reg.bis - reg.von) * anteil;
+        var bog = (grad - 90) * Math.PI / 180;
+        var x = MX + Math.cos(bog) * r;
+        var y = MY + Math.sin(bog) * r;
+        plan.appendChild(el('circle', {class:'stuhl', 'data-reg':reg.id, cx:x.toFixed(1), cy:y.toFixed(1), r:9}));
+      }
+      // Keine Beschriftung im Plan: sie ueberlagerte die hinteren
+      // Reihen, und die Registerliste daneben ist Legende und
+      // Bedienung in einem.
+    });
+  }
+
+  function zeigeRegister(id){
+    plan.querySelectorAll('.stuhl').forEach(function(s){
+      s.classList.toggle('an', !id || s.getAttribute('data-reg') === id);
+    });
+    liste.querySelectorAll('button').forEach(function(b){
+      b.setAttribute('aria-pressed', b.getAttribute('data-reg') === id ? 'true' : 'false');
+    });
+    var reg = REGISTER.filter(function(r){ return r.id === id; })[0];
+    fuss.textContent = reg ? reg.text : 'Ein Register anklicken.';
+  }
+
+  var groesstes = Math.max.apply(null, REGISTER.map(function(r){ return r.anzahl; }));
+  REGISTER.forEach(function(reg){
+    var li = document.createElement('li');
+    li.innerHTML = '<button type="button" data-reg="' + reg.id + '" aria-pressed="false">' +
+      '<span class="name">' + reg.name + '</span>' +
+      '<span class="balken"><i style="width:' + Math.round(reg.anzahl / groesstes * 100) + '%"></i></span>' +
+      '<span class="anzahl">' + reg.anzahl + '</span></button>';
+    liste.appendChild(li);
+  });
+  liste.addEventListener('click', function(e){
+    var b = e.target.closest('button');
+    if (b) zeigeRegister(b.getAttribute('data-reg'));
+  });
+
+  zeichnePlan();
+  plan.addEventListener('click', function(e){
+    if (e.target.classList && e.target.classList.contains('stuhl')) zeigeRegister(e.target.getAttribute('data-reg'));
+  });
+  // Alle Stuehle sind zu Beginn hell, damit die Sitzordnung im Ruhezustand vollstaendig lesbar ist
+  plan.querySelectorAll('.stuhl').forEach(function(s){ s.classList.add('an'); });
+})();
+</script>
+
+</body>
+</html>
