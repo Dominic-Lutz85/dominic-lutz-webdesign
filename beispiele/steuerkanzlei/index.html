@@ -20,6 +20,21 @@
   body{margin:0}
   img{max-width:100%; height:auto}
   [hidden]{display:none!important}
+
+/* ---------- Ganz schmale Geraete ----------
+   Steht bewusst am ENDE: bei gleicher Spezifitaet gewinnt die spaetere
+   Regel. Weiter oben platziert wurde die Schriftgroesse der Fristzeile
+   von der spaeteren Definition wieder ueberschrieben, und die Seite lief
+   bei 320 px 23 px ueber. */
+@media (max-width:400px){
+  .kopf-innen{padding:10px 14px; gap:8px;}
+  .marke{font-size:17px;}
+  .thema button{padding:4px 5px; font-size:9px;}
+  .frist{padding:13px 16px; gap:2px 10px;}
+  .frist .wann, .frist .rest{font-size:11px;}
+  .vorschau-kopf{padding:14px 16px;}
+  .feld{padding:0 16px;}
+}
 </style>
 </head>
 <body>
@@ -128,6 +143,10 @@ section{padding:88px 0; scroll-margin-top:80px; border-top:1px solid var(--linie
 }
 .lebt b{font-family:"JetBrains Mono",monospace; font-weight:500; color:var(--tinte);}
 .hero-raster{display:grid; grid-template-columns:1.06fr .94fr; gap:56px; align-items:start;}
+/* Rasterkinder haben von Haus aus min-width:auto und schrumpfen nicht
+   unter ihren Inhalt. Ohne diese Zeile liefen die Spalten bei 320 px
+   drei Pixel ueber. Gilt fuer jedes Raster auf dieser Seite. */
+.hero-raster > *, .rechner > *, .zwei > *, .kopfzeile > *, .kanzlei-raster > *, .formular > *{min-width:0;}
 @media (max-width:960px){ .hero-raster{grid-template-columns:1fr; gap:38px;} }
 .hero h1{font-size:clamp(38px,4.9vw,62px);}
 .hero h1 span{color:var(--tinte-fein);}

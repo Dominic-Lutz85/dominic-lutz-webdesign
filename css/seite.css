@@ -114,7 +114,12 @@
 
   .num{font-family:"IBM Plex Mono", ui-monospace, monospace; font-variant-numeric:tabular-nums;}
 
-  .wrap{max-width:1040px; margin:0 auto; padding:0 24px;}
+  /* War 1040. Auf einem 1920er Schirm stand damit rechts und links je
+     440 px leer, waehrend die Arbeiten die volle Breite nutzen: das las
+     sich wie zwei zusammengeklebte Seiten. Jetzt 1280, und der Fliesstext
+     wird ueber max-width der einzelnen Bloecke lesbar gehalten, nicht
+     ueber die Breite des ganzen Behaelters. */
+  .wrap{max-width:1280px; margin:0 auto; padding:0 32px;}
   .wrap-narrow{max-width:760px; margin:0 auto; padding:0 24px;}
 
   /* ---------- Motion helpers ---------- */
@@ -593,5 +598,5 @@
 /* Eigene, breitere Spur. Die Textabschnitte bleiben bei 1040 px lesbar,
    die Arbeiten duerfen die Breite nutzen, sonst steht auf grossen
    Schirmen rechts und links nichts. */
-.wrap-weit{max-width:1400px; margin:0 auto; padding:0 40px;}
+.wrap-weit{max-width:1400px; margin:0 auto; padding:0 32px;}
 @media (max-width:820px){ .wrap-weit{padding:0 24px;} }

@@ -188,7 +188,7 @@ section{scroll-margin-top:86px;}
 .weine-kopf p{color:var(--tinte-weich); max-width:52ch; margin:0 auto;}
 .lage-block{margin-top:74px;}
 .lage-kopf{
-  display:flex; align-items:baseline; gap:18px; padding-bottom:14px;
+  display:flex; align-items:baseline; gap:18px; flex-wrap:wrap; padding-bottom:14px;
   border-bottom:1px solid var(--linie);
 }
 .lage-kopf h3{font-size:30px;}
@@ -209,6 +209,7 @@ section{scroll-margin-top:86px;}
 .wein .klein{grid-column:2/-1; color:var(--tinte-fein); font-size:12.5px; letter-spacing:.02em;}
 @media (max-width:640px){
   .wein{grid-template-columns:46px minmax(0,1fr); gap:6px 16px;}
+  .wein > *{min-width:0;}
   .wein .preis{grid-column:2/3; font-size:18px;}
   .wein .name{font-size:23px;}
 }
