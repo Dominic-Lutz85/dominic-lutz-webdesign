@@ -1,0 +1,827 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Reiland Keramik, Beispielseite von Dominic Lutz</title>
+<meta name="description" content="Beispielseite fuer eine Toepferwerkstatt. Eine Bildfolge, die beim Scrollen laeuft, und ein Schwindungsrechner mit echten Herstellerdaten. Die Werkstatt ist erfunden.">
+<!-- NICHT INDEXIEREN: Die Werkstatt ist erfunden. Ein Suchtreffer auf einen
+     Betrieb, den es nicht gibt, waere irrefuehrend. Gilt auch nach dem Umzug
+     auf die eigene Domain, dort bleibt diese Zeile stehen.
+     BILDER: Die Bildfolge stammt aus einem freien Video von Pexels und wurde
+     hier in 100 Einzelbilder zerlegt. Vor einer echten Uebergabe wird in der
+     Werkstatt selbst gefilmt.
+     ECHT SIND: die Schwindungswerte der drei Tonmassen. Sie stehen so in den
+     Datenblaettern von Goerg & Schneider, die Quelle steht unter dem Rechner. -->
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#F5F2ED">
+<style>
+  html{-webkit-text-size-adjust:100%}
+  body{margin:0}
+  img{max-width:100%}
+  [hidden]{display:none!important}
+</style>
+</head>
+<body>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Hanken+Grotesk:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+/* ==========================================================
+   Reiland Keramik
+   Die Seite hat eine einzige grosse Geste: eine Bildfolge, die
+   beim Scrollen laeuft, waehrend echter Text darueber steht.
+   Alles danach ist bewusst still, damit die Geste wirkt.
+   Kein Kicker, kein Knopfpaar, kein Formular. Wer anrufen will,
+   findet die Nummer oben und unten.
+   Schriften: Instrument Serif fuer die Saetze, die zaehlen,
+   Hanken Grotesk fuer alles Gebrauchsmaessige.
+   ========================================================== */
+:root{
+  --porzellan:#F5F2ED; --flaeche:#FBF9F6; --tinte:#1B1917; --tinte-weich:#57524B;
+  --tinte-fein:#6F6961; --linie:#DFD9D0; --linie-zart:#EAE5DD; --ton:#9A5F38;
+  --auf-bild:#FCFAF7; --schatten:rgba(27,25,23,.5);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --porzellan:#141210; --flaeche:#1C1A16; --tinte:#EDE8E0; --tinte-weich:#A7A096;
+    --tinte-fein:#8A837A; --linie:#2C2823; --linie-zart:#232019; --ton:#CE9367;
+    --schatten:rgba(0,0,0,.62);
+  }
+}
+:root[data-theme="dark"]{
+  --porzellan:#141210; --flaeche:#1C1A16; --tinte:#EDE8E0; --tinte-weich:#A7A096;
+  --tinte-fein:#8A837A; --linie:#2C2823; --linie-zart:#232019; --ton:#CE9367;
+  --schatten:rgba(0,0,0,.62);
+}
+
+*{box-sizing:border-box;}
+body{
+  margin:0; background:var(--porzellan); color:var(--tinte);
+  font-family:"Hanken Grotesk", ui-sans-serif, system-ui, sans-serif;
+  font-size:17px; font-weight:300; line-height:1.68; overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3{font-family:"Instrument Serif", Georgia, serif; font-weight:400; margin:0; text-wrap:balance; letter-spacing:-.01em;}
+p{margin:0 0 1.05em;}
+a{color:var(--tinte); text-underline-offset:3px;}
+:focus-visible{outline:1.5px solid var(--ton); outline-offset:4px;}
+button,input,select{font-family:inherit; font-size:inherit; color:inherit;}
+section{scroll-margin-top:96px;}
+
+.feld{max-width:1120px; margin:0 auto; padding:0 56px;}
+.schmal{max-width:720px; margin:0 auto; padding:0 56px;}
+@media (max-width:800px){ .feld,.schmal{padding:0 22px;} }
+
+.etikett{
+  font-family:"Hanken Grotesk",sans-serif; font-weight:600; font-size:10.5px;
+  letter-spacing:.24em; text-transform:uppercase; color:var(--tinte-fein); display:block;
+}
+
+/* ---------- Musterband ---------- */
+.muster{
+  position:relative; z-index:60;
+  background:#1B1917; color:#F5F2ED;
+  font-size:10.5px; font-weight:500; letter-spacing:.2em; text-transform:uppercase;
+  text-align:center; padding:9px 16px;
+}
+.muster a{color:inherit; text-underline-offset:3px;}
+
+/* ---------- Kopfleiste ----------
+   Liegt ueber der Buehne und bleibt oben stehen, auch nachdem
+   die Buehne zu Ende ist. Auf dem Handy ist sie die einzige
+   dauerhafte Orientierung, deshalb sitzt sie ausserhalb der
+   gepinnten Flaeche. */
+.kopf{
+  position:fixed; left:0; right:0; z-index:50;
+  padding:14px 0; transition:background .3s, border-color .3s, backdrop-filter .3s;
+  border-bottom:1px solid transparent;
+  padding-top:calc(14px + env(safe-area-inset-top));
+}
+.kopf.fest{
+  background:color-mix(in srgb, var(--porzellan) 88%, transparent);
+  backdrop-filter:blur(10px); border-bottom-color:var(--linie);
+}
+.kopf-innen{
+  max-width:1120px; margin:0 auto; padding:0 56px;
+  display:flex; align-items:center; justify-content:space-between; gap:18px;
+}
+.marke{
+  font-family:"Instrument Serif",serif; font-size:21px; text-decoration:none;
+  letter-spacing:.02em; white-space:nowrap; color:var(--auf-bild);
+  text-shadow:0 1px 14px var(--schatten);
+}
+.kopf.fest .marke{color:var(--tinte); text-shadow:none;}
+.kopf-rechts{display:flex; align-items:center; gap:20px;}
+.kopf-rechts a{
+  color:var(--auf-bild); text-shadow:0 1px 14px var(--schatten);
+  font-size:14px; text-decoration:none; border-bottom:1px solid transparent; padding-bottom:2px;
+}
+.kopf-rechts a:hover{border-bottom-color:currentColor;}
+.kopf.fest .kopf-rechts a{color:var(--tinte); text-shadow:none;}
+.thema{display:flex; gap:2px;}
+.thema button{
+  background:none; border:0; cursor:pointer; padding:5px 7px; line-height:1; border-radius:6px;
+  color:var(--auf-bild); opacity:.72; text-shadow:0 1px 14px var(--schatten); font-size:13px;
+}
+.kopf.fest .thema button{color:var(--tinte); text-shadow:none;}
+.thema button[aria-pressed="true"]{opacity:1; background:color-mix(in srgb, currentColor 14%, transparent);}
+@media (max-width:800px){
+  .kopf-innen{padding:0 22px;}
+  .kopf-rechts a.nur-gross{display:none;}
+}
+
+/* ---------- Die Buehne ----------
+   .buehne gibt den Scrollweg her, .fest ist das, was klebt.
+   Der Scrollweg ist absichtlich laenger als die Bildfolge braucht:
+   die Haltestellen am Anfang und am Ende geben den Saetzen Zeit. */
+.buehne{position:relative;}
+.buehne-fest{
+  position:sticky; top:0; height:100svh; overflow:hidden;
+  background:var(--flaeche);
+}
+.buehne canvas{
+  position:absolute; inset:0; width:100%; height:100%; display:block;
+}
+/* Schleier, damit weisse Schrift auf hellem Ton lesbar bleibt.
+   Nur unten und oben, die Mitte bleibt frei. */
+.schleier{
+  position:absolute; inset:0; pointer-events:none;
+  background:
+    linear-gradient(to bottom, rgba(18,16,14,.60) 0%, rgba(18,16,14,.18) 12%, rgba(18,16,14,0) 26%),
+    linear-gradient(to top, rgba(18,16,14,.86) 0%, rgba(18,16,14,.42) 30%, rgba(18,16,14,0) 68%),
+    linear-gradient(to right, rgba(18,16,14,.52) 0%, rgba(18,16,14,.12) 42%, rgba(18,16,14,0) 62%);
+}
+.kapitel{
+  position:absolute; inset:0; display:flex; align-items:flex-end;
+  padding:0 0 clamp(56px, 9vh, 112px);
+  pointer-events:none;
+}
+/* Die drei Saetze liegen im selben Rasterfeld uebereinander.
+   So bestimmt der laengste die Hoehe und keiner springt. */
+.kapitel-innen{max-width:1120px; margin:0 auto; padding:0 56px; width:100%; display:grid;}
+@media (max-width:800px){ .kapitel-innen{padding:0 22px;} }
+.satz{
+  grid-area:1 / 1; align-self:end; margin:0;
+  opacity:0; transform:translateY(14px);
+  transition:opacity .5s ease, transform .5s ease;
+  color:var(--auf-bild); max-width:15ch;
+  font-family:"Instrument Serif",serif; font-size:clamp(34px, 5.4vw, 68px);
+  line-height:1.08; text-shadow:0 2px 30px var(--schatten);
+}
+.satz.da{opacity:1; transform:none;}
+.satz span{display:block; font-family:"Hanken Grotesk",sans-serif; font-weight:300;
+  font-size:clamp(15px,1.5vw,19px); line-height:1.55; max-width:34ch; margin-top:18px;
+  text-shadow:0 1px 18px var(--schatten);}
+/* Kapitelzaehler am rechten Rand, vertikal.
+   Uebernommen von kevalaceramics.com (Awwwards Honorable Mention),
+   dort steht "01 - 04" senkrecht neben dem Aufmacher. Bei einem
+   Scrollweg von 460 svh ist das keine Zierde, sondern die einzige
+   Auskunft darueber, wie lang die Geschichte noch ist. */
+.zaehler{
+  position:absolute; right:26px; top:50%; transform:translateY(-50%);
+  writing-mode:vertical-rl; text-orientation:mixed;
+  color:var(--auf-bild); font-size:11px; letter-spacing:.26em;
+  font-variant-numeric:tabular-nums; opacity:.82;
+  text-shadow:0 1px 14px var(--schatten); pointer-events:none;
+}
+.zaehler b{font-weight:500;}
+.zaehler i{font-style:normal; opacity:.55; margin-block:8px;}
+@media (max-width:800px){ .zaehler{right:14px; font-size:10px;} }
+
+.wink{
+  position:absolute; left:50%; bottom:26px; transform:translateX(-50%);
+  color:var(--auf-bild); font-size:10.5px; letter-spacing:.24em; text-transform:uppercase;
+  opacity:.8; text-shadow:0 1px 14px var(--schatten); transition:opacity .4s;
+}
+.wink.weg{opacity:0;}
+.ueberspringen{
+  position:absolute; right:22px; bottom:22px; z-index:5;
+  background:color-mix(in srgb, #141210 52%, transparent); color:#FCFAF7;
+  border:1px solid rgba(252,250,247,.34); border-radius:999px;
+  padding:9px 16px; font-size:13px; cursor:pointer; backdrop-filter:blur(6px);
+  min-height:44px;
+}
+.ueberspringen:hover{background:color-mix(in srgb, #141210 72%, transparent);}
+
+/* Auf dem Handy braucht der Text mehr Boden, sonst stoesst er an den
+   Knopf. Und beide muessen ueber der Sicherheitszone bleiben. */
+@media (max-width:800px){
+  .kapitel{padding-bottom:calc(104px + env(safe-area-inset-bottom));}
+  .ueberspringen{right:16px; bottom:calc(16px + env(safe-area-inset-bottom));}
+  .wink{bottom:calc(22px + env(safe-area-inset-bottom)); left:22px; transform:none;}
+}
+
+/* Fallback: kein Scriptlauf, reduzierte Bewegung, schmales Geraet ohne Folge */
+.ruhig{
+  min-height:78svh; display:flex; align-items:flex-end;
+  background-size:cover; background-position:center;
+}
+.still-kapitel{padding:clamp(72px,10vh,120px) 0 clamp(24px,4vh,48px);}
+.satz-still{
+  font-family:"Instrument Serif",serif; font-weight:400;
+  font-size:clamp(28px,3.4vw,44px); line-height:1.12; margin:0 0 40px;
+  color:var(--tinte); max-width:18ch;
+}
+.satz-still:last-child{margin-bottom:0;}
+.satz-still span{
+  display:block; font-family:"Hanken Grotesk",sans-serif; font-weight:300;
+  font-size:17px; line-height:1.68; color:var(--tinte-weich);
+  max-width:44ch; margin-top:14px;
+}
+
+/* ---------- Stille Abschnitte ---------- */
+.still{padding:clamp(96px,13vh,168px) 0;}
+.still h2{font-size:clamp(30px,3.7vw,50px); line-height:1.1; margin-bottom:28px;}
+.vorsatz{font-size:clamp(19px,2vw,23px); color:var(--tinte-weich); max-width:38ch;}
+
+.zeilen{border-top:1px solid var(--linie); margin-top:56px;}
+.zeile{
+  display:grid; grid-template-columns:6.5rem 1fr 8rem; gap:28px; align-items:baseline;
+  padding:26px 0; border-bottom:1px solid var(--linie);
+}
+.zeile b{font-weight:500;}
+.zeile .was{font-family:"Instrument Serif",serif; font-size:23px;}
+.zeile .dazu{color:var(--tinte-weich); font-size:15.5px; grid-column:2; margin:0;}
+.zeile .preis{text-align:right; font-variant-numeric:tabular-nums; color:var(--tinte-weich); font-size:15.5px;}
+.zeile .nr{font-size:12px; letter-spacing:.18em; color:var(--tinte-fein); text-transform:uppercase;}
+@media (max-width:700px){
+  .zeile{grid-template-columns:1fr auto; gap:6px 16px;}
+  .zeile .nr{grid-column:1 / -1;}
+  .zeile .dazu{grid-column:1 / -1;}
+  .zeile .preis{grid-row:2; grid-column:2;}
+}
+
+/* ---------- Rechner ---------- */
+.rechner{background:var(--flaeche); border-top:1px solid var(--linie); border-bottom:1px solid var(--linie);}
+.rechner-raster{display:grid; grid-template-columns:1fr 1fr; gap:64px; align-items:start; margin-top:48px;}
+@media (max-width:880px){ .rechner-raster{grid-template-columns:1fr; gap:40px;} }
+
+fieldset{border:0; padding:0; margin:0 0 30px;}
+legend{padding:0; margin-bottom:12px;}
+.massen{display:flex; flex-direction:column; gap:0; border-top:1px solid var(--linie);}
+.masse{
+  display:grid; grid-template-columns:auto 1fr auto; gap:14px; align-items:center;
+  padding:14px 4px; border-bottom:1px solid var(--linie); cursor:pointer; min-height:44px;
+}
+.masse:hover{background:color-mix(in srgb, var(--ton) 6%, transparent);}
+.masse input{accent-color:var(--ton); width:17px; height:17px; margin:0;}
+.masse .name{font-weight:500;}
+.masse .art{display:block; font-size:14px; color:var(--tinte-fein); font-weight:300;}
+.masse .farbe{font-size:13.5px; color:var(--tinte-weich); text-align:right;}
+
+.grade{display:flex; flex-wrap:wrap; gap:8px;}
+.grad{
+  border:1px solid var(--linie); background:transparent; border-radius:999px;
+  padding:9px 15px; cursor:pointer; font-size:14.5px; font-variant-numeric:tabular-nums;
+  min-height:44px;
+}
+.grad[aria-pressed="true"]{background:var(--ton); border-color:var(--ton); color:#FCFAF7;}
+
+.mass-eingabe{display:flex; align-items:baseline; gap:12px; margin-top:6px;}
+.mass-eingabe input{
+  width:7.5rem; background:transparent; border:0; border-bottom:1.5px solid var(--tinte);
+  padding:6px 2px; font-size:30px; font-family:"Instrument Serif",serif;
+  font-variant-numeric:tabular-nums;
+}
+.mass-eingabe input::-webkit-outer-spin-button,
+.mass-eingabe input::-webkit-inner-spin-button{-webkit-appearance:none; margin:0;}
+.mass-eingabe input[type=number]{-moz-appearance:textfield;}
+
+.ergebnis{border-top:1px solid var(--linie);}
+.erg-zeile{display:flex; justify-content:space-between; align-items:baseline; gap:20px; padding:18px 0; border-bottom:1px solid var(--linie);}
+.erg-zeile .wert{font-family:"Instrument Serif",serif; font-size:34px; font-variant-numeric:tabular-nums; line-height:1;}
+.erg-zeile.gross .wert{font-size:52px; color:var(--ton);}
+.erg-zeile .bez{color:var(--tinte-weich); font-size:15px; max-width:22ch;}
+.hinweis{margin-top:22px; font-size:15px; color:var(--tinte-weich);}
+.hinweis b{font-weight:500; color:var(--tinte);}
+.quelle{margin-top:26px; font-size:13.5px; color:var(--tinte-fein); line-height:1.6;}
+.quelle a{color:var(--tinte-fein);}
+
+/* ---------- Fuss ---------- */
+footer{padding:76px 0 90px; border-top:1px solid var(--linie);}
+.fuss-raster{display:grid; grid-template-columns:repeat(3,1fr); gap:40px; font-size:14.5px; color:var(--tinte-weich);}
+.fuss-raster b{display:block; color:var(--tinte); font-weight:500; margin-bottom:7px;}
+@media (max-width:800px){ .fuss-raster{grid-template-columns:1fr; gap:26px;} }
+
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important; transition:none!important;}
+  html{scroll-behavior:auto;}
+}
+</style>
+</head>
+<body>
+
+<div class="muster">Beispielseite &middot; Werkstatt, Anschrift und Preise sind erfunden &middot; <a href="/">Zurück zur Übersicht</a></div>
+
+<header class="kopf" id="kopf">
+  <div class="kopf-innen">
+    <a class="marke" href="#oben">Reiland Keramik</a>
+    <div class="kopf-rechts">
+      <a href="#werkstatt" class="nur-gross">Werkstatt</a>
+      <a href="#rechner" class="nur-gross">Schwindung</a>
+      <a href="tel:+4965910000">06591 0000</a>
+      <span class="thema" role="group" aria-label="Darstellung">
+        <button type="button" data-thema="hell" aria-pressed="false" title="Hell">Hell</button>
+        <button type="button" data-thema="dunkel" aria-pressed="false" title="Dunkel">Dunkel</button>
+      </span>
+    </div>
+  </div>
+</header>
+
+<main id="oben">
+
+<!-- Die Buehne. Die Hoehe hier ist der Scrollweg, nicht die Bildhoehe. -->
+<div class="buehne" id="buehne" style="height:460svh">
+  <div class="buehne-fest">
+    <canvas id="leinwand" aria-hidden="true"></canvas>
+    <div class="schleier"></div>
+    <div class="kapitel">
+      <div class="kapitel-innen">
+        <h1 class="satz" data-satz="0">Zwölf Minuten an der Scheibe.
+          <span>Vier Wochen, bis die Schale aus dem Ofen kommt. Das meiste davon ist Warten.</span></h1>
+        <p class="satz" data-satz="1">Der Ton geht zurück.
+          <span>Beim Trocknen sechs Prozent, im Feuer noch einmal sieben. Wer eine Schale mit vierundzwanzig Zentimetern will, dreht siebenundzwanzig.</span></p>
+        <p class="satz" data-satz="2">Und dann steht sie da.
+          <span>Jede etwas anders als die davor. Das ist keine Entschuldigung, das ist der Grund.</span></p>
+      </div>
+    </div>
+    <p class="zaehler" id="zaehler" aria-hidden="true"><b>01</b><i>—</i>03</p>
+    <p class="wink" id="wink">Scrollen</p>
+    <button type="button" class="ueberspringen" id="ueberspringen">Zur Werkstatt</button>
+  </div>
+</div>
+
+<!-- Ohne Script, bei reduzierter Bewegung oder wenn die Folge nicht laedt -->
+<noscript>
+  <div class="ruhig" style="background-image:url(bilder/lauf/b-099.jpg)">
+    <div class="feld" style="padding-bottom:40px">
+      <h1 style="color:#FCFAF7;font-size:44px;text-shadow:0 2px 30px rgba(0,0,0,.5)">Zwölf Minuten an der Scheibe.</h1>
+    </div>
+  </div>
+</noscript>
+
+<section class="still" id="werkstatt">
+  <div class="feld">
+    <h2>Wir drehen, wir brennen, wir verkaufen im Hof.</h2>
+    <p class="vorsatz">Keine Serie, keine zwei gleichen Stücke. Was in der Werkstatt steht, kann man mitnehmen. Was nicht dasteht, drehen wir nach, das dauert vier bis sechs Wochen.</p>
+
+    <div class="zeilen">
+      <div class="zeile">
+        <span class="nr">Geschirr</span>
+        <span class="was">Schalen und Teller</span>
+        <span class="preis">18 bis 46 €</span>
+        <p class="dazu">Steinzeug, bei 1220 Grad dicht gebrannt. Spülmaschine und Mikrowelle vertragen sie, der Ofen nicht.</p>
+      </div>
+      <div class="zeile">
+        <span class="nr">Küche</span>
+        <span class="was">Vorratsgefäße</span>
+        <span class="preis">32 bis 78 €</span>
+        <p class="dazu">Mit Korkdeckel. Für Mehl, Kaffee, Salz. Die großen fassen drei Liter.</p>
+      </div>
+      <div class="zeile">
+        <span class="nr">Garten</span>
+        <span class="was">Pflanztöpfe</span>
+        <span class="preis">24 bis 120 €</span>
+        <p class="dazu">Grob geschamottiert, frostfest. Stehen bei uns seit neun Wintern draußen.</p>
+      </div>
+      <div class="zeile">
+        <span class="nr">Auftrag</span>
+        <span class="was">Nach Maß</span>
+        <span class="preis">auf Anfrage</span>
+        <p class="dazu">Meistens Geschirr für Gastronomie. Ab zwanzig Stück lohnt es sich, darunter wird es teuer je Teil.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="still rechner" id="rechner">
+  <div class="feld">
+    <h2>Wie groß muss ich drehen?</h2>
+    <p class="vorsatz">Ton schwindet zweimal: beim Trocknen und im Feuer. Und das zweite Mal wirkt auf ein Maß, das schon kleiner ist. Deshalb kann man die Prozente nicht einfach zusammenzählen.</p>
+
+    <div class="rechner-raster">
+      <div>
+        <fieldset>
+          <legend><span class="etikett">Tonmasse</span></legend>
+          <div class="massen" id="massen"></div>
+        </fieldset>
+
+        <fieldset>
+          <legend><span class="etikett">Brenntemperatur</span></legend>
+          <div class="grade" id="grade"></div>
+        </fieldset>
+
+        <fieldset style="margin-bottom:0">
+          <legend><span class="etikett">Fertiges Maß</span></legend>
+          <div class="mass-eingabe">
+            <input type="number" id="fertig" value="240" min="10" max="900" step="5"
+                   inputmode="numeric" aria-label="Gewünschtes fertiges Maß in Millimetern">
+            <span style="color:var(--tinte-weich)">mm, nach dem Brand</span>
+          </div>
+        </fieldset>
+      </div>
+
+      <div>
+        <div class="ergebnis">
+          <div class="erg-zeile gross">
+            <span class="bez">So groß drehen, feucht gemessen</span>
+            <span class="wert" id="roh">–</span>
+          </div>
+          <div class="erg-zeile">
+            <span class="bez">Zwischenmaß, lederhart getrocknet</span>
+            <span class="wert" id="trocken">–</span>
+          </div>
+          <div class="erg-zeile">
+            <span class="bez">Gesamtschwund von feucht bis gebrannt</span>
+            <span class="wert" id="gesamt">–</span>
+          </div>
+        </div>
+        <p class="hinweis" id="dicht"></p>
+        <p class="quelle" id="quelle"></p>
+      </div>
+    </div>
+
+    <p class="quelle" style="margin-top:44px; max-width:62ch">
+      <b style="color:var(--tinte);font-weight:500">Das eigene Schwindmaß schlägt jede Tabelle.</b>
+      Einen Streifen aus derselben Charge ausrollen, zwei Marken genau 100 mm auseinander einritzen,
+      mitbrennen, danach nachmessen. Was fehlt, ist der Gesamtschwund in Prozent. Die Zahlen hier
+      sind Herstellerangaben und gelten für die Masse, nicht für Ihren Ofen.
+    </p>
+  </div>
+</section>
+
+<section class="still" id="besuch">
+  <div class="schmal">
+    <h2>Kommen Sie einfach vorbei.</h2>
+    <p>Die Werkstatt liegt am Ortsrand, das Tor steht offen, wenn wir da sind. Donnerstag und Freitag
+    von 10 bis 18 Uhr, samstags bis 14 Uhr. Wer weiter fährt, ruft vorher an, dann ist sicher jemand da.</p>
+    <p style="font-size:20px"><a href="tel:+4965910000">06591 0000</a></p>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="feld">
+    <div class="fuss-raster">
+      <div>
+        <b>Reiland Keramik</b>
+        Eine erfundene Werkstatt. Ort, Anschrift, Öffnungszeiten und Preise gibt es nicht.
+        Diese Seite ist eine Beispielseite von Dominic Lutz, <a href="/">zurück zur Übersicht</a>.
+      </div>
+      <div>
+        <b>Auf der echten Seite</b>
+        stünden hier Impressum, Datenschutz und, sobald etwas verschickt wird, Widerruf und Versandkosten.
+      </div>
+      <div>
+        <b>Bilder, Daten und Schrift</b>
+        Die Bildfolge ist ein freies Video von <a href="https://www.pexels.com/video/person-making-ceramics-bowl-6610560/">Pexels</a>,
+        in 100 Einzelbilder zerlegt. Vor einer echten Übergabe wird in der Werkstatt selbst gefilmt.
+        Die Schwindungswerte stammen aus den Datenblättern von Goerg &amp; Schneider und sind echt.
+        Schriften: Instrument Serif und Hanken Grotesk.
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+"use strict";
+
+/* ---------- Darstellung ---------- */
+var wurzel = document.documentElement, gemerkt = null;
+try { gemerkt = localStorage.getItem('keramik-thema'); } catch(e){}
+if (gemerkt === 'hell' || gemerkt === 'dunkel') setzeThema(gemerkt);
+function setzeThema(t){
+  wurzel.setAttribute('data-theme', t === 'dunkel' ? 'dark' : 'light');
+  Array.prototype.forEach.call(document.querySelectorAll('.thema button'), function(b){
+    b.setAttribute('aria-pressed', String(b.dataset.thema === t));
+  });
+  try { localStorage.setItem('keramik-thema', t); } catch(e){}
+}
+Array.prototype.forEach.call(document.querySelectorAll('.thema button'), function(b){
+  b.addEventListener('click', function(){ setzeThema(b.dataset.thema); });
+});
+
+/* ---------- Kopfleiste wird fest, sobald die Buehne durch ist ---------- */
+var kopf = document.getElementById('kopf');
+var buehne = document.getElementById('buehne');
+
+/* ==========================================================
+   Die Bildfolge
+   Zwei Saetze Bilder, quer und hoch. Es wird immer nur einer
+   geladen. Wer die Breite wechselt, bekommt den anderen, und
+   der alte wird weggeworfen.
+   ========================================================== */
+var ANZAHL = 100;
+var SAETZE = {
+  quer: { pfad:'bilder/lauf/b-',  breite:1280, hoehe:720 },
+  hoch: { pfad:'bilder/hoch/b-', breite:720,  hoehe:1280 }
+};
+
+/* Der Fahrplan: Scrollanteil -> Bildbereich.
+   Ein Halt ist ein Abschnitt, in dem sich das Bild nicht aendert.
+   Er kostet Scrollweg und gibt dem Satz darueber Zeit. */
+var FAHRPLAN = [
+  { von:0.00, bis:0.09, bild:0,  nach:0  },   /* Halt: der erste Satz */
+  { von:0.09, bis:0.42, bild:0,  nach:46 },
+  { von:0.42, bis:0.53, bild:46, nach:46 },   /* Halt: der zweite Satz */
+  { von:0.53, bis:0.88, bild:46, nach:99 },
+  { von:0.88, bis:1.00, bild:99, nach:99 }    /* Halt: die Schale allein */
+];
+
+/* Wann welcher Satz steht. Zwischen 0.42 und 0.53 haelt das Bild,
+   deshalb steht dort der zweite Satz. Der Uebergang dazwischen
+   traegt bewusst keinen Text. */
+var SAETZE_ZEIT = [
+  { von:-0.01, bis:0.30 },
+  { von:0.42, bis:0.66 },
+  { von:0.88, bis:1.01 }
+];
+
+var leinwand = document.getElementById('leinwand');
+var stift = leinwand.getContext('2d', { alpha:false });
+var wink = document.getElementById('wink');
+var zaehler = document.getElementById('zaehler');
+var letzteNr = 1;
+var satzKnoten = Array.prototype.slice.call(document.querySelectorAll('.satz'));
+
+var wenigerBewegung = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+var satzName = null, bilder = [], geladen = 0, laufend = 0, letztesGutes = null, aktuell = 0;
+
+function welcherSatz(){ return window.innerWidth < 768 ? 'hoch' : 'quer'; }
+
+function nummer(i){ return ('00' + i).slice(-3); }
+
+function starteSatz(name){
+  if (name === satzName) return;
+  /* Alten Satz fallen lassen: laufende Ladungen abbrechen, Speicher freigeben */
+  bilder.forEach(function(b){ if (b && !b.complete) { b.src = ''; } });
+  satzName = name; bilder = new Array(ANZAHL); geladen = 0; laufend = 0; letztesGutes = null;
+  hole(0, true);
+  nachladen();
+}
+
+function hole(i, sofort){
+  if (i < 0 || i >= ANZAHL || bilder[i]) return;
+  if (!sofort && laufend >= 6) return;
+  var bild = new Image();
+  bilder[i] = bild;
+  laufend++;
+  bild.onload = function(){
+    laufend--; geladen++;
+    if (Math.abs(i - aktuell) < 2 || letztesGutes === null) zeichne();
+    nachladen();
+  };
+  bild.onerror = function(){
+    laufend--; bilder[i] = null;   /* darf spaeter noch einmal versucht werden */
+  };
+  bild.src = SAETZE[satzName].pfad + nummer(i) + '.jpg';
+}
+
+/* Immer das holen, was am naechsten an der aktuellen Stelle liegt.
+   Wer schnell springt, bekommt dadurch zuerst das Bild unter dem Daumen. */
+function nachladen(){
+  var versuche = 0;
+  for (var abstand = 0; abstand < ANZAHL && laufend < 6 && versuche < 40; abstand++){
+    versuche++;
+    if (!bilder[aktuell + abstand]) hole(aktuell + abstand);
+    if (abstand && !bilder[aktuell - abstand]) hole(aktuell - abstand);
+  }
+}
+
+function passeGroesseAn(){
+  var v = Math.min(window.devicePixelRatio || 1, 2);
+  var b = leinwand.clientWidth, h = leinwand.clientHeight;
+  if (!b || !h) return;
+  leinwand.width = Math.round(b * v);
+  leinwand.height = Math.round(h * v);
+  zeichne();
+}
+
+/* Wie background-size:cover, nur von Hand */
+function zeichne(){
+  var bild = bilder[aktuell];
+  if (!bild || !bild.complete || !bild.naturalWidth){
+    bild = letztesGutes;
+    if (!bild) return;
+  } else {
+    letztesGutes = bild;
+  }
+  var zb = leinwand.width, zh = leinwand.height;
+  var q = Math.max(zb / bild.naturalWidth, zh / bild.naturalHeight);
+  var nb = bild.naturalWidth * q, nh = bild.naturalHeight * q;
+  stift.drawImage(bild, (zb - nb) / 2, (zh - nh) / 2, nb, nh);
+}
+
+function anteil(){
+  var oben = buehne.offsetTop;
+  var weg = buehne.offsetHeight - window.innerHeight;
+  if (weg <= 0) return 0;
+  return Math.min(1, Math.max(0, (window.scrollY - oben) / weg));
+}
+
+function bildZu(a){
+  for (var i = 0; i < FAHRPLAN.length; i++){
+    var s = FAHRPLAN[i];
+    if (a >= s.von && a <= s.bis){
+      if (s.bis === s.von) return s.bild;
+      var t = (a - s.von) / (s.bis - s.von);
+      return Math.round(s.bild + t * (s.nach - s.bild));
+    }
+  }
+  return a < 0.5 ? 0 : ANZAHL - 1;
+}
+
+var wartet = false;
+function beimScrollen(){
+  if (wartet) return;
+  wartet = true;
+  window.requestAnimationFrame(function(){
+    wartet = false;
+    var a = anteil();
+    var neu = Math.min(ANZAHL - 1, Math.max(0, bildZu(a)));
+    if (neu !== aktuell){
+      aktuell = neu;
+      zeichne();
+      if (geladen < ANZAHL) nachladen();
+    }
+    var kapitelNr = 1;
+    satzKnoten.forEach(function(k, i){
+      var z = SAETZE_ZEIT[i];
+      k.classList.toggle('da', a >= z.von && a < z.bis);
+      if (a >= z.von) kapitelNr = i + 1;   /* im Uebergang gilt das zuletzt erreichte */
+    });
+    if (kapitelNr !== letzteNr){
+      letzteNr = kapitelNr;
+      zaehler.firstChild.textContent = '0' + kapitelNr;
+    }
+    wink.classList.toggle('weg', a > 0.04);
+    /* Erst fest, wenn die Buehne wirklich durch ist. Ein frueherer
+       Wechsel sieht aus wie ein Fehler, weil der helle Balken dann
+       mitten im Bild sitzt. */
+    kopf.classList.toggle('fest', a >= 1);
+  });
+}
+
+/* ---------- Der stille Weg ----------
+   Reduzierte Bewegung heisst: gar keine Folge laden, ein Bild
+   reicht, und der Text steht darunter im normalen Fluss. */
+function stillerWeg(){
+  /* Ein Standbild, darunter dieselben Saetze im normalen Textfluss.
+     Weisse Schrift auf Bild faellt weg, weil hier nichts mehr
+     abgedunkelt wird. Der Inhalt bleibt vollstaendig, nur die
+     Bewegung ist weg. */
+  buehne.style.height = 'auto';
+  var fest = buehne.querySelector('.buehne-fest');
+  fest.style.position = 'static';
+  fest.style.height = '72svh';
+  fest.style.backgroundImage = 'url(' + SAETZE[welcherSatz()].pfad + '099.jpg)';
+  fest.style.backgroundSize = 'cover';
+  fest.style.backgroundPosition = 'center';
+  leinwand.remove();
+  document.getElementById('wink').remove();
+  document.getElementById('ueberspringen').remove();
+  document.getElementById('zaehler').remove();
+  document.querySelector('.schleier').remove();
+
+  var kapitel = document.querySelector('.kapitel');
+  kapitel.remove();
+  kapitel.className = 'still-kapitel';
+  kapitel.removeAttribute('style');
+  var innen = kapitel.firstElementChild;
+  innen.className = 'schmal';
+  satzKnoten.forEach(function(k){
+    k.className = 'satz-still';
+    k.removeAttribute('style');
+  });
+  buehne.insertAdjacentElement('afterend', kapitel);
+  kopf.classList.add('fest');
+}
+
+document.getElementById('ueberspringen').addEventListener('click', function(){
+  document.getElementById('werkstatt').scrollIntoView({ behavior: wenigerBewegung ? 'auto' : 'smooth' });
+});
+
+if (wenigerBewegung){
+  stillerWeg();
+} else {
+  starteSatz(welcherSatz());
+  passeGroesseAn();
+  window.addEventListener('scroll', beimScrollen, { passive:true });
+  var alteBreite = window.innerWidth;
+  window.addEventListener('resize', function(){
+    passeGroesseAn();
+    if (welcherSatz() !== satzName) starteSatz(welcherSatz());
+    alteBreite = window.innerWidth;
+    beimScrollen();
+  }, { passive:true });
+  beimScrollen();
+}
+
+/* ==========================================================
+   Schwindungsrechner
+   Zwei Schwindungen hintereinander, nicht nebeneinander:
+   roh -> trocken -> gebrannt. Deshalb wird multipliziert und
+   nicht addiert. Alle Werte sind Herstellerangaben.
+   ========================================================== */
+var MASSEN = [
+  { id:'208', name:'G&S 208', art:'Drehmasse, ohne Schamotte', farbe:'weiß bis beige',
+    trocken:6.0, sinter:1220,
+    brand:[ {grad:1140, schwund:4.0}, {grad:1220, schwund:7.0} ],
+    max:1300 },
+  { id:'930', name:'G&S 930', art:'Drehmasse, 25 % Schamotte 0–0,2 mm', farbe:'hellcreme, mit Spots',
+    trocken:6.0, sinter:1220,
+    brand:[ {grad:1200, schwund:7.0} ],
+    max:1280 },
+  { id:'373', name:'G&S 373', art:'Modelliermasse, 30 % Schamotte 0–0,5 mm', farbe:'grau bis schwarz',
+    trocken:6.0, sinter:null,
+    brand:[ {grad:1070, schwund:3.0, wasser:9}, {grad:1140, schwund:4.0, wasser:5}, {grad:1240, schwund:6.0, wasser:1} ],
+    max:1240 }
+];
+
+var gewaehlt = MASSEN[0], gewaehlterBrand = gewaehlt.brand[gewaehlt.brand.length - 1];
+
+function zahl(n, k){ return n.toLocaleString('de-DE', { minimumFractionDigits:k, maximumFractionDigits:k }); }
+
+function baueMassen(){
+  var ziel = document.getElementById('massen');
+  ziel.innerHTML = MASSEN.map(function(m){
+    return '<label class="masse">' +
+      '<input type="radio" name="masse" value="' + m.id + '"' + (m === gewaehlt ? ' checked' : '') + '>' +
+      '<span><span class="name">' + m.name + '</span>' +
+      '<span class="art">' + m.art + '</span></span>' +
+      '<span class="farbe">' + m.farbe + '</span>' +
+    '</label>';
+  }).join('');
+  Array.prototype.forEach.call(ziel.querySelectorAll('input'), function(e){
+    e.addEventListener('change', function(){
+      gewaehlt = MASSEN.filter(function(m){ return m.id === e.value; })[0];
+      gewaehlterBrand = gewaehlt.brand[gewaehlt.brand.length - 1];
+      baueGrade(); rechne();
+    });
+  });
+}
+
+function baueGrade(){
+  var ziel = document.getElementById('grade');
+  ziel.innerHTML = gewaehlt.brand.map(function(b){
+    return '<button type="button" class="grad" data-grad="' + b.grad + '" aria-pressed="' +
+      (b === gewaehlterBrand) + '">' + b.grad + ' °C</button>';
+  }).join('');
+  Array.prototype.forEach.call(ziel.querySelectorAll('.grad'), function(k){
+    k.addEventListener('click', function(){
+      gewaehlterBrand = gewaehlt.brand.filter(function(b){ return String(b.grad) === k.dataset.grad; })[0];
+      baueGrade(); rechne();
+    });
+  });
+}
+
+function rechne(){
+  var fertig = parseFloat(document.getElementById('fertig').value);
+  var t = gewaehlt.trocken / 100, b = gewaehlterBrand.schwund / 100;
+  var faktor = (1 - t) * (1 - b);
+
+  if (!isFinite(fertig) || fertig <= 0){
+    document.getElementById('roh').textContent = '–';
+    document.getElementById('trocken').textContent = '–';
+  } else {
+    var roh = fertig / faktor;
+    document.getElementById('roh').textContent = zahl(roh, 0) + ' mm';
+    document.getElementById('trocken').textContent = zahl(roh * (1 - t), 0) + ' mm';
+  }
+  document.getElementById('gesamt').textContent = zahl((1 - faktor) * 100, 1) + ' %';
+
+  var d = document.getElementById('dicht');
+  if (typeof gewaehlterBrand.wasser === 'number'){
+    d.innerHTML = gewaehlterBrand.wasser <= 3
+      ? '<b>Dicht.</b> Wasseraufnahme ' + zahl(gewaehlterBrand.wasser, 0) + ' %. Für Geschirr geeignet.'
+      : '<b>Noch offen.</b> Wasseraufnahme ' + zahl(gewaehlterBrand.wasser, 0) +
+        ' %. Ohne dichte Glasur zieht das Stück Wasser, für Geschirr zu wenig.';
+  } else if (gewaehlt.sinter && gewaehlterBrand.grad >= gewaehlt.sinter){
+    d.innerHTML = '<b>Dicht.</b> Die Sintertemperatur von ' + gewaehlt.sinter +
+      ' °C ist erreicht. Für Geschirr geeignet.';
+  } else if (gewaehlt.sinter){
+    d.innerHTML = '<b>Noch offen.</b> Die Masse sintert erst bei etwa ' + gewaehlt.sinter +
+      ' °C. Bei diesem Brand bleibt der Scherben saugend.';
+  } else {
+    d.textContent = '';
+  }
+
+  document.getElementById('quelle').innerHTML =
+    'Trockenschwindung ' + zahl(gewaehlt.trocken, 1) + ' %, Brennschwindung ' +
+    zahl(gewaehlterBrand.schwund, 1) + ' % bei ' + gewaehlterBrand.grad +
+    ' °C. Höchstens ' + gewaehlt.max + ' °C. Angaben aus dem Datenblatt der Masse ' +
+    gewaehlt.name.replace('G&S ', 'Goerg &amp; Schneider ') + '.';
+}
+
+document.getElementById('fertig').addEventListener('input', rechne);
+baueMassen(); baueGrade(); rechne();
+
+})();
+</script>
+
+</body>
+</html>
